@@ -1,0 +1,62 @@
+name: Prijava greške
+description: Prijava greške pronađene tokom pregleda koda (checklist).
+title: "[CHECKLIST] Kontroler.Metoda - Naziv"
+body:
+  - type: input
+    id: lokacija
+    attributes:
+      label: Lokacija
+      description: Putanja do fajla i linije koda.
+      value: "PametniParkingSistem/Controllers/<Kontroler>.cs, linije <od–do>"
+    validations:
+      required: true
+
+  - type: input
+    id: pr_komentar
+    attributes:
+      label: Link na PR komentar
+      description: Na komentaru u Pull Requestu kliknite ⋯ → Copy link i zalijepite ga ovdje.
+      placeholder: "https://github.com/VVS-2026-2027/Grupa2-Tim1/pull/1#discussion_r..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: opis
+    attributes:
+      label: Opis
+      description: Šta je problem u kodu. Ovdje možete zalijepiti i citat/referencu iz Pull Request komentara.
+      placeholder: "[Ozbiljnost: 2 - Nisko] [Checklist: STR-5] ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: posljedica
+    attributes:
+      label: Posljedica
+      description: Šta se može desiti zbog toga.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: sigurnosni_propust
+    attributes:
+      label: Sigurnosni propust
+      description: Odaberite "Ne" ili odgovarajući tip sigurnosnog propusta.
+      options:
+        - "Ne"
+        - "Da – Nedostaje autorizacija"
+        - "Da – Pogrešna kontrola uloga"
+        - "Da – Pristup tuđim podacima (IDOR)"
+        - "Da – CSRF (… fali ValidateAntiForgeryToken)"
+        - "Da – Izložene tajne"
+        - "Da – Nezaštićeni osjetljivi podaci"
+        - "Da – Otvoreno preusmjeravanje"
+        - "Da – Nedostatak sigurnosnog logiranja"
+        - "Da – Slaba autentifikacija"
+        - "Da – Povjerenje u podatke sa klijenta"
+        - "Da – HTML / SQL Injection"
+        - "Da – Proslijeđivanje previše podataka (over-posting)"
+        - "Da – Nesiguran upload fajla"
+        - "Da – Curenje informacija (stack trace)"
+    validations:
+      required: true
