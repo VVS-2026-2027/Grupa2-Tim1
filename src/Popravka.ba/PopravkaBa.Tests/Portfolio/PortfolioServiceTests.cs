@@ -83,5 +83,31 @@ public class PortfolioServiceTests
         Assert.AreEqual(2, dto.TrenutnaPozicija);
     }
 
+    [TestMethod]
+    public async Task DajPrikazSlike_JednaSlika_StrelicePokazujuNaSebe()
+    {
+        // Arrange
+        StubMajstorSaSlikama(10);
 
+        // Act
+        var dto = await _portfolioService.DajPrikazSlike("m1", 10);
+
+        // Assert
+        Assert.AreEqual(10, dto.NarednaSlikaID);
+        Assert.AreEqual(10, dto.PrethodnaSlikaID);
+    }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_DvijeSlike_ObjeStrelicePokazujuNaDrugu()
+    {
+        // Arrange
+        StubMajstorSaSlikama(10,20);
+
+        // Act
+        var prikaz = await _portfolioService.DajPrikazSlike("m1", 10);
+
+        // Assert
+        Assert.AreEqual(20, prikaz.PrethodnaSlikaID);
+        Assert.AreEqual(20, prikaz.NarednaSlikaID);
+    }
 }
