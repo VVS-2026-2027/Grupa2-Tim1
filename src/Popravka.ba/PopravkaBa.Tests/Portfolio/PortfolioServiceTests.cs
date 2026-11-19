@@ -44,7 +44,6 @@ public class PortfolioServiceTests
         Assert.AreEqual(2, dto.NarednaSlikaID);
         Assert.AreEqual(2, dto.TrenutnaPozicija);
         Assert.AreEqual(3, dto.UkupanPortfolio);
-
     }
 
     [TestMethod]
@@ -56,6 +55,17 @@ public class PortfolioServiceTests
         var dto = await _portfolioService.DajPrikazSlike("m1", 30);
         // Assert
         Assert.AreEqual(10, dto.NarednaSlikaID);
+    }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_PrvaSlika_PrethodnaPokazujeZadnju()
+    {
+        // Arrange
+        StubMajstorSaSlikama(10, 20, 30);
+        // Act
+        var dto = await _portfolioService.DajPrikazSlike("m1", 10);
+        // Assert
+        Assert.AreEqual(30, dto.PrethodnaSlikaID);
     }
 
     
