@@ -155,4 +155,14 @@ public class PortfolioServiceTests
         // Act + Assert
         await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 10));
     }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_PraznaListaSlika_BacaKeyNotFoundException()
+    {
+        // Arrange: majstor postoji, ali nije dodao nijednu sliku
+        StubMajstorSaSlikama();
+
+        // Act + Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 10));
+    }
 }
