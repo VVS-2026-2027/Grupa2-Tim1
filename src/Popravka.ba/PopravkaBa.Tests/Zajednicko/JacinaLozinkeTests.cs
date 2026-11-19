@@ -113,5 +113,13 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_CestaLozinka12345678_VracaSlaba()
+        {
+            var rezultat = JacinaLozinke.Procijeni("12345678", Email);
+
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
     }
 }
