@@ -14,8 +14,9 @@ namespace PopravkaBa.Domain.Shared
             ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
             var bezRazmaka = UkloniRazmake(lozinka);
 
-            if (SadrziDioEmaila(bezRazmaka, email))
-                return Jacina.Slaba;
+            if (SadrziDioEmaila(bezRazmaka, email)
+    || string.Equals(bezRazmaka, "password", StringComparison.OrdinalIgnoreCase))
+    return Jacina.Slaba;
 
             var bodovi = IzracunajBodove(bezRazmaka);
 
