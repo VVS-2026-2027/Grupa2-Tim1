@@ -9,6 +9,7 @@ namespace PopravkaBa.Domain.Shared
             var bodovi = 0;
             if (lozinka.Length >= 8) bodovi++;
             if (lozinka.Any(char.IsDigit)) bodovi++;
+            if (lozinka.Any(char.IsUpper)) bodovi++;
 
             return bodovi >= 2 ? Jacina.Srednja : Jacina.Slaba;
         }
