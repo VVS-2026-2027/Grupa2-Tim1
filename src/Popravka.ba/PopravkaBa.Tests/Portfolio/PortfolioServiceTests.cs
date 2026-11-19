@@ -144,4 +144,15 @@ public class PortfolioServiceTests
         // Act + Assert
         await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m99", 10));
     }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_PortfolioJeNull_BacaKeyNotFoundException()
+    {
+        // Arrange: majstor postoji, ali nema listu slika
+        _izvrsilacRepository.Setup(r => r.DajProfilPoIdAsync("m1"))
+            .ReturnsAsync(new Majstor { Id = "m1", SlikePortfolija = null });
+
+        // Act + Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 10));
+    }
 }
