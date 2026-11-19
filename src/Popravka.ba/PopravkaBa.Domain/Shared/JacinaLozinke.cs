@@ -10,17 +10,17 @@ namespace PopravkaBa.Domain.Shared
         private const int MinimalnaDuzinaDijelaEmaila = 5;
 
         private static readonly string[] CesteLozinke =
-{
-    "lozinka", "password", "qwerty", "12345678", "20092005", "sifra", "admin123", "abc12345"
-};
-        
+        {
+            "lozinka", "password", "qwerty", "12345678", "20092005", "sifra", "admin123", "abc12345"
+        };
+
         public static Jacina Procijeni(string lozinka, string? email)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
             var bezRazmaka = UkloniRazmake(lozinka);
 
-            if (SadrziDioEmaila(bezRazmaka, email) || CesteLozinke.Any(cesta => bezRazmaka.Contains(cesta, StringComparison.OrdinalIgnoreCase)))
-    return Jacina.Slaba;
+            if (SadrziDioEmaila(bezRazmaka, email) || JeCestaLozinka(bezRazmaka))
+                return Jacina.Slaba;
 
             var bodovi = IzracunajBodove(bezRazmaka);
 
@@ -39,6 +39,9 @@ namespace PopravkaBa.Domain.Shared
             return dioEmaila.Length >= MinimalnaDuzinaDijelaEmaila
                 && lozinka.Contains(dioEmaila, StringComparison.OrdinalIgnoreCase);
         }
+
+        private static bool JeCestaLozinka(string lozinka) =>
+            CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
 
         private static int IzracunajBodove(string lozinka)
         {
