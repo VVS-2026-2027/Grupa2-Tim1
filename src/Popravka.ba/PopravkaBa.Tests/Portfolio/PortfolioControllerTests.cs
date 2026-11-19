@@ -54,4 +54,18 @@ public class PortfolioControllerTests
         // Assert
         Assert.IsInstanceOfType<NotFoundResult>(rezultat);
     }
+
+    [TestMethod]
+    public async Task PortfolioSlika_PrazanIdMajstora_VracaBadRequest()
+    {
+        // Arrange
+        _portfolioService.Setup(p => p.DajPrikazSlike("", 20))
+            .ThrowsAsync(new ArgumentException("Id majstora je prazan."));
+
+        // Act
+        var rezultat = await _kontroler.PortfolioSlika("", 20);
+
+        // Assert
+        Assert.IsInstanceOfType<BadRequestResult>(rezultat);
+    }
 }
