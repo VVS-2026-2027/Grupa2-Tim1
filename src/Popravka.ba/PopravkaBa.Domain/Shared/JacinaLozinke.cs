@@ -9,14 +9,17 @@ namespace PopravkaBa.Domain.Shared
         private const int BodoviZaJaku = 4;
         private const int MinimalnaDuzinaDijelaEmaila = 5;
 
-        private static readonly string[] CesteLozinke = { "password", "12345678" };
+        private static readonly string[] CesteLozinke =
+{
+    "lozinka", "password", "qwerty", "12345678", "20092005", "sifra", "admin123", "abc12345"
+};
         
         public static Jacina Procijeni(string lozinka, string? email)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
             var bezRazmaka = UkloniRazmake(lozinka);
 
-            if (SadrziDioEmaila(bezRazmaka, email) || CesteLozinke.Contains(bezRazmaka, StringComparer.OrdinalIgnoreCase))
+            if (SadrziDioEmaila(bezRazmaka, email) || CesteLozinke.Any(cesta => bezRazmaka.Contains(cesta, StringComparison.OrdinalIgnoreCase)))
     return Jacina.Slaba;
 
             var bodovi = IzracunajBodove(bezRazmaka);
