@@ -70,5 +70,13 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Jaka, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_EmailNull_Ignorira()
+        {
+            var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", null);
+
+            Assert.AreEqual(Jacina.Jaka, rezultat);
+        }
     }
 }
