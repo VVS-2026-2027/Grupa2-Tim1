@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- contentType, ocekivanaEkstenzija -->
+<slucajevi>
+  <slucaj>
+    <contentType>image/jpeg</contentType>
+    <ekstenzija>.jpg</ekstenzija>
+  </slucaj>
+  <slucaj>
+    <contentType>image/png</contentType>
+    <ekstenzija>.png</ekstenzija>
+  </slucaj>
+  <slucaj>
+    <contentType>image/webp</contentType>
+    <ekstenzija>.webp</ekstenzija>
+  </slucaj>
+  <slucaj>
+    <contentType>application/pdf</contentType>
+    <ekstenzija>.pdf</ekstenzija>
+  </slucaj>
+</slucajevi>
