@@ -78,5 +78,11 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Jaka, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_LozinkaNull_BacaArgumentNullException()
+        {
+            Assert.ThrowsExactly<ArgumentNullException>(() => JacinaLozinke.Procijeni(null!, Email));
+        }
     }
 }
