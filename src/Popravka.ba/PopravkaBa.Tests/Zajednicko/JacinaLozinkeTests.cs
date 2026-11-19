@@ -90,5 +90,14 @@ namespace PopravkaBa.Tests.Zajednicko
         {
             Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("", Email));
         }
+
+        [TestMethod]
+        public void Procijeni_LozinkaSaRazmacima_RazmaciSeIgnorisu()
+        {
+            // "abc de f1" bez razmaka je "abcdef1" (7 znakova), samo 1 bod
+            var rezultat = JacinaLozinke.Procijeni("abc de f1", Email);
+
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
     }
 }
