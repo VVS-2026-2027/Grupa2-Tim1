@@ -1025,4 +1025,29 @@ public class AccountControllerTests
         Assert.AreEqual("Novi link za verifikaciju je upravo poslat na Vaš email.", _kontroler.TempData["Success"]);
         Assert.IsInstanceOfType<RedirectToActionResult>(rezultat);
     }
+
+    [TestMethod]
+    public void ProcijeniJacinuLozinke_PraznaLozinka_VracaBadRequest()
+    {
+        var rezultat = _kontroler.ProcijeniJacinuLozinke("   ", "korisnik@popravka.ba");
+
+        Assert.IsInstanceOfType<BadRequestResult>(rezultat);
+    }
+
+    [TestMethod]
+    public void ProcijeniJacinuLozinke_NullLozinka_VracaBadRequest()
+    {
+        var rezultat = _kontroler.ProcijeniJacinuLozinke(null, null);
+
+        Assert.IsInstanceOfType<BadRequestResult>(rezultat);
+    }
+
+    [TestMethod]
+    public void ProcijeniJacinuLozinke_JakaLozinka_VracaJson()
+    {
+        var rezultat = _kontroler.ProcijeniJacinuLozinke("Abcdefg1!", "korisnik@popravka.ba");
+
+        var json = Assert.IsInstanceOfType<JsonResult>(rezultat);
+        Assert.AreEqual("{ jacina = Jaka }", json.Value!.ToString());
+    }
 }
