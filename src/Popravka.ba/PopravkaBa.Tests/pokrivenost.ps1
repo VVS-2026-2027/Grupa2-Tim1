@@ -4,7 +4,14 @@
 #   powershell -ExecutionPolicy Bypass -File .\pokrivenost.ps1
 Set-Location $PSScriptRoot
 Remove-Item -Recurse -Force TestResults, coverage-report -ErrorAction SilentlyContinue
-dotnet tool restore
+
+# ReportGenerator se instalira samo prvi put (ili kad se promijeni verzija u dotnet-tools.json)
+$verzija = (Get-Content dotnet-tools.json | ConvertFrom-Json).tools.'dotnet-reportgenerator-globaltool'.version
+$nuget = if ($env:NUGET_PACKAGES) { $env:NUGET_PACKAGES } else { Join-Path $env:USERPROFILE ".nuget\packages" }
+if (-not (Test-Path (Join-Path $nuget "dotnet-reportgenerator-globaltool\$verzija"))) {
+    dotnet tool restore
+}
+
 dotnet test --settings coverage.runsettings --collect "XPlat Code Coverage" --results-directory TestResults
 
 if (-not (Get-ChildItem TestResults -Recurse -Filter coverage.cobertura.xml -ErrorAction SilentlyContinue)) {
