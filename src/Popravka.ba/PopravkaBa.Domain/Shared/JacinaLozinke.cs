@@ -6,6 +6,7 @@ namespace PopravkaBa.Domain.Shared
     {
         public static Jacina Procijeni(string lozinka, string? email)
         {
+            if (lozinka.Contains(email.Split('@')[0], StringComparison.OrdinalIgnoreCase)) return Jacina.Slaba;
             var bodovi = 0;
             if (lozinka.Length >= 8) bodovi++;
             if (lozinka.Any(char.IsDigit)) bodovi++;
