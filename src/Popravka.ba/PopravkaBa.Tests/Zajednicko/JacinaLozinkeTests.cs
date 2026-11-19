@@ -62,5 +62,13 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_KratakDioEmaila_Ignorira()
+        {
+            var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", "a@gmail.com");
+
+            Assert.AreEqual(Jacina.Jaka, rezultat);
+        }
     }
 }
