@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tokenPostoji, iskoristen, istekao, korisnikPostoji, ocekivaniStatus -->
+<slucajevi>
+  <slucaj>
+    <tokenPostoji>false</tokenPostoji>
+    <iskoristen>false</iskoristen>
+    <istekao>false</istekao>
+    <korisnikPostoji>true</korisnikPostoji>
+    <ocekivano>Odbijeno</ocekivano>
+  </slucaj>
+  <slucaj>
+    <tokenPostoji>true</tokenPostoji>
+    <iskoristen>true</iskoristen>
+    <istekao>false</istekao>
+    <korisnikPostoji>true</korisnikPostoji>
+    <ocekivano>VecIskoristen</ocekivano>
+  </slucaj>
+  <slucaj>
+    <tokenPostoji>true</tokenPostoji>
+    <iskoristen>false</iskoristen>
+    <istekao>true</istekao>
+    <korisnikPostoji>true</korisnikPostoji>
+    <ocekivano>Neaktivan</ocekivano>
+  </slucaj>
+  <slucaj>
+    <tokenPostoji>true</tokenPostoji>
+    <iskoristen>false</iskoristen>
+    <istekao>false</istekao>
+    <korisnikPostoji>false</korisnikPostoji>
+    <ocekivano>Odbijeno</ocekivano>
+  </slucaj>
+  <slucaj>
+    <tokenPostoji>true</tokenPostoji>
+    <iskoristen>false</iskoristen>
+    <istekao>false</istekao>
+    <korisnikPostoji>true</korisnikPostoji>
+    <ocekivano>Aktivan</ocekivano>
+  </slucaj>
+</slucajevi>

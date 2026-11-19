@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- minutaOdZadnjegTokena, ocekivanoJeTokenGenerisan -->
+<slucajevi>
+  <slucaj>
+    <minuta>0</minuta>
+    <generisan>false</generisan>
+  </slucaj>
+  <slucaj>
+    <minuta>3</minuta>
+    <generisan>false</generisan>
+  </slucaj>
+  <slucaj>
+    <minuta>5</minuta>
+    <generisan>true</generisan>
+  </slucaj>
+  <slucaj>
+    <minuta>60</minuta>
+    <generisan>true</generisan>
+  </slucaj>
+</slucajevi>
