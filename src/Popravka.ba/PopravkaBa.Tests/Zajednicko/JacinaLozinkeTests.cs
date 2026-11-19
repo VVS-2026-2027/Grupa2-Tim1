@@ -38,5 +38,13 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Srednja, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_DuzinaISpecijalniZnak_VracaSrednja()
+        {
+            var rezultat = JacinaLozinke.Procijeni("abcdefg!", Email);
+
+            Assert.AreEqual(Jacina.Srednja, rezultat);
+        }
     }
 }
