@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- mozeOstavitiRecenziju (sta vraca servis), ocekivano vecOcijenjen na zavrsenom oglasu -->
+<slucajevi>
+  <slucaj>
+    <mozeOstavitiRecenziju>true</mozeOstavitiRecenziju>
+    <vecOcijenjen>false</vecOcijenjen>
+  </slucaj>
+  <slucaj>
+    <mozeOstavitiRecenziju>false</mozeOstavitiRecenziju>
+    <vecOcijenjen>true</vecOcijenjen>
+  </slucaj>
+</slucajevi>

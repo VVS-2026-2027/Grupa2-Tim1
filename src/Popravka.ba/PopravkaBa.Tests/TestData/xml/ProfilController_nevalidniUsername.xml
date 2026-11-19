@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- username (prazan, samo razmaci) -->
+<slucajevi>
+  <slucaj>
+    <username></username>
+  </slucaj>
+  <slucaj>
+    <username>   </username>
+  </slucaj>
+</slucajevi>

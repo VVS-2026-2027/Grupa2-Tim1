@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- prijavljeniId, uloga prijavljenog korisnika, ocekivano (moze li ostaviti recenziju majstoru m1; servis uvijek vraca true) -->
+<slucajevi>
+  <slucaj>
+    <prijavljeniId>k9</prijavljeniId>
+    <uloga>Klijent</uloga>
+    <ocekivano>true</ocekivano>
+  </slucaj>
+  <slucaj>
+    <prijavljeniId>m2</prijavljeniId>
+    <uloga>Majstor</uloga>
+    <ocekivano>false</ocekivano>
+  </slucaj>
+  <slucaj>
+    <prijavljeniId>f1</prijavljeniId>
+    <uloga>Firma</uloga>
+    <ocekivano>false</ocekivano>
+  </slucaj>
+  <slucaj>
+    <prijavljeniId>m1</prijavljeniId>
+    <uloga>Majstor</uloga>
+    <ocekivano>false</ocekivano>
+  </slucaj>
+</slucajevi>

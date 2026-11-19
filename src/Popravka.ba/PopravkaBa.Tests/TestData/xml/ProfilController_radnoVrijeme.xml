@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- otvorenoOd (sat), otvorenoDo (sat), poruka greske koju firma dobije. Prazno polje = vrijeme nije uneseno -->
+<slucajevi>
+  <slucaj>
+    <otvorenoOd>8</otvorenoOd>
+    <otvorenoDo></otvorenoDo>
+    <poruka>Za radno vrijeme unesite i vrijeme otvaranja i vrijeme zatvaranja.</poruka>
+  </slucaj>
+  <slucaj>
+    <otvorenoOd></otvorenoOd>
+    <otvorenoDo>16</otvorenoDo>
+    <poruka>Za radno vrijeme unesite i vrijeme otvaranja i vrijeme zatvaranja.</poruka>
+  </slucaj>
+  <slucaj>
+    <otvorenoOd>16</otvorenoOd>
+    <otvorenoDo>8</otvorenoDo>
+    <poruka>Vrijeme otvaranja mora biti prije vremena zatvaranja.</poruka>
+  </slucaj>
+  <slucaj>
+    <otvorenoOd>8</otvorenoOd>
+    <otvorenoDo>8</otvorenoDo>
+    <poruka>Vrijeme otvaranja mora biti prije vremena zatvaranja.</poruka>
+  </slucaj>
+</slucajevi>

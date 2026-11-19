@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- brojSlika koje korisnik posalje, ocekivano koliko ih se sprema u portfolio (najvise 10) -->
+<slucajevi>
+  <slucaj>
+    <brojSlika>0</brojSlika>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+  <slucaj>
+    <brojSlika>1</brojSlika>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <brojSlika>10</brojSlika>
+    <ocekivano>10</ocekivano>
+  </slucaj>
+  <slucaj>
+    <brojSlika>12</brojSlika>
+    <ocekivano>10</ocekivano>
+  </slucaj>
+</slucajevi>

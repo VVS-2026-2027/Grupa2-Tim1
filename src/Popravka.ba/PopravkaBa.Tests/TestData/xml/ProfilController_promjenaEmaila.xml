@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- stariEmail, noviEmail, ocekivano (da li je email i dalje potvrdjen nakon izmjene) -->
+<slucajevi>
+  <slucaj>
+    <stariEmail>haso@popravka.ba</stariEmail>
+    <noviEmail>haso@popravka.ba</noviEmail>
+    <ocekivano>true</ocekivano>
+  </slucaj>
+  <slucaj>
+    <stariEmail>haso@popravka.ba</stariEmail>
+    <noviEmail>HASO@POPRAVKA.BA</noviEmail>
+    <ocekivano>true</ocekivano>
+  </slucaj>
+  <slucaj>
+    <stariEmail>haso@popravka.ba</stariEmail>
+    <noviEmail>novi@popravka.ba</noviEmail>
+    <ocekivano>false</ocekivano>
+  </slucaj>
+</slucajevi>
