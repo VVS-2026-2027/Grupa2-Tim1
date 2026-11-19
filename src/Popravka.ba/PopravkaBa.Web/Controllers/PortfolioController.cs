@@ -16,8 +16,15 @@ namespace PopravkaBa.Web.Controllers
         [HttpGet("/portfolio/image/")]
         public async Task<IActionResult> PortfolioSlika(string ID, int slikaID)
         {
-            var dto = await _portfolioService.DajPrikazSlike(ID, slikaID);
-            return Json(dto);
+            try
+            {
+                var dto = await _portfolioService.DajPrikazSlike(ID, slikaID);
+                return Json(dto);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
