@@ -25,6 +25,10 @@ namespace PopravkaBa.Web.Controllers
             {
                 return NotFound();
             }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
