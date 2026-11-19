@@ -1,6 +1,7 @@
 ﻿
 
 
+using Amazon.S3.Model;
 using PopravkaBa.Application.Services.Implementation;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
@@ -45,4 +46,6 @@ public class PortfolioServiceTests
         Assert.AreEqual(3, slikaViewDTO.UkupanPortfolio);
 
     }
+
+    
 }

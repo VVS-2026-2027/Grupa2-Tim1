@@ -28,7 +28,9 @@ namespace PopravkaBa.Application.Services.Implementation
                 NarednaSlikaID = slike[i + 1].PortfolioSlikaID,
                 PrethodnaSlikaID = slike[i - 1].PortfolioSlikaID,
                 TrenutnaPozicija = i + 1,
-                UkupanPortfolio = slike.Count
+                UkupanPortfolio = slike.Count,
+                Opis = slike[i].Opis,
+                URL = slike[i].URL
             };
 
         }
