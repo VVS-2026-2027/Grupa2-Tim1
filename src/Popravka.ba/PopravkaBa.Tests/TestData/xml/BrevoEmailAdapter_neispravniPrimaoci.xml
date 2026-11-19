@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- zaAdmina, adminEmail, firmaEmail, ocekivanaGreskaFormataAdrese -->
+<!-- Neispravna adresa baca FormatException prije konekcije, a ispravna dolazi do konekcije na SMTP (koja ne uspijeva). -->
+<slucajevi>
+  <slucaj>
+    <zaAdmina>true</zaAdmina>
+    <adminEmail>nije@@email</adminEmail>
+    <firmaEmail>firma@popravka.ba</firmaEmail>
+    <formatGreska>true</formatGreska>
+  </slucaj>
+  <slucaj>
+    <zaAdmina>false</zaAdmina>
+    <adminEmail>admin@popravka.ba</adminEmail>
+    <firmaEmail>nije@@email</firmaEmail>
+    <formatGreska>true</formatGreska>
+  </slucaj>
+  <slucaj>
+    <zaAdmina>true</zaAdmina>
+    <adminEmail>admin@popravka.ba</adminEmail>
+    <firmaEmail>nije@@email</firmaEmail>
+    <formatGreska>false</formatGreska>
+  </slucaj>
+  <slucaj>
+    <zaAdmina>false</zaAdmina>
+    <adminEmail>nije@@email</adminEmail>
+    <firmaEmail>firma@popravka.ba</firmaEmail>
+    <formatGreska>false</formatGreska>
+  </slucaj>
+</slucajevi>
