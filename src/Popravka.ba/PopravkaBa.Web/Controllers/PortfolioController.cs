@@ -8,9 +8,9 @@ namespace PopravkaBa.Web.Controllers
     {
         private readonly IPortfolioService _portfolioService;
 
-        public PortfolioController(IPortfolioService portfolio) {
+        public PortfolioController(IPortfolioService portfolio) =>
             _portfolioService = portfolio;
-        }
+        
 
         [AllowAnonymous]
         [HttpGet("/portfolio/image/")]
