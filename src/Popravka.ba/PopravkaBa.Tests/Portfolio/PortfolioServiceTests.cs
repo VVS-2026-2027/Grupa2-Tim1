@@ -135,4 +135,13 @@ public class PortfolioServiceTests
         await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 50));
         _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync("m2"), Times.Never);
     }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_NepostojeciMajstor_BacaKeyNotFoundException()
+    {
+        // Arrange: za m99 nema Setup-a, pa mock vraća null
+
+        // Act + Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m99", 10));
+    }
 }
