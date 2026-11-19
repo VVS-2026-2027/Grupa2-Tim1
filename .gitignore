@@ -485,3 +485,7 @@ $RECYCLE.BIN/
 appsettings.*.json
 wwwroot/lib/
 
+# Rezultati testova i pokrivenosti
+TestResults/
+coverage-report/
+
