@@ -129,5 +129,17 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
+
+        public static IEnumerable<object[]> SlucajeviIzCsv =>
+    DataDrivenInputParser.CitajCsv<string, string?, Jacina>("TestData/csv/JacinaLozinke.csv");
+
+        [TestMethod]
+        [DynamicData(nameof(SlucajeviIzCsv))]
+        public void Procijeni_PodaciIzCsv_VracaOcekivano(string lozinka, string? email, Jacina ocekivano)
+        {
+            var rezultat = JacinaLozinke.Procijeni(lozinka, email);
+
+            Assert.AreEqual(ocekivano, rezultat);
+        }
     }
 }
