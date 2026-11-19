@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using Microsoft.Extensions.Logging;
 using PopravkaBa.Application.DTOs;
 using PopravkaBa.Application.Services.Interface;
