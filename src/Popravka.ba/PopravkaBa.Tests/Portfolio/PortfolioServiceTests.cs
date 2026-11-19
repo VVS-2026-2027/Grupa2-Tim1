@@ -68,5 +68,20 @@ public class PortfolioServiceTests
         Assert.AreEqual(30, dto.PrethodnaSlikaID);
     }
 
-    
+    [TestMethod]
+    public async Task DajPrikazSlike_SlikeNisuPoRedu_RedoslijedJePoId()
+    {
+        // Arrange: repozitorij vraća slike izmiješane
+        StubMajstorSaSlikama(40, 10, 30, 20);
+
+        // Act
+        var dto = await _portfolioService.DajPrikazSlike("m1", 20);
+
+        // Assert
+        Assert.AreEqual(10, dto.PrethodnaSlikaID);
+        Assert.AreEqual(30, dto.NarednaSlikaID);
+        Assert.AreEqual(2, dto.TrenutnaPozicija);
+    }
+
+
 }
