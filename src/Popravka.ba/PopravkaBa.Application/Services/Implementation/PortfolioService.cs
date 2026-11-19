@@ -17,8 +17,9 @@ namespace PopravkaBa.Application.Services.Implementation
          
         public async Task<PrikazPortfolioSlikeDto> DajPrikazSlike(string izvrsilacID, int slikaID)
         {
-            var izvrsilac = await _izvrsilacRepository.DajProfilPoIdAsync(izvrsilacID);
-            var slike = izvrsilac!.SlikePortfolija!.OrderBy(s => s.PortfolioSlikaID).ToList();
+            var izvrsilac = await _izvrsilacRepository.DajProfilPoIdAsync(izvrsilacID)
+                ?? throw new KeyNotFoundException($"Majstor {izvrsilacID} ne postoji.");
+            var slike = izvrsilac.SlikePortfolija!.OrderBy(s => s.PortfolioSlikaID).ToList();
 
             var i = slike.FindIndex(s => s.PortfolioSlikaID == slikaID);
             if (i < 0) throw new KeyNotFoundException($"Slika {slikaID} nije u portfoliju traženog majstora.");
