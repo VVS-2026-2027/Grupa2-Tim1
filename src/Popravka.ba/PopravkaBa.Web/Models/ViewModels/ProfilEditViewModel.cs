@@ -68,5 +68,7 @@ namespace PopravkaBa.Web.Models.ViewModels
     {
         public int Id { get; set; }
         public string URL { get; set; } = "";
+
+        public string? Opis { get; set; }
     }
 }

@@ -61,7 +61,7 @@ namespace PopravkaBa.Web.Controllers
             var uloga = uloge.FirstOrDefault() ?? "Korisnik";
 
             // Admins don't have public profiles
-            if (uloga == "Administrator") return NotFound();
+            if (uloga == nameof(KorisnickeUloge.Administrator)) return NotFound();
 
             var vm = new ProfilViewModel
             {
@@ -111,8 +111,8 @@ namespace PopravkaBa.Web.Controllers
                     : string.Join(", ", izvrsilac.Mjesta.Select(km => km.Mjesto?.Naziv).Where(n => n != null));
 
                 vm.PortfolioSlike = izvrsilac.SlikePortfolija?
-                    .Select(s => s.URL)
-                    .ToList() ?? new();
+                .Select(s => new PortfolioSlikaItem { Id = s.PortfolioSlikaID, URL = s.URL, Opis = s.Opis })
+                .ToList() ?? new();
 
                 vm.Recenzije = izvrsilac.Recenzije?
                     .OrderByDescending(r => r.DatumRecenzije)

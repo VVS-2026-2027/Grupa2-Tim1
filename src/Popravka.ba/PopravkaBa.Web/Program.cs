@@ -173,6 +173,8 @@ builder.Services.AddScoped<IVerifikacijskiTokenRepository, VerifikacijskiTokenRe
 builder.Services.AddScoped<IVerifikacijaFirmeService, VerifikacijaFirmeService>();
 builder.Services.AddScoped<IVerifikacijaFirmeRepository, VerifikacijaFirmeRepository>();
 
+builder.Services.AddScoped<IPortfolioService, PortfolioService>();
+
 builder.Services.AddHostedService<VerifikacijskiTokenCleanupJob>();
 builder.Services.AddHostedService<MjesecnaStatistikaJob>();
 builder.Services.AddHostedService<NeaktivniOglasCleanupJob>();
