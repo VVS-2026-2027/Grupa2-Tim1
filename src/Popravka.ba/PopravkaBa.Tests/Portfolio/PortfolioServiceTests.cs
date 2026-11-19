@@ -110,4 +110,14 @@ public class PortfolioServiceTests
         Assert.AreEqual(20, prikaz.PrethodnaSlikaID);
         Assert.AreEqual(20, prikaz.NarednaSlikaID);
     }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_NepostojecaSlika_BacaKeyNotFoundException()
+    {
+        // Arrange
+        MajstorImaSlike(10, 20);
+
+        // Act + Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _servis.DajPrikazSlike("m1", 99));
+    }
 }
