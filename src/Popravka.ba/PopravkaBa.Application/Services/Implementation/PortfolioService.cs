@@ -34,5 +34,33 @@ namespace PopravkaBa.Application.Services.Implementation
             };
 
         }
+
+        [TestMethod]
+        public async Task DajPrikazSlike_JednaSlika_StrelicePokazujuNaNju()
+        {
+            // Arrange
+            MajstorImaSlike(10);
+
+            // Act
+            var prikaz = await _servis.DajPrikazSlike("m1", 10);
+
+            // Assert
+            Assert.AreEqual(10, prikaz.PrethodnaId);
+            Assert.AreEqual(10, prikaz.SljedecaId);
+        }
+
+        [TestMethod]
+        public async Task DajPrikazSlike_DvijeSlike_ObjeStrelicePokazujuNaDrugu()
+        {
+            // Arrange
+            MajstorImaSlike(10, 20);
+
+            // Act
+            var prikaz = await _servis.DajPrikazSlike("m1", 10);
+
+            // Assert
+            Assert.AreEqual(20, prikaz.PrethodnaId);
+            Assert.AreEqual(20, prikaz.SljedecaId);
+        }
     }
 }
