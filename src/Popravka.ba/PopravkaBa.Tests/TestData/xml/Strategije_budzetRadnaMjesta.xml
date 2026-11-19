@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- minPrihod, maxPrihod, ocekivaniBrojOglasa (aktivni oglasi: 1000-1500, 500-800, 1500-2500) -->
+<slucajevi>
+  <slucaj>
+    <minPrihod></minPrihod>
+    <maxPrihod></maxPrihod>
+    <ocekivano>3</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod>1200</minPrihod>
+    <maxPrihod></maxPrihod>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod>2000</minPrihod>
+    <maxPrihod></maxPrihod>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod></minPrihod>
+    <maxPrihod>900</maxPrihod>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod></minPrihod>
+    <maxPrihod>400</maxPrihod>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod>600</minPrihod>
+    <maxPrihod>1100</maxPrihod>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minPrihod>1100</minPrihod>
+    <maxPrihod>600</maxPrihod>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+</slucajevi>

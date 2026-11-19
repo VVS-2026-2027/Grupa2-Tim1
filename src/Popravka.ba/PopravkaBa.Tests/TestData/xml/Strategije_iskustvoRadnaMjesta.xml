@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- godineIskustva, ocekivaniBrojOglasa (trazeno iskustvo oglasa: 2, 0 i 5 godina) -->
+<slucajevi>
+  <slucaj>
+    <godine></godine>
+    <ocekivano>3</ocekivano>
+  </slucaj>
+  <slucaj>
+    <godine>0</godine>
+    <ocekivano>3</ocekivano>
+  </slucaj>
+  <slucaj>
+    <godine>2</godine>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <godine>3</godine>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <godine>6</godine>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+</slucajevi>

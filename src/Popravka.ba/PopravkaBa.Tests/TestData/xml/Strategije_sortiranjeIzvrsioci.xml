@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- sortiranje, silazno -->
+<slucajevi>
+  <slucaj>
+    <sortiranje>ProsjecnaOcjena_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>ProsjecnaOcjena_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MinCijena_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MinCijena_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+</slucajevi>

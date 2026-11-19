@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- minBudzet, maxBudzet, ocekivaniBrojOglasa (aktivni oglasi: 100-300, 500-1000, 0-50) -->
+<slucajevi>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>3</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>200</minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>600</minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet>100</maxBudzet>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet>50</maxBudzet>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>0</minBudzet>
+    <maxBudzet>60</maxBudzet>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>120</minBudzet>
+    <maxBudzet>60</maxBudzet>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+</slucajevi>

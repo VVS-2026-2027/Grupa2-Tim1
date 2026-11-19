@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- sortiranje, silazno -->
+<slucajevi>
+  <slucaj>
+    <sortiranje>MinBudzet_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MinBudzet_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MaxBudzet_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MaxBudzet_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+</slucajevi>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- minBudzet, maxBudzet, ocekivaniBrojIzvrsilaca (cijene izvrsilaca: 50, 100, 200 i bez cijene = 0) -->
+<slucajevi>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>4</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>100</minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>300</minBudzet>
+    <maxBudzet></maxBudzet>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet>100</maxBudzet>
+    <ocekivano>3</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet></minBudzet>
+    <maxBudzet>40</maxBudzet>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>60</minBudzet>
+    <maxBudzet>150</maxBudzet>
+    <ocekivano>1</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>100</minBudzet>
+    <maxBudzet>200</maxBudzet>
+    <ocekivano>2</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>0</minBudzet>
+    <maxBudzet>1000</maxBudzet>
+    <ocekivano>4</ocekivano>
+  </slucaj>
+  <slucaj>
+    <minBudzet>150</minBudzet>
+    <maxBudzet>60</maxBudzet>
+    <ocekivano>0</ocekivano>
+  </slucaj>
+</slucajevi>

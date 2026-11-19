@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- sortiranje, silazno -->
+<slucajevi>
+  <slucaj>
+    <sortiranje>MinPrihod_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MinPrihod_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MaxPrihod_Asc</sortiranje>
+    <silazno>false</silazno>
+  </slucaj>
+  <slucaj>
+    <sortiranje>MaxPrihod_Desc</sortiranje>
+    <silazno>true</silazno>
+  </slucaj>
+</slucajevi>
