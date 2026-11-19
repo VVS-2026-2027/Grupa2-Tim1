@@ -28,15 +28,16 @@ namespace PopravkaBa.Application.Services.Implementation
             var i = slike.FindIndex(s => s.PortfolioSlikaID == slikaID);
             if (i < 0) throw new KeyNotFoundException($"Slika {slikaID} nije u portfoliju traženog majstora.");
             var n = slike.Count;
+            var slika = slike[i];
             return new PrikazPortfolioSlikeDto
             {
-                SlikaID = slike[i].PortfolioSlikaID,
+                SlikaID = slika.PortfolioSlikaID,
                 NarednaSlikaID = slike[(i + 1) % n].PortfolioSlikaID,
                 PrethodnaSlikaID = slike[(i - 1 + n) % n].PortfolioSlikaID,
                 TrenutnaPozicija = i + 1,
                 UkupanPortfolio = n,
-                Opis = slike[i].Opis,
-                URL = slike[i].URL
+                Opis = slika.Opis,
+                URL = slika.URL
             };
 
         }
