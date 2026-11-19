@@ -21,14 +21,14 @@ namespace PopravkaBa.Application.Services.Implementation
             var slike = izvrsilac!.SlikePortfolija!.ToList();
 
             var i = slike.FindIndex(s => s.PortfolioSlikaID == slikaID);
-
+            var n = slike.Count;
             return new PrikazPortfolioSlikeDto
             {
                 SlikaID = slike[i].PortfolioSlikaID,
-                NarednaSlikaID = slike[(i + 1) % slike.Count].PortfolioSlikaID,
-                PrethodnaSlikaID = slike[(i - 1) % slike.Count].PortfolioSlikaID,
+                NarednaSlikaID = slike[(i + 1) % n].PortfolioSlikaID,
+                PrethodnaSlikaID = slike[(i - 1) % n].PortfolioSlikaID,
                 TrenutnaPozicija = i + 1,
-                UkupanPortfolio = slike.Count,
+                UkupanPortfolio = n,
                 Opis = slike[i].Opis,
                 URL = slike[i].URL
             };
