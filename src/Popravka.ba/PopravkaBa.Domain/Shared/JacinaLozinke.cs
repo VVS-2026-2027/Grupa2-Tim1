@@ -5,6 +5,6 @@ namespace PopravkaBa.Domain.Shared
     public static class JacinaLozinke
     {
         public static Jacina Procijeni(string lozinka, string? email)
-            => throw new NotImplementedException();
+    => Jacina.Slaba;
     }
 }
