@@ -7,20 +7,26 @@ namespace PopravkaBa.Domain.Shared
         private const int MinimalnaDuzina = 8;
         private const int MinimalniBodoviZaSrednju = 2;
         private const int BodoviZaJaku = 4;
+        private const int MinimalnaDuzinaDijelaEmaila = 5;
 
         public static Jacina Procijeni(string lozinka, string? email)
         {
-            if (!string.IsNullOrEmpty(email))
-            {
-                var dioEmaila = email.Split('@')[0];
-                if (dioEmaila.Length >= 5 && lozinka.Contains(dioEmaila, StringComparison.OrdinalIgnoreCase))
-                    return Jacina.Slaba;
-            }
+            if (SadrziDioEmaila(lozinka, email))
+                return Jacina.Slaba;
 
             var bodovi = IzracunajBodove(lozinka);
 
             if (bodovi >= BodoviZaJaku) return Jacina.Jaka;
             return bodovi >= MinimalniBodoviZaSrednju ? Jacina.Srednja : Jacina.Slaba;
+        }
+
+        private static bool SadrziDioEmaila(string lozinka, string? email)
+        {
+            if (string.IsNullOrEmpty(email)) return false;
+
+            var dioEmaila = email.Split('@')[0];
+            return dioEmaila.Length >= MinimalnaDuzinaDijelaEmaila
+                && lozinka.Contains(dioEmaila, StringComparison.OrdinalIgnoreCase);
         }
 
         private static int IzracunajBodove(string lozinka)
