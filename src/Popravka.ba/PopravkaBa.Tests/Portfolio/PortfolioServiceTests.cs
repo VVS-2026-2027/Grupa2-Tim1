@@ -115,9 +115,9 @@ public class PortfolioServiceTests
     public async Task DajPrikazSlike_NepostojecaSlika_BacaKeyNotFoundException()
     {
         // Arrange
-        MajstorImaSlike(10, 20);
+        StubMajstorSaSlikama(10, 20);
 
-        // Act + Assert
-        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _servis.DajPrikazSlike("m1", 99));
+        // Act and Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 99));
     }
 }
