@@ -1,14 +1,12 @@
-﻿using PopravkaBa.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using PopravkaBa.Application.DTOs;
+using System.Globalization;
 
 namespace PopravkaBa.Application.Services.Interface
 {
     public interface IPortfolioService
     {
-    
+        Task<PrikazPortfolioSlikeDto> DajPrikazSlike(string izvrsilacID, int slikaID);
     }
 }
