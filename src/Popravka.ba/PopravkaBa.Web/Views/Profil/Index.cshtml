@@ -329,8 +329,34 @@
                         <div class="profil-portfolio">
                             @foreach (var slika in Model.PortfolioSlike)
                             {
-                                <img src="@slika" alt="Portfolio" class="profil-portfolio-slika" />
+                                <img src="@slika.URL" alt="Portfolio" class="profil-portfolio-slika"
+                                     data-slika-id="@slika.Id" role="button" style="cursor: zoom-in;" />
                             }
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="portfolioModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 id="portfolioNaslov" class="modal-title">Portfolio</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button>
+                                </div>
+                                <div class="modal-body d-flex align-items-center gap-2" style="height: 70vh;">
+                                    <button type="button" id="portfolioPrethodna" class="btn btn-light flex-shrink-0" aria-label="Prethodna slika">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </button>
+                                    <div class="flex-grow-1 h-100 d-flex align-items-center justify-content-center" style="min-width: 0;">
+                                        <img id="portfolioSlika" src="" alt="Portfolio" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                                    </div>
+                                    <button type="button" id="portfolioNaredna" class="btn btn-light flex-shrink-0" aria-label="Sljedeća slika">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <span id="portfolioPozicija" class="text-muted"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
@@ -1469,5 +1495,35 @@
                 document.getElementById('panel-zatvoreni').style.display = tab.dataset.tab === 'zatvoreni' ? '' : 'none';
             });
         });
+        const portfolioModal = document.getElementById('portfolioModal');
+        if (portfolioModal) {
+            const portfolioUrl = '@Url.Action("PortfolioSlika", "Portfolio")';
+            const majstorId = '@Model.UserId';
+            let prethodnaId, narednaId;
+
+            async function prikaziSliku(slikaId) {
+                const odgovor = await fetch(`${portfolioUrl}?id=${encodeURIComponent(majstorId)}&slikaId=${slikaId}`);
+                if (!odgovor.ok) return;
+                const podaci = await odgovor.json();   // imena su camelCase: url, opis, narednaSlikaID...
+
+                document.getElementById('portfolioSlika').src = podaci.url;
+                document.getElementById('portfolioSlika').alt = podaci.opis ?? 'Portfolio';
+                document.getElementById('portfolioNaslov').textContent = podaci.opis ? `Portfolio: ${podaci.opis}` : 'Portfolio';
+                document.getElementById('portfolioPozicija').textContent = `${podaci.trenutnaPozicija} od ${podaci.ukupanPortfolio}`;
+                document.getElementById('portfolioPrethodna').hidden = podaci.ukupanPortfolio === 1;
+                document.getElementById('portfolioNaredna').hidden = podaci.ukupanPortfolio === 1;
+                prethodnaId = podaci.prethodnaSlikaID;
+                narednaId = podaci.narednaSlikaID;
+            }
+
+            document.querySelectorAll('.profil-portfolio-slika').forEach(img => {
+                img.addEventListener('click', async () => {
+                    await prikaziSliku(img.dataset.slikaId);
+                    bootstrap.Modal.getOrCreateInstance(portfolioModal).show();
+                });
+            });
+            document.getElementById('portfolioPrethodna').addEventListener('click', () => prikaziSliku(prethodnaId));
+            document.getElementById('portfolioNaredna').addEventListener('click', () => prikaziSliku(narednaId));
+        }
     </script>
 }

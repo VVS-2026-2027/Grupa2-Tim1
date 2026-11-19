@@ -23,7 +23,7 @@ namespace PopravkaBa.Web.Models.ViewModels
         public int BrojRecenzija { get; set; }
         public int BrojZavrsenihPoslova { get; set; }
         public List<string> Vjestine { get; set; } = new();
-        public List<string> PortfolioSlike { get; set; } = new();
+        public List<PortfolioSlikaItem> PortfolioSlike { get; set; } = new();
         public List<ProfilRecenzijaItem> Recenzije { get; set; } = new();
         public List<ProfilOglasMajstoraItem> OglasiMajstora { get; set; } = new();
         public List<ProfilOglasUslugeItem> OglasiUsluge { get; set; } = new();
