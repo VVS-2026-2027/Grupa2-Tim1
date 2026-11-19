@@ -13,10 +13,12 @@ namespace PopravkaBa.Domain.Shared
         {
             ArgumentException.ThrowIfNullOrEmpty(lozinka);
 
-            if (SadrziDioEmaila(lozinka, email))
+            var bezRazmaka = new string(lozinka.Where(znak => !char.IsWhiteSpace(znak)).ToArray());
+
+            if (SadrziDioEmaila(bezRazmaka, email))
                 return Jacina.Slaba;
 
-            var bodovi = IzracunajBodove(lozinka);
+            var bodovi = IzracunajBodove(bezRazmaka);
 
             if (bodovi >= BodoviZaJaku) return Jacina.Jaka;
             return bodovi >= MinimalniBodoviZaSrednju ? Jacina.Srednja : Jacina.Slaba;
