@@ -18,6 +18,8 @@ namespace PopravkaBa.Application.Services.Implementation
          
         public async Task<PrikazPortfolioSlikeDto> DajPrikazSlike(string izvrsilacID, int slikaID)
         {
+            ArgumentException.ThrowIfNullOrWhiteSpace(izvrsilacID);
+
             var izvrsilac = await _izvrsilacRepository.DajProfilPoIdAsync(izvrsilacID)
                 ?? throw new KeyNotFoundException($"Majstor {izvrsilacID} ne postoji.");
             var slike = (izvrsilac.SlikePortfolija ?? new List<PortfolioSlika>())
