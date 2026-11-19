@@ -176,4 +176,17 @@ public class PortfolioServiceTests
         await Assert.ThrowsAsync<ArgumentException>(() => _portfolioService.DajPrikazSlike("", 10));
         _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync(It.IsAny<string>()), Times.Never);
     }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_IspravanZahtjev_RepozitorijSePozivaJednom()
+    {
+        // Arrange
+        StubMajstorSaSlikama(10, 20, 30);
+
+        // Act
+        await _portfolioService.DajPrikazSlike("m1", 20);
+
+        // Assert
+        _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync("m1"), Times.Once);
+    }
 }
