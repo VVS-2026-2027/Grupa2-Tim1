@@ -54,5 +54,13 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Jaka, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_LozinkaSadrziDioEmaila_VracaSlaba()
+        {
+            var rezultat = JacinaLozinke.Procijeni("Amina123!x", "amina@gmail.com");
+
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
     }
 }
