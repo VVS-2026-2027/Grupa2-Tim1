@@ -105,5 +105,13 @@ namespace PopravkaBa.Tests.Zajednicko
         {
             Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("   ", Email));
         }
+
+        [TestMethod]
+        public void Procijeni_CestaLozinkaPassword_VracaSlaba()
+        {
+            var rezultat = JacinaLozinke.Procijeni("Password", Email);
+
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
     }
 }
