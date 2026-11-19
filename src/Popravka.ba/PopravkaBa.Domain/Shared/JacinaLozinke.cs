@@ -11,6 +11,8 @@ namespace PopravkaBa.Domain.Shared
 
         public static Jacina Procijeni(string lozinka, string? email)
         {
+            ArgumentNullException.ThrowIfNull(lozinka);
+
             if (SadrziDioEmaila(lozinka, email))
                 return Jacina.Slaba;
 
