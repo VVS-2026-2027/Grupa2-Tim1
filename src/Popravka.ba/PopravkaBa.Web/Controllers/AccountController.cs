@@ -11,6 +11,7 @@ using PopravkaBa.Web.Attributes;
 using PopravkaBa.Web.Models.Enums;
 using PopravkaBa.Web.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using PopravkaBa.Domain.Shared;
 
 namespace PopravkaBa.Web.Controllers
 {
@@ -309,6 +310,18 @@ namespace PopravkaBa.Web.Controllers
                 await PosaljiVerifikacijskiEmailAsync(user, rawToken);
 
             return RedirectToAction(nameof(VerifikacijaPoslana));
+        }
+
+        [AllowAnonymous]
+        [HttpPost("/register/jacina-lozinke")]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProcijeniJacinuLozinke(string? lozinka, string? email)
+        {
+            if (string.IsNullOrWhiteSpace(lozinka))
+                return BadRequest();
+
+            var jacina = JacinaLozinke.Procijeni(lozinka, email);
+            return Json(new { jacina = jacina.ToString() });
         }
 
         [AllowAnonymous]

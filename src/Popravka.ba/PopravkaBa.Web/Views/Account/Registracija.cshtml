@@ -541,6 +541,7 @@
                             <div class="two-col">
                                 <div class="field"><label asp-for="KlijentDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="KlijentDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="KlijentDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="KlijentDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="KlijentDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="KlijentDTO.PotvrdaLozinke" class="field-error"></span></div>
+                                <div class="jacina-lozinke" data-lozinka="KlijentDTO_Lozinka" data-email="KlijentDTO_Email" aria-live="polite"></div>
                             </div>
 
                             <div class="field">
@@ -598,6 +599,7 @@
                             <div class="two-col">
                                 <div class="field"><label asp-for="MajstorDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="MajstorDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="MajstorDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="MajstorDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="MajstorDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="MajstorDTO.PotvrdaLozinke" class="field-error"></span></div>
+                                <div class="jacina-lozinke" data-lozinka="MajstorDTO_Lozinka" data-email="MajstorDTO_Email" aria-live="polite"></div>
                             </div>
 
                             <div class="field">
@@ -698,6 +700,7 @@
                             <div class="two-col">
                                 <div class="field"><label asp-for="FirmaDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="FirmaDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="FirmaDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="FirmaDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="FirmaDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="FirmaDTO.PotvrdaLozinke" class="field-error"></span></div>
+                                <div class="jacina-lozinke" data-lozinka="FirmaDTO_Lozinka" data-email="FirmaDTO_Email" aria-live="polite"></div>
                             </div>
                             <div class="field"><label asp-for="FirmaDTO.VelicinaFirme" class="field-label">Veličina firme</label><select asp-for="FirmaDTO.VelicinaFirme" asp-items="Html.GetEnumSelectList<PopravkaBa.Domain.Enums.VelicinaFirme>()" class="field-input field-input--plain"></select><span asp-validation-for="FirmaDTO.VelicinaFirme" class="field-error"></span></div>
                             <div class="field"><label asp-for="FirmaDTO.WebStranica" class="field-label">Web stranica <span style="color:var(--text-soft);font-weight:400;">(opcionalno)</span></label><input asp-for="FirmaDTO.WebStranica" class="field-input field-input--plain" placeholder="https://..." /><span asp-validation-for="FirmaDTO.WebStranica" class="field-error"></span></div>
@@ -1069,6 +1072,38 @@
                 });
                 })();
             </script>
+
+            <script>
+        (function () {
+            const tekstovi = { Slaba: 'Slaba', Srednja: 'Srednja', Jaka: 'Jaka' };
+            const boje = { Slaba: '#c0392b', Srednja: '#e67e22', Jaka: '#27ae60' };
+            const tokenEl = document.querySelector('input[name="__RequestVerificationToken"]');
+            let timer;
+
+            document.querySelectorAll('.jacina-lozinke').forEach(function (prikaz) {
+                const lozinka = document.getElementById(prikaz.dataset.lozinka);
+                const email = document.getElementById(prikaz.dataset.email);
+                if (!lozinka) return;
+
+                lozinka.addEventListener('input', function () {
+                    clearTimeout(timer);
+                    if (!lozinka.value.trim()) { prikaz.textContent = ''; return; }
+                    timer = setTimeout(async function () {
+                        const tijelo = new URLSearchParams({ lozinka: lozinka.value, email: email ? email.value : '' });
+                        const odgovor = await fetch('/register/jacina-lozinke', {
+                            method: 'POST',
+                            headers: { 'RequestVerificationToken': tokenEl ? tokenEl.value : '' },
+                            body: tijelo
+                        });
+                        if (!odgovor.ok) { prikaz.textContent = ''; return; }
+                        const podaci = await odgovor.json();
+                        prikaz.textContent = 'Jačina lozinke: ' + tekstovi[podaci.jacina];
+                        prikaz.style.color = boje[podaci.jacina];
+                    }, 300);
+                });
+            });
+        })();
+        </script>
     }
 </body>
 </html>
