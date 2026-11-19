@@ -21,7 +21,7 @@ namespace PopravkaBa.Application.Services.Implementation
             var slike = izvrsilac!.SlikePortfolija!.OrderBy(s => s.PortfolioSlikaID).ToList();
 
             var i = slike.FindIndex(s => s.PortfolioSlikaID == slikaID);
-            if (i < 0) throw new KeyNotFoundException();
+            if (i < 0) throw new KeyNotFoundException($"Slika {slikaID} nije u portfoliju traženog majstora.");
             var n = slike.Count;
             return new PrikazPortfolioSlikeDto
             {
