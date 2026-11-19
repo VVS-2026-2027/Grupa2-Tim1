@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- stranica, stavkiPoStranici, ocekivanoNaStranici, ukupno -->
+<slucajevi>
+  <slucaj>
+    <stranica>1</stranica>
+    <stavkiPoStranici>2</stavkiPoStranici>
+    <ocekivanoNaStranici>2</ocekivanoNaStranici>
+    <ukupno>5</ukupno>
+  </slucaj>
+  <slucaj>
+    <stranica>2</stranica>
+    <stavkiPoStranici>2</stavkiPoStranici>
+    <ocekivanoNaStranici>2</ocekivanoNaStranici>
+    <ukupno>5</ukupno>
+  </slucaj>
+  <slucaj>
+    <stranica>3</stranica>
+    <stavkiPoStranici>2</stavkiPoStranici>
+    <ocekivanoNaStranici>1</ocekivanoNaStranici>
+    <ukupno>5</ukupno>
+  </slucaj>
+  <slucaj>
+    <stranica>1</stranica>
+    <stavkiPoStranici>10</stavkiPoStranici>
+    <ocekivanoNaStranici>5</ocekivanoNaStranici>
+    <ukupno>5</ukupno>
+  </slucaj>
+  <slucaj>
+    <stranica>4</stranica>
+    <stavkiPoStranici>2</stavkiPoStranici>
+    <ocekivanoNaStranici>0</ocekivanoNaStranici>
+    <ukupno>5</ukupno>
+  </slucaj>
+</slucajevi>
