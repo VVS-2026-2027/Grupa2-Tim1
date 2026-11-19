@@ -32,4 +32,26 @@ public class PortfolioControllerTests
         var json = Assert.IsInstanceOfType<JsonResult>(rezultat);
         Assert.AreSame(prikaz, json.Value);
     }
+
+    // SEC-9 iz checkliste, prevencija side-channel attacka
+    public static IEnumerable<object[]> PorukeServisa => new[]
+    {
+    new object[] { "Majstor m99 ne postoji." },
+    new object[] { "Slika 99 nije u portfoliju traženog majstora." },
+};
+
+    [TestMethod]
+    [DynamicData(nameof(PorukeServisa))]
+    public async Task PortfolioSlika_MajstorIliSlikaNePostoji_VracaIstiNotFoundBezPoruke(string poruka)
+    {
+        // Arrange
+        _portfolioService.Setup(p => p.DajPrikazSlike(It.IsAny<string>(), It.IsAny<int>()))
+            .ThrowsAsync(new KeyNotFoundException(poruka));
+
+        // Act
+        var rezultat = await _kontroler.PortfolioSlika("m99", 99);
+
+        // Assert
+        Assert.IsInstanceOfType<NotFoundResult>(rezultat);
+    }
 }
