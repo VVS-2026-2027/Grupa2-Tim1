@@ -37,14 +37,25 @@ public class PortfolioServiceTests
         // Arrange
         StubMajstorSaSlikama(0, 1, 2);
         // Act
-        var slikaViewDTO = await _portfolioService.DajPrikazSlike("m1", 1);
+        var dto = await _portfolioService.DajPrikazSlike("m1", 1);
         // Assert
-        Assert.AreEqual(1, slikaViewDTO.SlikaID);
-        Assert.AreEqual(0, slikaViewDTO.PrethodnaSlikaID);
-        Assert.AreEqual(2, slikaViewDTO.NarednaSlikaID);
-        Assert.AreEqual(2, slikaViewDTO.TrenutnaPozicija);
-        Assert.AreEqual(3, slikaViewDTO.UkupanPortfolio);
+        Assert.AreEqual(1, dto.SlikaID);
+        Assert.AreEqual(0, dto.PrethodnaSlikaID);
+        Assert.AreEqual(2, dto.NarednaSlikaID);
+        Assert.AreEqual(2, dto.TrenutnaPozicija);
+        Assert.AreEqual(3, dto.UkupanPortfolio);
 
+    }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_PosljednjaSlika_SljedecuPrikazePrvu()
+    {
+        // Arrange
+        StubMajstorSaSlikama(10, 20, 30);
+        // Act
+        var dto = await _portfolioService.DajPrikazSlike("m1", 30);
+        // Assert
+        Assert.AreEqual(10, dto.NarednaSlikaID);
     }
 
     
