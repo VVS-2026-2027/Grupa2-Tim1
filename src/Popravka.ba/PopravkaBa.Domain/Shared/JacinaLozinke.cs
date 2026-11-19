@@ -11,7 +11,7 @@ namespace PopravkaBa.Domain.Shared
 
         public static Jacina Procijeni(string lozinka, string? email)
         {
-            ArgumentException.ThrowIfNullOrEmpty(lozinka);
+            ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
 
             var bezRazmaka = new string(lozinka.Where(znak => !char.IsWhiteSpace(znak)).ToArray());
 
