@@ -12,8 +12,7 @@ namespace PopravkaBa.Domain.Shared
         public static Jacina Procijeni(string lozinka, string? email)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
-
-            var bezRazmaka = new string(lozinka.Where(znak => !char.IsWhiteSpace(znak)).ToArray());
+            var bezRazmaka = UkloniRazmake(lozinka);
 
             if (SadrziDioEmaila(bezRazmaka, email))
                 return Jacina.Slaba;
@@ -23,6 +22,9 @@ namespace PopravkaBa.Domain.Shared
             if (bodovi >= BodoviZaJaku) return Jacina.Jaka;
             return bodovi >= MinimalniBodoviZaSrednju ? Jacina.Srednja : Jacina.Slaba;
         }
+
+        private static string UkloniRazmake(string lozinka) =>
+            new(lozinka.Where(znak => !char.IsWhiteSpace(znak)).ToArray());
 
         private static bool SadrziDioEmaila(string lozinka, string? email)
         {
