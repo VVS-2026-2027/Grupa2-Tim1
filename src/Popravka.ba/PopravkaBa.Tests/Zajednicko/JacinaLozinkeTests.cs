@@ -99,5 +99,11 @@ namespace PopravkaBa.Tests.Zajednicko
 
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
+
+        [TestMethod]
+        public void Procijeni_SamoRazmaci_BacaArgumentException()
+        {
+            Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("   ", Email));
+        }
     }
 }
