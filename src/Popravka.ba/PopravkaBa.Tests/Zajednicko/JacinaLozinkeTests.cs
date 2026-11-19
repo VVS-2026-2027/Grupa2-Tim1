@@ -84,5 +84,11 @@ namespace PopravkaBa.Tests.Zajednicko
         {
             Assert.ThrowsExactly<ArgumentNullException>(() => JacinaLozinke.Procijeni(null!, Email));
         }
+
+        [TestMethod]
+        public void Procijeni_PrazanString_BacaArgumentException()
+        {
+            Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("", Email));
+        }
     }
 }
