@@ -10,23 +10,24 @@ namespace PopravkaBa.Web.Controllers
 
         public PortfolioController(IPortfolioService portfolio) =>
             _portfolioService = portfolio;
-        
+
 
         [AllowAnonymous]
-        [HttpGet("/portfolio/image/")]
-        public async Task<IActionResult> PortfolioSlika(string ID, int slikaID)
+        [HttpGet]
+        public async Task<IActionResult> PortfolioSlika(string id, int slikaId)
         {
             try
             {
-                var dto = await _portfolioService.DajPrikazSlike(ID, slikaID);
-                return Json(dto);
+                return Json(await _portfolioService.DajPrikazSlike(id, slikaId));
             }
             catch (KeyNotFoundException)
             {
+                // Bez poruke: ne vidi da li ne postoji majstor ili slika (SEC-9 sa checkliste)
                 return NotFound();
             }
             catch (ArgumentException)
             {
+                // Neispravan zahtjev, npr. prazan id majstora
                 return BadRequest();
             }
         }
