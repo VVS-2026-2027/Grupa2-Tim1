@@ -189,4 +189,25 @@ public class PortfolioServiceTests
         // Assert
         _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync("m1"), Times.Once);
     }
+
+    // Data-driven: slučajevi navigacije iz CSV-a. Id-evi slika su odvojeni sa ";", jer "," odvaja kolone.
+    public static IEnumerable<object[]> SlucajeviNavigacije =>
+        DataDrivenInputParser.CitajCsv<string, int, int, int, int>("TestData/csv/PortfolioService.csv");
+
+    [TestMethod]
+    [DynamicData(nameof(SlucajeviNavigacije))]
+    public async Task DajPrikazSlike_PodaciIzCsv_VracaOcekivaneSusjede(
+        string slike, int trazena, int prethodna, int naredna, int pozicija)
+    {
+        // Arrange
+        StubMajstorSaSlikama(slike.Split(';').Select(int.Parse).ToArray());
+
+        // Act
+        var prikaz = await _portfolioService.DajPrikazSlike("m1", trazena);
+
+        // Assert
+        Assert.AreEqual(prethodna, prikaz.PrethodnaSlikaID);
+        Assert.AreEqual(naredna, prikaz.NarednaSlikaID);
+        Assert.AreEqual(pozicija, prikaz.TrenutnaPozicija);
+    }
 }
