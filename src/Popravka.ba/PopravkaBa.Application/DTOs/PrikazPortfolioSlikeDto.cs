@@ -10,5 +10,8 @@ namespace PopravkaBa.Application.DTOs
         public int PrethodnaSlikaID { get; set; }
         public int TrenutnaPozicija { get; set; }
         public int UkupanPortfolio { get; set; }
+
+        public string URL { get; set; }
+        public string? Opis { get; set; }
     }
 }
