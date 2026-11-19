@@ -36,7 +36,7 @@ public class PortfolioServiceTests
         // Arrange
         StubMajstorSaSlikama(0, 1, 2);
         // Act
-        var slikaViewDTO = await _portfolioService().DajPrikazSlike("m1", 1);
+        var slikaViewDTO = await _portfolioService.DajPrikazSlike("m1", 1);
         // Assert
         Assert.AreEqual(1, slikaViewDTO.SlikaID);
         Assert.AreEqual(0, slikaViewDTO.PrethodnaSlikaID);
