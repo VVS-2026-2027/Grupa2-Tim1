@@ -21,16 +21,19 @@ public class PortfolioServiceTests
         _portfolioService = new PortfolioService(_izvrsilacRepository.Object);
     }
 
-    private void StubMajstorSaSlikama(params int[] slikeID) =>
-        _izvrsilacRepository.Setup(r => r.DajProfilPoIdAsync("m1")).ReturnsAsync(new Majstor
+    // Stub: majstor sa datim id-em ima slike sa ovim id-evima, u ovom redoslijedu
+    private void StubMajstorSaSlikama(string majstorId, params int[] ids) =>
+        _izvrsilacRepository.Setup(r => r.DajProfilPoIdAsync(majstorId)).ReturnsAsync(new Majstor
         {
-            Id = "m1",
-            SlikePortfolija = slikeID.Select(id => new PortfolioSlika 
-            { 
-                PortfolioSlikaID = id, 
-                IzvrsilacID = "m1", 
-                URL = $"slika{id}.png" }).ToList()
+            Id = majstorId,
+            SlikePortfolija = ids.Select(id => new PortfolioSlika
+            { PortfolioSlikaID = id, IzvrsilacID = majstorId, URL = $"slika{id}.png" }).ToList()
         });
+
+    // Kraći oblik za većinu testova, gdje je majstor uvijek "m1"
+    private void StubMajstorSaSlikama(params int[] ids) => StubMajstorSaSlikama("m1", ids);
+
+
     [TestMethod]
     public async Task DajPrikazSlike_SrednjaSlika_VracaSlikuIPokazujeNaOstale()
     {
@@ -119,5 +122,17 @@ public class PortfolioServiceTests
 
         // Act and Assert
         await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 99));
+    }
+
+    [TestMethod]
+    public async Task DajPrikazSlike_SlikaDrugogMajstora_BacaKeyNotFoundException()
+    {
+        // Arrange: m1 ima slike 10 i 20, a slika 50 stvarno postoji, ali pripada majstoru m2
+        StubMajstorSaSlikama("m1", 10, 20);
+        StubMajstorSaSlikama("m2", 50);
+
+        // Act + Assert
+        await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 50));
+        _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync("m2"), Times.Never);
     }
 }
