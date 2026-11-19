@@ -25,7 +25,7 @@ namespace PopravkaBa.Application.Services.Implementation
             return new PrikazPortfolioSlikeDto
             {
                 SlikaID = slike[i].PortfolioSlikaID,
-                NarednaSlikaID = slike[i + 1].PortfolioSlikaID,
+                NarednaSlikaID = slike[(i + 1) % slike.Count].PortfolioSlikaID,
                 PrethodnaSlikaID = slike[i - 1].PortfolioSlikaID,
                 TrenutnaPozicija = i + 1,
                 UkupanPortfolio = slike.Count,
