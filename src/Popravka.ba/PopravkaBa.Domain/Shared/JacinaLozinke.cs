@@ -10,8 +10,12 @@ namespace PopravkaBa.Domain.Shared
 
         public static Jacina Procijeni(string lozinka, string? email)
         {
-            var dioEmaila = email.Split('@')[0];
-            if (dioEmaila.Length >= 5 && lozinka.Contains(dioEmaila, StringComparison.OrdinalIgnoreCase)) return Jacina.Slaba;
+            if (!string.IsNullOrEmpty(email))
+            {
+                var dioEmaila = email.Split('@')[0];
+                if (dioEmaila.Length >= 5 && lozinka.Contains(dioEmaila, StringComparison.OrdinalIgnoreCase))
+                    return Jacina.Slaba;
+            }
 
             var bodovi = IzracunajBodove(lozinka);
 
