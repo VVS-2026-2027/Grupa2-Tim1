@@ -12,6 +12,8 @@ namespace PopravkaBa.Domain.Shared
             if (lozinka.Any(char.IsUpper)) bodovi++;
             if (lozinka.Any(znak => !char.IsLetterOrDigit(znak))) bodovi++;
 
+            if (bodovi == 4) return Jacina.Jaka;
+
             return bodovi >= 2 ? Jacina.Srednja : Jacina.Slaba;
         }
     }
