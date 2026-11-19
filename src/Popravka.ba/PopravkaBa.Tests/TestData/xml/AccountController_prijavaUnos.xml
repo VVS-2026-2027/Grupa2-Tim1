@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- unos, brojPozivaFindByEmail, brojPozivaFindByName (unos sa @ trazi se po emailu, ostalo po korisnickom imenu) -->
+<slucajevi>
+  <slucaj>
+    <unos>haso@popravka.ba</unos>
+    <poEmailu>1</poEmailu>
+    <poImenu>0</poImenu>
+  </slucaj>
+  <slucaj>
+    <unos>a@b.ba</unos>
+    <poEmailu>1</poEmailu>
+    <poImenu>0</poImenu>
+  </slucaj>
+  <slucaj>
+    <unos>haso</unos>
+    <poEmailu>0</poEmailu>
+    <poImenu>1</poImenu>
+  </slucaj>
+  <slucaj>
+    <unos>haso.hasic</unos>
+    <poEmailu>0</poEmailu>
+    <poImenu>1</poImenu>
+  </slucaj>
+</slucajevi>

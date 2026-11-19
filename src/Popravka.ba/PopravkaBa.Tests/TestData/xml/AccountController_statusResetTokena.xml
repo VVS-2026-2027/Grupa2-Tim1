@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- statusTokena, ocekivanoPreusmjerenje (samo aktivan token otvara formu) -->
+<slucajevi>
+  <slucaj>
+    <status>Aktivan</status>
+    <preusmjerenje>false</preusmjerenje>
+  </slucaj>
+  <slucaj>
+    <status>Odbijeno</status>
+    <preusmjerenje>true</preusmjerenje>
+  </slucaj>
+  <slucaj>
+    <status>Neaktivan</status>
+    <preusmjerenje>true</preusmjerenje>
+  </slucaj>
+  <slucaj>
+    <status>VecIskoristen</status>
+    <preusmjerenje>true</preusmjerenje>
+  </slucaj>
+</slucajevi>

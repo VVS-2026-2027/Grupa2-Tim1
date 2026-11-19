@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- email (prazan, bez @, bez domene, bez imena) -->
+<slucajevi>
+  <slucaj>
+    <email></email>
+  </slucaj>
+  <slucaj>
+    <email>nijeemail</email>
+  </slucaj>
+  <slucaj>
+    <email>a@</email>
+  </slucaj>
+  <slucaj>
+    <email>@popravka.ba</email>
+  </slucaj>
+</slucajevi>

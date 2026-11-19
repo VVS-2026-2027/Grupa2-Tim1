@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- imeFajla, velicinaBajta, prihvacen (dozvoljeno .jpg .jpeg .png .webp do 5MB = 5242880) -->
+<slucajevi>
+  <slucaj>
+    <ime>logo.png</ime>
+    <velicina>1024</velicina>
+    <prihvacen>true</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>logo.JPG</ime>
+    <velicina>1024</velicina>
+    <prihvacen>true</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>logo.jpeg</ime>
+    <velicina>2048</velicina>
+    <prihvacen>true</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>logo.webp</ime>
+    <velicina>5242880</velicina>
+    <prihvacen>true</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>logo.gif</ime>
+    <velicina>1024</velicina>
+    <prihvacen>false</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>dokument.pdf</ime>
+    <velicina>1024</velicina>
+    <prihvacen>false</prihvacen>
+  </slucaj>
+  <slucaj>
+    <ime>logo.png</ime>
+    <velicina>6291456</velicina>
+    <prihvacen>false</prihvacen>
+  </slucaj>
+</slucajevi>
