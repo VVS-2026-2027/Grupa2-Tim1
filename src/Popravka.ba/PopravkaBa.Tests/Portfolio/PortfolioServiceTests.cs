@@ -165,4 +165,15 @@ public class PortfolioServiceTests
         // Act + Assert
         await Assert.ThrowsExactlyAsync<KeyNotFoundException>(() => _portfolioService.DajPrikazSlike("m1", 10));
     }
+
+    // ThrowsAsync, a ne ThrowsExactlyAsync: za null stiže ArgumentNullException, podtip ArgumentException
+    [TestMethod]
+    public async Task DajPrikazSlike_PrazanIdMajstora_BacaArgumentExceptionBezPozivaRepozitorija()
+    {
+        // Arrange: ništa, id majstora je prazan
+
+        // Act + Assert
+        await Assert.ThrowsAsync<ArgumentException>(() => _portfolioService.DajPrikazSlike("", 10));
+        _izvrsilacRepository.Verify(r => r.DajProfilPoIdAsync(It.IsAny<string>()), Times.Never);
+    }
 }
