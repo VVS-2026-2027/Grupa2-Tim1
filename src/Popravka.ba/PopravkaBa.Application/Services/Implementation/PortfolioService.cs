@@ -18,7 +18,7 @@ namespace PopravkaBa.Application.Services.Implementation
         public async Task<PrikazPortfolioSlikeDto> DajPrikazSlike(string izvrsilacID, int slikaID)
         {
             var izvrsilac = await _izvrsilacRepository.DajProfilPoIdAsync(izvrsilacID);
-            var slike = izvrsilac!.SlikePortfolija!.ToList();
+            var slike = izvrsilac!.SlikePortfolija!.OrderBy(s => s.PortfolioSlikaID).ToList();
 
             var i = slike.FindIndex(s => s.PortfolioSlikaID == slikaID);
             var n = slike.Count;
@@ -26,7 +26,7 @@ namespace PopravkaBa.Application.Services.Implementation
             {
                 SlikaID = slike[i].PortfolioSlikaID,
                 NarednaSlikaID = slike[(i + 1) % n].PortfolioSlikaID,
-                PrethodnaSlikaID = slike[(i - 1) % n].PortfolioSlikaID,
+                PrethodnaSlikaID = slike[(i - 1 + n) % n].PortfolioSlikaID,
                 TrenutnaPozicija = i + 1,
                 UkupanPortfolio = n,
                 Opis = slike[i].Opis,
