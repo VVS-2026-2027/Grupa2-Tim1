@@ -113,4 +113,26 @@ internal static class ProfilControllerTestHelper
         };
         return majstor;
     }
+
+    // Prijavljuje korisnika na kontroleru i postavlja GetUserId na njegov id
+    internal static void Prijavi(ProfilController kontroler, Mock<UserManager<ApplicationUser>> userManager, string id, params string[] uloge)
+    {
+        TestHelpers.PrijaviKorisnika(kontroler, id, uloge);
+        userManager.PrijavljenId(id);
+    }
+
+    // Profil se otvara po korisničkom imenu i korisnik ima date uloge
+    internal static void PostaviProfilPoUsernameu(this Mock<UserManager<ApplicationUser>> userManager, ApplicationUser korisnik, params string[] uloge)
+    {
+        userManager.PronadjiPoUsername(korisnik);
+        userManager.VratiUloge(korisnik, uloge);
+    }
+
+    // Prijavljeni korisnik uređuje vlastiti profil
+    internal static void PripremiVlastitiProfil(ProfilController kontroler, Mock<UserManager<ApplicationUser>> userManager, ApplicationUser korisnik, string uloga)
+    {
+        Prijavi(kontroler, userManager, korisnik.Id, uloga);
+        userManager.PronadjiPoId(korisnik, korisnik.Id);
+        userManager.VratiUloge(korisnik, uloga);
+    }
 }

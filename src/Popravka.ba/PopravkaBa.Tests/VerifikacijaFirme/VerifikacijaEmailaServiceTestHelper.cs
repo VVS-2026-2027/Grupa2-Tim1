@@ -23,4 +23,15 @@ internal static class VerifikacijaEmailaServiceTestHelper
         VrijemeIsteka = DateTime.UtcNow.AddMinutes(minutaDoIsteka),
         VrijemeKoristenja = koristen
     };
+
+    // Priprema repozitorij i UserManager prema redu iz XML-a
+    internal static void PostaviStanje(Mock<IVerifikacijskiTokenRepository> tokenRepo, Mock<UserManager<ApplicationUser>> userManager,
+        bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji)
+    {
+        var token = tokenPostoji
+            ? Token(iskoristen ? DateTime.UtcNow : null, istekao ? -1 : 10)
+            : null;
+        tokenRepo.Setup(r => r.DajTokenPoHashuAsync(It.IsAny<string>(), It.IsAny<TipTokena>())).ReturnsAsync(token);
+        userManager.PronadjiPoId(korisnikPostoji ? Korisnik() : null, "k1");
+    }
 }

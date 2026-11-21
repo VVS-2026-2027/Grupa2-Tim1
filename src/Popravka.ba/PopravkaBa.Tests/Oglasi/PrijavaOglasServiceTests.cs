@@ -188,10 +188,10 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
-    public async Task PrihvatiPonudu_PopunjenOglas_OdbijaPrijaveNaCekanjuIZatvaraOglas()
+    public async Task PrihvatiPonudu_PopunjenOglas_OdbijaPrijaveNaCekanju()
     {
-        // Arrange
-        var oglas = PostaviOglas(_oglasi, 2);
+        // Arrange: oglas traži 2 izvršioca, jedna prijava je ranije prihvaćena, jedna čeka
+        PostaviOglas(_oglasi, 2);
         var odabrana = NovaPrijava(PrijavaId);
         var ranijePrihvacena = NovaPrijava(6, "m2", Status.Prihvaceno);
         var naCekanju = NovaPrijava(7, "m3");
@@ -200,17 +200,32 @@ public class PrijavaOglasServiceTests
             .ReturnsAsync(new[] { odabrana, ranijePrihvacena, naCekanju });
 
         // Act
+        await _servis.PrihvatiPonudu(PrijavaId);
+
+        // Assert: odbija se samo prijava na čekanju, ranije prihvaćena ostaje
+        Assert.AreEqual(Status.Odbijeno, naCekanju.StatusPrijave);
+        Assert.AreEqual(Status.Prihvaceno, ranijePrihvacena.StatusPrijave);
+        _prijave.Verify(r => r.UrediAsync(naCekanju), Times.Once());
+        _prijave.Verify(r => r.UrediAsync(ranijePrihvacena), Times.Never());
+    }
+
+    [TestMethod]
+    public async Task PrihvatiPonudu_PopunjenOglas_ZatvaraOglas()
+    {
+        // Arrange: oglas traži 2 izvršioca, jedna prijava je ranije prihvaćena
+        var oglas = PostaviOglas(_oglasi, 2);
+        var odabrana = NovaPrijava(PrijavaId);
+        var ranijePrihvacena = NovaPrijava(6, "m2", Status.Prihvaceno);
+        _prijave.Setup(r => r.DajPoIdAsync(PrijavaId)).ReturnsAsync(odabrana);
+        _prijave.Setup(r => r.DajSvePrijaveOglasaAsync(OglasId))
+            .ReturnsAsync(new[] { odabrana, ranijePrihvacena });
+
+        // Act
         bool oglasPopunjen = await _servis.PrihvatiPonudu(PrijavaId);
 
         // Assert
         Assert.IsTrue(oglasPopunjen);
-        Assert.AreEqual(Status.Prihvaceno, odabrana.StatusPrijave);
-        Assert.AreEqual(Status.Prihvaceno, ranijePrihvacena.StatusPrijave);
-        Assert.AreEqual(Status.Odbijeno, naCekanju.StatusPrijave);
         Assert.AreEqual(Status.Neaktivan, oglas.StatusOglasa);
-        _prijave.Verify(r => r.UrediAsync(odabrana), Times.Once());
-        _prijave.Verify(r => r.UrediAsync(naCekanju), Times.Once());
-        _prijave.Verify(r => r.UrediAsync(ranijePrihvacena), Times.Never());
         _oglasi.Verify(r => r.UrediAsync(oglas), Times.Once());
     }
 

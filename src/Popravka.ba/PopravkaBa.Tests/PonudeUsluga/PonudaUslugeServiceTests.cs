@@ -178,14 +178,31 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
-    public async Task PrihvatiPonudu_VisePonuda_OdbijaOstaleNaCekanjuIZatvaraOglas()
+    public async Task PrihvatiPonudu_VisePonuda_PrihvataOdabranuPonudu()
     {
         // Arrange
         var odabrana = NovaPonuda(PonudaId, Status.NaCekanju);
         var druga = NovaPonuda(6, Status.NaCekanju);
-        var zavrsena = NovaPonuda(7, Status.Isporuceno);
-        var oglas = PostaviOglas(_oglasi, Status.Aktivan);
+        PostaviOglas(_oglasi, Status.Aktivan);
+        _ponude.Setup(r => r.DajPoIdAsync(PonudaId)).ReturnsAsync(odabrana);
+        _ponude.Setup(r => r.DajSvePonudeOglasaAsync(OglasId)).ReturnsAsync(new[] { odabrana, druga });
 
+        // Act
+        await _servis.PrihvatiPonudu(PonudaId);
+
+        // Assert
+        Assert.AreEqual(Status.Prihvaceno, odabrana.StatusPonude);
+        _ponude.Verify(r => r.UrediAsync(odabrana), Times.Once());
+    }
+
+    [TestMethod]
+    public async Task PrihvatiPonudu_VisePonuda_OdbijaOstaleNaCekanju()
+    {
+        // Arrange: jedna ponuda čeka, jedna je već isporučena
+        var odabrana = NovaPonuda(PonudaId, Status.NaCekanju);
+        var druga = NovaPonuda(6, Status.NaCekanju);
+        var zavrsena = NovaPonuda(7, Status.Isporuceno);
+        PostaviOglas(_oglasi, Status.Aktivan);
         _ponude.Setup(r => r.DajPoIdAsync(PonudaId)).ReturnsAsync(odabrana);
         _ponude.Setup(r => r.DajSvePonudeOglasaAsync(OglasId))
             .ReturnsAsync(new[] { odabrana, druga, zavrsena });
@@ -193,14 +210,27 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
         // Act
         await _servis.PrihvatiPonudu(PonudaId);
 
-        // Assert
-        Assert.AreEqual(Status.Prihvaceno, odabrana.StatusPonude);
+        // Assert: odbija se samo ponuda na čekanju, isporučena ostaje
         Assert.AreEqual(Status.Odbijeno, druga.StatusPonude);
         Assert.AreEqual(Status.Isporuceno, zavrsena.StatusPonude);
-        Assert.AreEqual(Status.Neaktivan, oglas.StatusOglasa);
-        _ponude.Verify(r => r.UrediAsync(odabrana), Times.Once());
         _ponude.Verify(r => r.UrediAsync(druga), Times.Once());
         _ponude.Verify(r => r.UrediAsync(zavrsena), Times.Never());
+    }
+
+    [TestMethod]
+    public async Task PrihvatiPonudu_VisePonuda_ZatvaraOglas()
+    {
+        // Arrange
+        var odabrana = NovaPonuda(PonudaId, Status.NaCekanju);
+        var oglas = PostaviOglas(_oglasi, Status.Aktivan);
+        _ponude.Setup(r => r.DajPoIdAsync(PonudaId)).ReturnsAsync(odabrana);
+        _ponude.Setup(r => r.DajSvePonudeOglasaAsync(OglasId)).ReturnsAsync(new[] { odabrana });
+
+        // Act
+        await _servis.PrihvatiPonudu(PonudaId);
+
+        // Assert
+        Assert.AreEqual(Status.Neaktivan, oglas.StatusOglasa);
         _oglasi.Verify(r => r.UrediAsync(oglas), Times.Once());
     }
 

@@ -72,36 +72,6 @@ public class ProfilControllerTests
         TestHelpers.NeprijavljenKorisnik(_kontroler);
     }
 
-    // ---------- Pomoćne metode (priprema podataka) ----------
-
-    private void Prijavi(string id, params string[] uloge)
-    {
-        TestHelpers.PrijaviKorisnika(_kontroler, id, uloge);
-        _userManager.Setup(m => m.GetUserId(It.IsAny<ClaimsPrincipal>())).Returns(id);
-    }
-
-    private void PostaviUloge(ApplicationUser korisnik, params string[] uloge)
-    {
-        _userManager.Setup(m => m.GetRolesAsync(korisnik)).ReturnsAsync(uloge.ToList());
-    }
-
-    private void PostaviProfilPoUsernameu(ApplicationUser korisnik, params string[] uloge)
-    {
-        _userManager.Setup(m => m.FindByNameAsync(korisnik.UserName!)).ReturnsAsync(korisnik);
-        PostaviUloge(korisnik, uloge);
-    }
-
-    // Prijavljeni korisnik uređuje vlastiti profil
-    private void PripremiVlastitiProfil(ApplicationUser korisnik, string uloga)
-    {
-        Prijavi(korisnik.Id, uloga);
-        _userManager.Setup(m => m.FindByIdAsync(korisnik.Id)).ReturnsAsync(korisnik);
-        PostaviUloge(korisnik, uloga);
-    }
-
-    private List<string> PorukeGresaka() =>
-        _kontroler.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-
     // ---------- Index ----------
 
     public static IEnumerable<object[]> NevalidniUsernamei =>
@@ -137,7 +107,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var admin = new Administrator { Id = "a1", UserName = "admin" };
-        PostaviProfilPoUsernameu(admin, "Administrator");
+        _userManager.PostaviProfilPoUsernameu(admin, "Administrator");
 
         // Act
         var rezultat = await _kontroler.Index("admin");
@@ -151,7 +121,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PostaviProfilPoUsernameu(klijent);
+        _userManager.PostaviProfilPoUsernameu(klijent);
 
         // Act
         var rezultat = await _kontroler.Index("haso");
@@ -169,7 +139,7 @@ public class ProfilControllerTests
         // Arrange
         var klijent = NoviKlijent();
         klijent.Slika = "https://cdn.popravka.ba/slike/haso.png";
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
 
         // Act
         var rezultat = await _kontroler.Index("haso");
@@ -192,7 +162,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
         _oglasUslugeFacade.Setup(f => f.DajSveOglase()).ReturnsAsync(new List<OglasUsluge>
         {
             NoviOglasUsluge(1, "k1", Status.Aktivan, new DateTime(2026, 1, 1)),
@@ -217,7 +187,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
         var oglas = NoviOglasUsluge(1, "k1", Status.Aktivan, new DateTime(2026, 1, 1));
         oglas.Mjesto = new Mjesto { Naziv = "Sarajevo" };
         oglas.Kategorije = new List<OglasKategorija>
@@ -250,7 +220,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
         _oglasUslugeFacade.Setup(f => f.DajSveOglase()).ReturnsAsync(new List<OglasUsluge>
         {
             NoviOglasUsluge(1, "k1", Status.Aktivan, new DateTime(2026, 1, 1))
@@ -277,8 +247,8 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        Prijavi("k1", "Klijent");
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        Prijavi(_kontroler, _userManager, "k1", "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
         var oglas = NoviOglasUsluge(1, "k1", Status.Isporuceno, new DateTime(2026, 1, 1));
         oglas.Ponude = new List<PonudaUsluge>
         {
@@ -304,8 +274,8 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        Prijavi("k9", "Klijent");
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        Prijavi(_kontroler, _userManager, "k9", "Klijent");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
         var oglas = NoviOglasUsluge(1, "k1", Status.Isporuceno, new DateTime(2026, 1, 1));
         oglas.Ponude = new List<PonudaUsluge>
         {
@@ -328,7 +298,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = MajstorSaPunimProfilom();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
 
         // Act
@@ -352,7 +322,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = MajstorSaPunimProfilom();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
 
         // Act
@@ -373,7 +343,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = MajstorSaPunimProfilom();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         _oglasMajstoraFacade.Setup(f => f.DajSveOglase()).ReturnsAsync(new List<OglasMajstora>
         {
@@ -400,7 +370,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync((IzvrsilacUsluge?)null);
         _oglasMajstoraFacade.Setup(f => f.DajSveOglase()).ReturnsAsync(new List<OglasMajstora>
         {
@@ -423,7 +393,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
 
         // Act
@@ -443,7 +413,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PostaviProfilPoUsernameu(firma, "Firma");
+        _userManager.PostaviProfilPoUsernameu(firma, "Firma");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("f1")).ReturnsAsync(firma);
 
         // Act
@@ -467,7 +437,7 @@ public class ProfilControllerTests
         // Arrange
         var firma = NovaFirma();
         firma.AdminVerificirao = false;
-        PostaviProfilPoUsernameu(firma, "Firma");
+        _userManager.PostaviProfilPoUsernameu(firma, "Firma");
 
         // Act
         var rezultat = await _kontroler.Index("elektro");
@@ -488,8 +458,8 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        Prijavi(prijavljeniId, uloga);
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        Prijavi(_kontroler, _userManager, prijavljeniId, uloga);
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
         _recenzijaService.Setup(r => r.MozeOstavitiRecenziju(It.IsAny<string>(), "m1")).ReturnsAsync(true);
 
         // Act
@@ -505,7 +475,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PostaviProfilPoUsernameu(majstor, "Majstor");
+        _userManager.PostaviProfilPoUsernameu(majstor, "Majstor");
 
         // Act
         var rezultat = await _kontroler.Index("majstor1");
@@ -524,7 +494,7 @@ public class ProfilControllerTests
         // Arrange
         var klijent = NoviKlijent();
         klijent.Slika = "https://cdn.popravka.ba/slike/haso.png";
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         var rezultat = await _kontroler.Edit(username: null);
@@ -540,6 +510,18 @@ public class ProfilControllerTests
         Assert.AreEqual("https://cdn.popravka.ba/slike/haso.png", model.TrenutnaSlika);
         Assert.AreEqual(1, model.Mjesta.Count());
         Assert.AreEqual(1, model.Kategorije.Count());
+    }
+
+    [TestMethod]
+    public async Task Edit_Get_Klijent_NeUcitavaProfilIzvrsioca()
+    {
+        // Arrange
+        PripremiVlastitiProfil(_kontroler, _userManager, NoviKlijent(), "Klijent");
+
+        // Act
+        await _kontroler.Edit(username: null);
+
+        // Assert
         _izvrsilacService.Verify(s => s.DajProfilPoIdAsync(It.IsAny<string>()), Times.Never);
     }
 
@@ -547,7 +529,7 @@ public class ProfilControllerTests
     public async Task Edit_Get_NepostojeciKorisnik_VracaNotFound()
     {
         // Arrange
-        Prijavi("k1", "Klijent");
+        Prijavi(_kontroler, _userManager, "k1", "Klijent");
         _userManager.Setup(m => m.FindByIdAsync("k1")).ReturnsAsync((ApplicationUser?)null);
 
         // Act
@@ -562,8 +544,8 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        Prijavi("a1", "Administrator");
-        PostaviProfilPoUsernameu(klijent, "Klijent");
+        Prijavi(_kontroler, _userManager, "a1", "Administrator");
+        _userManager.PostaviProfilPoUsernameu(klijent, "Klijent");
 
         // Act
         var rezultat = await _kontroler.Edit("haso");
@@ -579,7 +561,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         var rezultat = await _kontroler.Edit("neki.drugi");
@@ -595,7 +577,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = MajstorSaPunimProfilom();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
 
         // Act
@@ -616,7 +598,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync((IzvrsilacUsluge?)null);
 
         // Act
@@ -634,7 +616,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("f1")).ReturnsAsync(firma);
 
         // Act
@@ -656,7 +638,7 @@ public class ProfilControllerTests
     public async Task Edit_Post_NepostojeciKorisnik_VracaNotFound()
     {
         // Arrange
-        Prijavi("k1", "Klijent");
+        Prijavi(_kontroler, _userManager, "k1", "Klijent");
         _userManager.Setup(m => m.FindByIdAsync("k1")).ReturnsAsync((ApplicationUser?)null);
 
         // Act
@@ -672,7 +654,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         var vm = NoviVm("k1", "haso", "haso@popravka.ba");
         vm.Ime = "Novo";
         vm.Prezime = "Prezime";
@@ -695,7 +677,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         await _kontroler.Edit(NoviVm("k1", "haso", "haso@popravka.ba"), null, null, CancellationToken.None);
@@ -709,9 +691,9 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        Prijavi("a1", "Administrator");
+        Prijavi(_kontroler, _userManager, "a1", "Administrator");
         _userManager.Setup(m => m.FindByIdAsync("k1")).ReturnsAsync(klijent);
-        PostaviUloge(klijent, "Klijent");
+        _userManager.VratiUloge(klijent, "Klijent");
 
         // Act
         var rezultat = await _kontroler.Edit(NoviVm("k1", "haso", "haso@popravka.ba"), null, null, CancellationToken.None);
@@ -733,7 +715,7 @@ public class ProfilControllerTests
         // Arrange
         var klijent = NoviKlijent();
         klijent.Email = stariEmail;
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         await _kontroler.Edit(NoviVm("k1", "haso", noviEmail), null, null, CancellationToken.None);
@@ -748,7 +730,7 @@ public class ProfilControllerTests
         // Arrange
         var klijent = NoviKlijent();
         klijent.OsvjeziStatusAktivnosti();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         await _kontroler.Edit(NoviVm("k1", "haso", "novi@popravka.ba"), null, null, CancellationToken.None);
@@ -763,7 +745,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         var vm = NoviVm("k1", "haso", "haso@popravka.ba");
         _kontroler.ModelState.AddModelError(nameof(vm.Ime), "Ime je obavezno");
 
@@ -783,7 +765,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         _userManager.Setup(m => m.FindByNameAsync("zauzeto")).ReturnsAsync(new Klijent { Id = "k2", UserName = "zauzeto" });
 
         // Act
@@ -792,7 +774,7 @@ public class ProfilControllerTests
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
         Assert.IsTrue(_kontroler.ModelState.ContainsKey(nameof(ProfilEditViewModel.Username)));
-        Assert.IsTrue(PorukeGresaka().Contains("Korisničko ime je već zauzeto."));
+        Assert.IsTrue(_kontroler.PorukeGresaka().Contains("Korisničko ime je već zauzeto."));
         _userManager.Verify(m => m.SetUserNameAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()), Times.Never);
         _userManager.Verify(m => m.UpdateAsync(It.IsAny<ApplicationUser>()), Times.Never);
     }
@@ -802,7 +784,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         _userManager.Setup(m => m.FindByNameAsync("novo.ime")).ReturnsAsync((ApplicationUser?)null);
 
         // Act
@@ -818,7 +800,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         _userManager.Setup(m => m.FindByNameAsync("novo.ime")).ReturnsAsync((ApplicationUser?)null);
         _userManager.Setup(m => m.SetUserNameAsync(klijent, "novo.ime")).ReturnsAsync(Greske("Neispravno korisničko ime."));
 
@@ -827,7 +809,7 @@ public class ProfilControllerTests
 
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
-        Assert.IsTrue(PorukeGresaka().Contains("Neispravno korisničko ime."));
+        Assert.IsTrue(_kontroler.PorukeGresaka().Contains("Neispravno korisničko ime."));
         _userManager.Verify(m => m.UpdateAsync(It.IsAny<ApplicationUser>()), Times.Never);
     }
 
@@ -836,7 +818,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         await _kontroler.Edit(NoviVm("k1", "haso", "haso@popravka.ba"), Fajl(), null, CancellationToken.None);
@@ -851,7 +833,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
 
         // Act
         await _kontroler.Edit(NoviVm("k1", "haso", "haso@popravka.ba"), null, null, CancellationToken.None);
@@ -865,7 +847,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         _userManager.Setup(m => m.UpdateAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(Greske("Greška A.", "Greška B."));
 
         // Act
@@ -873,7 +855,7 @@ public class ProfilControllerTests
 
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
-        var poruke = PorukeGresaka();
+        var poruke = _kontroler.PorukeGresaka();
         Assert.IsTrue(poruke.Contains("Greška A."));
         Assert.IsTrue(poruke.Contains("Greška B."));
         _signInManager.Verify(s => s.RefreshSignInAsync(It.IsAny<ApplicationUser>()), Times.Never);
@@ -884,7 +866,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var klijent = NoviKlijent();
-        PripremiVlastitiProfil(klijent, "Klijent");
+        PripremiVlastitiProfil(_kontroler, _userManager, klijent, "Klijent");
         _userManager.Setup(m => m.UpdateAsync(It.IsAny<ApplicationUser>())).ThrowsAsync(new InvalidOperationException("Baza nije dostupna"));
 
         // Act
@@ -892,7 +874,7 @@ public class ProfilControllerTests
 
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
-        Assert.IsTrue(PorukeGresaka().Contains("Došlo je do greške pri ažuriranju profila."));
+        Assert.IsTrue(_kontroler.PorukeGresaka().Contains("Došlo je do greške pri ažuriranju profila."));
         _logger.Verify(l => l.Log(
             LogLevel.Error,
             It.IsAny<EventId>(),
@@ -909,7 +891,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         var vm = NoviVm("m1", "majstor1", "mujo@popravka.ba");
         vm.SelectedMjestaId = new List<int>();
         vm.SelectedKategorijeId = new List<int>();
@@ -919,7 +901,7 @@ public class ProfilControllerTests
 
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
-        var poruke = PorukeGresaka();
+        var poruke = _kontroler.PorukeGresaka();
         Assert.IsTrue(poruke.Contains("Trebate odabrati najmanje 1 lokaciju."));
         Assert.IsTrue(poruke.Contains("Trebate odabrati najmanje 1 kategoriju."));
         _userManager.Verify(m => m.UpdateAsync(It.IsAny<ApplicationUser>()), Times.Never);
@@ -930,7 +912,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = MajstorSaPunimProfilom();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         var vm = NoviVm("m1", "majstor1", "mujo@popravka.ba");
         vm.SelectedMjestaId = new List<int>();
@@ -950,7 +932,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         var vm = NoviVm("m1", "majstor1", "mujo@popravka.ba");
         vm.SelectedMjestaId = new List<int> { 2, 3 };
@@ -972,7 +954,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync((IzvrsilacUsluge?)null);
 
         // Act
@@ -992,7 +974,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
 
         // Act
@@ -1008,7 +990,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         var datoteke = new List<IFormFile> { Fajl(0), Fajl(100) };
 
@@ -1026,7 +1008,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var majstor = NoviMajstor();
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         _storage.Setup(s => s.SpremiPublic(It.IsAny<Stream>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync((string)null!);
@@ -1049,7 +1031,7 @@ public class ProfilControllerTests
             new() { PortfolioSlikaID = 2, URL = "https://cdn.popravka.ba/2.png" },
             new() { PortfolioSlikaID = 3, URL = "https://cdn.popravka.ba/3.png" }
         };
-        PripremiVlastitiProfil(majstor, "Majstor");
+        PripremiVlastitiProfil(_kontroler, _userManager, majstor, "Majstor");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("m1")).ReturnsAsync(majstor);
         var vm = NoviVm("m1", "majstor1", "mujo@popravka.ba");
         vm.SlikeZaBrisanje = new List<int> { 1, 3 };
@@ -1070,7 +1052,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         _izvrsilacService.Setup(s => s.DajProfilPoIdAsync("f1")).ReturnsAsync(firma);
         var vm = NoviVm("f1", "elektro", "firma@popravka.ba");
         vm.NazivFirme = "Novi Servis";
@@ -1096,7 +1078,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         var vm = NoviVm("f1", "elektro", "firma@popravka.ba");
         vm.NazivFirme = "Elektro Servis";
         vm.Ime = "Ime";
@@ -1119,7 +1101,7 @@ public class ProfilControllerTests
         // Arrange
         var firma = NovaFirma();
         firma.RadnoVrijeme = "08:00 - 16:00";
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         var vm = NoviVm("f1", "elektro", "firma@popravka.ba");
         vm.NazivFirme = "Elektro Servis";
         vm.VelicinaFirme = null;
@@ -1140,7 +1122,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         var vm = NoviVm("f1", "elektro", "firma@popravka.ba");
         vm.NazivFirme = "   ";
 
@@ -1150,7 +1132,7 @@ public class ProfilControllerTests
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
         Assert.IsTrue(_kontroler.ModelState.ContainsKey(nameof(ProfilEditViewModel.NazivFirme)));
-        Assert.IsTrue(PorukeGresaka().Contains("Naziv firme je obavezan."));
+        Assert.IsTrue(_kontroler.PorukeGresaka().Contains("Naziv firme je obavezan."));
         _userManager.Verify(m => m.UpdateAsync(It.IsAny<ApplicationUser>()), Times.Never);
     }
 
@@ -1163,7 +1145,7 @@ public class ProfilControllerTests
     {
         // Arrange
         var firma = NovaFirma();
-        PripremiVlastitiProfil(firma, "Firma");
+        PripremiVlastitiProfil(_kontroler, _userManager, firma, "Firma");
         var vm = NoviVm("f1", "elektro", "firma@popravka.ba");
         vm.NazivFirme = "Elektro Servis";
         vm.RadnoVrijeme = Radno(otvorenoOd, otvorenoDo);
@@ -1173,7 +1155,7 @@ public class ProfilControllerTests
 
         // Assert
         Assert.IsInstanceOfType<ViewResult>(rezultat);
-        Assert.IsTrue(PorukeGresaka().Contains(poruka));
+        Assert.IsTrue(_kontroler.PorukeGresaka().Contains(poruka));
         _userManager.Verify(m => m.UpdateAsync(It.IsAny<ApplicationUser>()), Times.Never);
     }
 }

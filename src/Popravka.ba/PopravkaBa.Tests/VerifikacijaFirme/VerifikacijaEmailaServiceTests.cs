@@ -24,15 +24,6 @@ public class VerifikacijaEmailaServiceTests
         _servis = new VerifikacijaEmailaService(_tokenRepo.Object, _userManager.Object);
     }
 
-    // Priprema repozitorij i UserManager prema redu iz XML-a
-    private void PostaviStanje(bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji)
-    {
-        var token = tokenPostoji
-            ? Token(iskoristen ? DateTime.UtcNow : null, istekao ? -1 : 10)
-            : null;
-        _tokenRepo.Setup(r => r.DajTokenPoHashuAsync(It.IsAny<string>(), It.IsAny<TipTokena>())).ReturnsAsync(token);
-        _userManager.Setup(m => m.FindByIdAsync("k1")).ReturnsAsync(korisnikPostoji ? Korisnik() : null);
-    }
 
     // ---------- GenerisiTokenAsync ----------
 
@@ -116,7 +107,7 @@ public class VerifikacijaEmailaServiceTests
         bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji, Status ocekivano)
     {
         // Arrange
-        PostaviStanje(tokenPostoji, iskoristen, istekao, korisnikPostoji);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji, iskoristen, istekao, korisnikPostoji);
 
         // Act
         var status = await _servis.PotvrdiAsync(SiroviToken, TipTokena.PotvrdaEmaila);
@@ -129,7 +120,7 @@ public class VerifikacijaEmailaServiceTests
     public async Task PotvrdiAsync_ValidanToken_TrazeTokenPoSha256HashuSirovogTokena()
     {
         // Arrange
-        PostaviStanje(tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
 
         // Act
         await _servis.PotvrdiAsync(SiroviToken, TipTokena.PotvrdaEmaila);
@@ -142,7 +133,7 @@ public class VerifikacijaEmailaServiceTests
     public async Task PotvrdiAsync_ValidanToken_PotvrdjujeTokenZaKorisnika()
     {
         // Arrange
-        PostaviStanje(tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
 
         // Act
         await _servis.PotvrdiAsync(SiroviToken, TipTokena.PotvrdaEmaila);
@@ -157,7 +148,7 @@ public class VerifikacijaEmailaServiceTests
     public async Task PotvrdiAsync_IstekaoToken_NePotvrdjujeToken()
     {
         // Arrange
-        PostaviStanje(tokenPostoji: true, iskoristen: false, istekao: true, korisnikPostoji: true);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji: true, iskoristen: false, istekao: true, korisnikPostoji: true);
 
         // Act
         await _servis.PotvrdiAsync(SiroviToken, TipTokena.PotvrdaEmaila);
@@ -174,7 +165,7 @@ public class VerifikacijaEmailaServiceTests
         bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji, Status ocekivano)
     {
         // Arrange
-        PostaviStanje(tokenPostoji, iskoristen, istekao, korisnikPostoji);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji, iskoristen, istekao, korisnikPostoji);
 
         // Act
         var (status, _, _) = await _servis.ValidirajResetTokenAsync(SiroviToken);
@@ -187,7 +178,7 @@ public class VerifikacijaEmailaServiceTests
     public async Task ValidirajResetTokenAsync_ValidanToken_VracaTokenIKorisnika()
     {
         // Arrange
-        PostaviStanje(tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji: true, iskoristen: false, istekao: false, korisnikPostoji: true);
 
         // Act
         var (_, token, korisnik) = await _servis.ValidirajResetTokenAsync(SiroviToken);
@@ -202,7 +193,7 @@ public class VerifikacijaEmailaServiceTests
     public async Task ValidirajResetTokenAsync_NevalidanToken_VracaNullTokenINullKorisnika()
     {
         // Arrange
-        PostaviStanje(tokenPostoji: false, iskoristen: false, istekao: false, korisnikPostoji: true);
+        PostaviStanje(_tokenRepo, _userManager, tokenPostoji: false, iskoristen: false, istekao: false, korisnikPostoji: true);
 
         // Act
         var (_, token, korisnik) = await _servis.ValidirajResetTokenAsync(SiroviToken);

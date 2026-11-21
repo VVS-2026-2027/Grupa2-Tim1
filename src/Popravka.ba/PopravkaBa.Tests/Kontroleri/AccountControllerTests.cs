@@ -65,10 +65,6 @@ public class AccountControllerTests
 
     // ---------- Pomoćne metode (priprema podataka) ----------
 
-    private void PostaviPrijavljenogKorisnika(ApplicationUser? korisnik)
-    {
-        _userManager.Setup(m => m.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(korisnik);
-    }
 
     // ---------- Login (GET) ----------
 
@@ -813,7 +809,7 @@ public class AccountControllerTests
     public async Task VerifikacijaPoslana_NemaPrijavljenogKorisnika_PreusmjeravaNaLogin()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(null);
+        _userManager.PrijavljenKorisnik(null);
 
         // Act
         var rezultat = await _kontroler.VerifikacijaPoslana();
@@ -827,7 +823,7 @@ public class AccountControllerTests
     public async Task VerifikacijaPoslana_VecAktivanKorisnik_PreusmjeravaNaPocetnu()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(AktivanKorisnik());
+        _userManager.PrijavljenKorisnik(AktivanKorisnik());
 
         // Act
         var rezultat = await _kontroler.VerifikacijaPoslana();
@@ -841,7 +837,7 @@ public class AccountControllerTests
     public async Task VerifikacijaPoslana_NeaktivanKorisnik_VracaViewSaEmailomUViewData()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
+        _userManager.PrijavljenKorisnik(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
 
         // Act
         var rezultat = await _kontroler.VerifikacijaPoslana();
@@ -857,7 +853,7 @@ public class AccountControllerTests
     public async Task PosaljiVerifikaciju_NemaPrijavljenogKorisnika_PreusmjeravaNaLogin()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(null);
+        _userManager.PrijavljenKorisnik(null);
 
         // Act
         var rezultat = await _kontroler.PosaljiVerifikaciju();
@@ -871,7 +867,7 @@ public class AccountControllerTests
     public async Task PosaljiVerifikaciju_VecAktivanKorisnik_PreusmjeravaNaPocetnuBezSlanja()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(AktivanKorisnik());
+        _userManager.PrijavljenKorisnik(AktivanKorisnik());
 
         // Act
         var rezultat = await _kontroler.PosaljiVerifikaciju();
@@ -887,7 +883,7 @@ public class AccountControllerTests
     public async Task PosaljiVerifikaciju_PreRanoNoviZahtjev_PrikazujeGreskuBezSlanjaEmaila()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
+        _userManager.PrijavljenKorisnik(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
         _verifikacijaService.Setup(v => v.GenerisiTokenAsync(It.IsAny<ApplicationUser>(), TipTokena.PotvrdaEmaila))
             .ReturnsAsync((string?)null);
 
@@ -905,7 +901,7 @@ public class AccountControllerTests
     public async Task PosaljiVerifikaciju_TokenGenerisan_SaljeEmailKorisniku()
     {
         // Arrange
-        PostaviPrijavljenogKorisnika(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
+        _userManager.PrijavljenKorisnik(new Klijent { Id = "k1", Email = "haso@popravka.ba" });
         _verifikacijaService.Setup(v => v.GenerisiTokenAsync(It.IsAny<ApplicationUser>(), TipTokena.PotvrdaEmaila))
             .ReturnsAsync("sirovi-token");
 

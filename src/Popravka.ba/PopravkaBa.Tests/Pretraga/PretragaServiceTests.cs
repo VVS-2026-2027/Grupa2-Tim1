@@ -12,9 +12,6 @@ namespace PopravkaBa.Tests.Pretraga;
 [TestClass]
 public class PretragaServiceTests
 {
-    private static readonly string DugiOpis = new string('x', 160);
-    private static readonly string SkraceniOpis = new string('x', 150) + "...";
-
     private Mock<IIzvrsilacUslugeRepository> _izvrsioci = null!;
     private Mock<IOglasUslugeRepository> _usluge = null!;
     private Mock<IOglasRadnoMjestoRepository> _radnaMjesta = null!;
@@ -35,16 +32,13 @@ public class PretragaServiceTests
             _izvrsioci.Object, _usluge.Object, _radnaMjesta.Object);
     }
 
+    // ---------- Bez taba i specifikacije ----------
+
     [TestMethod]
-    public async Task PretraziAsync_BezTabaISpecifikacija_VracaZadanePostavke()
+    public async Task PretraziAsync_BezTaba_KoristiZadaniTabStrategije()
     {
         // Arrange
-        var filteri = new FilterPretrageDto
-        {
-            AktivniTab = null,
-            Stranica = -2,
-            StavkiPoStranici = 0
-        };
+        var filteri = new FilterPretrageDto { AktivniTab = null };
         _strategija.Setup(s => s.DajDefaultniTab()).Returns("izvrsioci");
 
         // Act
@@ -52,61 +46,55 @@ public class PretragaServiceTests
 
         // Assert
         Assert.AreEqual("izvrsioci", rezultat.AktivniTab);
-        Assert.AreEqual(1, rezultat.TrenutnaStrana);
-        Assert.AreEqual(20, rezultat.StavkiPoStranici);
-        Assert.AreEqual(0, rezultat.UkupnoStavki);
         CollectionAssert.AreEqual(
             new[] { "izvrsioci", "usluge", "radnomjesto" },
             rezultat.DostupniTabovi.ToArray());
+        _strategija.Verify(s => s.DajDefaultniTab(), Times.Once());
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_NeispravnaStranicaIVelicina_KoristiPrvuStranicuOdDvadesetStavki()
+    {
+        // Arrange
+        var filteri = new FilterPretrageDto { AktivniTab = null, Stranica = -2, StavkiPoStranici = 0 };
+        _strategija.Setup(s => s.DajDefaultniTab()).Returns("izvrsioci");
+
+        // Act
+        var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
+        Assert.AreEqual(1, rezultat.TrenutnaStrana);
+        Assert.AreEqual(20, rezultat.StavkiPoStranici);
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_StrategijaBezSpecifikacije_VracaPrazneRezultateBezPozivaRepozitorija()
+    {
+        // Arrange: mock strategije ne vraća nijednu specifikaciju
+        var filteri = new FilterPretrageDto { AktivniTab = null };
+        _strategija.Setup(s => s.DajDefaultniTab()).Returns("izvrsioci");
+
+        // Act
+        var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
+        Assert.AreEqual(0, rezultat.UkupnoStavki);
         Assert.IsFalse(rezultat.Izvrsioci.Any());
         Assert.IsFalse(rezultat.OglasiUsluga.Any());
         Assert.IsFalse(rezultat.OglasiRadnihMjesta.Any());
-        _strategija.Verify(s => s.DajDefaultniTab(), Times.Once());
         _izvrsioci.VerifyNoOtherCalls();
         _usluge.VerifyNoOtherCalls();
         _radnaMjesta.VerifyNoOtherCalls();
     }
 
+    // ---------- Izvršioci ----------
+
     [TestMethod]
-    public async Task PretraziAsync_SpecifikacijaIzvrsilaca_MapiraIzvrsioceIPaginaciju()
+    public async Task PretraziAsync_SpecifikacijaIzvrsilaca_MapiraPoljaIzvrsilaca()
     {
         // Arrange
         var filteri = NoviFilter("izvrsioci");
-        var spec = Mock.Of<ISpecification<IzvrsilacUsluge>>();
-        var majstor = new Majstor
-        {
-            Id = "m1",
-            UserName = "majstor1",
-            Ime = "Amar",
-            Prezime = "Kovač",
-            Opis = DugiOpis,
-            ProsjecnaOcjena = 4.5m,
-            MinCijenaUsluge = 40,
-            BrojZavrsenihPoslova = 6,
-            BrojRecenzija = 4,
-            Mjesta = new List<KorisnikMjesto>
-            {
-                new KorisnikMjesto { Mjesto = NovoMjesto() }
-            },
-            Kategorije = new List<IzvrsilacKategorija>
-            {
-                new IzvrsilacKategorija
-                {
-                    Kategorija = new Kategorija { Naziv = "Vodoinstalacije" }
-                }
-            }
-        };
-        _strategija.Setup(s => s.NapraviIzvrsilacUslugeSpec(filteri)).Returns(spec);
-        _izvrsioci.Setup(r => r.PronadjiAsync(spec, 2, 5))
-            .ReturnsAsync(new StraniceniRezultat<IzvrsilacUsluge>
-            {
-                Stavke = new List<IzvrsilacUsluge>
-                {
-                    majstor,
-                    new Majstor { Id = "m2", Opis = null }
-                },
-                Ukupno = 12
-            });
+        var (_, majstor) = PostaviStranicuIzvrsilaca(_strategija, _izvrsioci, filteri);
 
         // Act
         var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
@@ -127,47 +115,47 @@ public class PretragaServiceTests
         Assert.IsNull(stavke[1].Opis);
         Assert.IsNull(stavke[1].Lokacija);
         Assert.IsNull(stavke[1].PrvaKategorija);
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaIzvrsilaca_ProsljedjujeStranicuIVelicinu()
+    {
+        // Arrange
+        var filteri = NoviFilter("izvrsioci");
+        var (spec, _) = PostaviStranicuIzvrsilaca(_strategija, _izvrsioci, filteri);
+
+        // Act
+        var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         ProvjeriPaginaciju(rezultat, "izvrsioci");
         _izvrsioci.Verify(r => r.PronadjiAsync(spec, 2, 5), Times.Once());
         _strategija.Verify(s => s.DajDefaultniTab(), Times.Never());
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaIzvrsilaca_NePozivaOstaleRepozitorije()
+    {
+        // Arrange
+        var filteri = NoviFilter("izvrsioci");
+        PostaviStranicuIzvrsilaca(_strategija, _izvrsioci, filteri);
+
+        // Act
+        await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         _usluge.VerifyNoOtherCalls();
         _radnaMjesta.VerifyNoOtherCalls();
     }
 
+    // ---------- Oglasi usluga ----------
+
     [TestMethod]
-    public async Task PretraziAsync_SpecifikacijaUsluga_MapiraOglaseUslugaIPaginaciju()
+    public async Task PretraziAsync_SpecifikacijaUsluga_MapiraPoljaOglasaUsluga()
     {
         // Arrange
         var filteri = NoviFilter("usluge");
-        var spec = Mock.Of<ISpecification<OglasUsluge>>();
-        var vlasnik = NoviVlasnik();
-        var oglas = new OglasUsluge
-        {
-            OglasID = 10,
-            Naslov = "Popravka slavine",
-            Opis = DugiOpis,
-            MinBudzet = 30,
-            MaxBudzet = 90,
-            VlasnikOglasa = vlasnik,
-            Mjesto = NovoMjesto(),
-            Ponude = new List<PonudaUsluge> { new PonudaUsluge() }
-        };
-        _strategija.Setup(s => s.NapraviUslugeSpec(filteri)).Returns(spec);
-        _usluge.Setup(r => r.PronadjiAsync(spec, 2, 5))
-            .ReturnsAsync(new StraniceniRezultat<OglasUsluge>
-            {
-                Stavke = new List<OglasUsluge>
-                {
-                    oglas,
-                    new OglasUsluge
-                    {
-                        OglasID = 11,
-                        Opis = "Kratak opis",
-                        VlasnikOglasa = vlasnik
-                    }
-                },
-                Ukupno = 12
-            });
+        var (_, vlasnik) = PostaviStranicuUsluga(_strategija, _usluge, filteri);
 
         // Act
         var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
@@ -186,46 +174,46 @@ public class PretragaServiceTests
         Assert.AreEqual("Sarajevo", stavke[0].Lokacija);
         Assert.AreEqual("Kratak opis", stavke[1].Opis);
         Assert.IsNull(stavke[1].Lokacija);
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaUsluga_ProsljedjujeStranicuIVelicinu()
+    {
+        // Arrange
+        var filteri = NoviFilter("usluge");
+        var (spec, _) = PostaviStranicuUsluga(_strategija, _usluge, filteri);
+
+        // Act
+        var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         ProvjeriPaginaciju(rezultat, "usluge");
         _usluge.Verify(r => r.PronadjiAsync(spec, 2, 5), Times.Once());
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaUsluga_NePozivaOstaleRepozitorije()
+    {
+        // Arrange
+        var filteri = NoviFilter("usluge");
+        PostaviStranicuUsluga(_strategija, _usluge, filteri);
+
+        // Act
+        await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         _izvrsioci.VerifyNoOtherCalls();
         _radnaMjesta.VerifyNoOtherCalls();
     }
 
+    // ---------- Radna mjesta ----------
+
     [TestMethod]
-    public async Task PretraziAsync_SpecifikacijaRadnihMjesta_MapiraRadnaMjestaIPaginaciju()
+    public async Task PretraziAsync_SpecifikacijaRadnihMjesta_MapiraPoljaRadnihMjesta()
     {
         // Arrange
         var filteri = NoviFilter("radnomjesto");
-        var spec = Mock.Of<ISpecification<OglasRadnoMjesto>>();
-        var vlasnik = NoviVlasnik();
-        var oglas = new OglasRadnoMjesto
-        {
-            OglasID = 20,
-            Naslov = "Vodoinstalater",
-            Opis = DugiOpis,
-            MinPrihod = 800,
-            MaxPrihod = 1200,
-            VlasnikOglasa = vlasnik,
-            Mjesto = NovoMjesto(),
-            Prijave = new List<PrijavaRadnoMjesto> { new PrijavaRadnoMjesto() }
-        };
-        _strategija.Setup(s => s.NapraviRadnoMjestoSpec(filteri)).Returns(spec);
-        _radnaMjesta.Setup(r => r.PronadjiAsync(spec, 2, 5))
-            .ReturnsAsync(new StraniceniRezultat<OglasRadnoMjesto>
-            {
-                Stavke = new List<OglasRadnoMjesto>
-                {
-                    oglas,
-                    new OglasRadnoMjesto
-                    {
-                        OglasID = 21,
-                        Opis = "Kratak opis",
-                        VlasnikOglasa = vlasnik
-                    }
-                },
-                Ukupno = 12
-            });
+        var (_, vlasnik) = PostaviStranicuRadnihMjesta(_strategija, _radnaMjesta, filteri);
 
         // Act
         var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
@@ -244,8 +232,34 @@ public class PretragaServiceTests
         Assert.AreEqual("Sarajevo", stavke[0].Lokacija);
         Assert.AreEqual("Kratak opis", stavke[1].Opis);
         Assert.IsNull(stavke[1].Lokacija);
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaRadnihMjesta_ProsljedjujeStranicuIVelicinu()
+    {
+        // Arrange
+        var filteri = NoviFilter("radnomjesto");
+        var (spec, _) = PostaviStranicuRadnihMjesta(_strategija, _radnaMjesta, filteri);
+
+        // Act
+        var rezultat = await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         ProvjeriPaginaciju(rezultat, "radnomjesto");
         _radnaMjesta.Verify(r => r.PronadjiAsync(spec, 2, 5), Times.Once());
+    }
+
+    [TestMethod]
+    public async Task PretraziAsync_SpecifikacijaRadnihMjesta_NePozivaOstaleRepozitorije()
+    {
+        // Arrange
+        var filteri = NoviFilter("radnomjesto");
+        PostaviStranicuRadnihMjesta(_strategija, _radnaMjesta, filteri);
+
+        // Act
+        await _servis.PretraziAsync(filteri, _strategija.Object);
+
+        // Assert
         _izvrsioci.VerifyNoOtherCalls();
         _usluge.VerifyNoOtherCalls();
     }
