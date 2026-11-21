@@ -6,11 +6,14 @@ using PopravkaBa.Tests.Helpers;
 namespace PopravkaBa.Tests.Zajednicko
 {
     [TestClass]
+    [TestCategory("Domain")]
+    [TestCategory("TDD")]
     public class JacinaLozinkeTests
     {
         private const string Email = "korisnik@popravka.ba";
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_KratkaLozinka_VracaSlaba()
         {
             // Arrange
@@ -24,6 +27,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_DuzinaICifra_VracaSrednja()
         {
             var rezultat = JacinaLozinke.Procijeni("abcdefg1", Email);
@@ -32,6 +36,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_DuzinaIVelikoSlovo_VracaSrednja()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefgh", Email);
@@ -40,6 +45,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_DuzinaISpecijalniZnak_VracaSrednja()
         {
             var rezultat = JacinaLozinke.Procijeni("abcdefg!", Email);
@@ -48,6 +54,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_SviKriterijiIspunjeni_VracaJaka()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", Email);
@@ -56,6 +63,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_LozinkaSadrziDioEmaila_VracaSlaba()
         {
             var rezultat = JacinaLozinke.Procijeni("Amina123!x", "amina@gmail.com");
@@ -64,6 +72,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_KratakDioEmaila_Ignorira()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", "a@gmail.com");
@@ -72,6 +81,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_EmailNull_Ignorira()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", null);
@@ -80,18 +90,21 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_LozinkaNull_BacaArgumentNullException()
         {
             Assert.ThrowsExactly<ArgumentNullException>(() => JacinaLozinke.Procijeni(null!, Email));
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_PrazanString_BacaArgumentException()
         {
             Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("", Email));
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_LozinkaSaRazmacima_RazmaciSeIgnorisu()
         {
             // "abc de f1" bez razmaka je "abcdef1" (7 znakova), samo 1 bod
@@ -101,12 +114,14 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_SamoRazmaci_BacaArgumentException()
         {
             Assert.ThrowsExactly<ArgumentException>(() => JacinaLozinke.Procijeni("   ", Email));
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_CestaLozinkaPassword_VracaSlaba()
         {
             var rezultat = JacinaLozinke.Procijeni("Password", Email);
@@ -115,6 +130,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_CestaLozinka12345678_VracaSlaba()
         {
             var rezultat = JacinaLozinke.Procijeni("12345678", Email);
@@ -123,6 +139,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         public void Procijeni_LozinkaSadrziCestuRijec_VracaSlaba()
         {
             var rezultat = JacinaLozinke.Procijeni("Password1!", Email);
@@ -134,7 +151,9 @@ namespace PopravkaBa.Tests.Zajednicko
     DataDrivenInputParser.CitajCsv<string, string?, Jacina>("TestData/csv/JacinaLozinke.csv");
 
         [TestMethod]
+        [Owner("Emina Vatrić")]
         [DynamicData(nameof(SlucajeviIzCsv))]
+        [TestCategory("DataDriven")]
         public void Procijeni_PodaciIzCsv_VracaOcekivano(string lozinka, string? email, Jacina ocekivano)
         {
             var rezultat = JacinaLozinke.Procijeni(lozinka, email);

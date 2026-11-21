@@ -424,6 +424,19 @@
 			}
 
 			
+        /* Jačina lozinke */
+        .jacina-lozinke { display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem; }
+        .jacina-lozinke[hidden] { display:none; }
+        .jacina-traka { flex:1; display:grid; grid-template-columns:repeat(3, 1fr); gap:4px; }
+        .jacina-traka span { height:4px; border-radius:999px; background:var(--border); transition:background-color 0.2s ease; }
+        .jacina-tekst { font-size:0.75rem; font-weight:600; color:var(--jacina-boja, var(--text-muted)); white-space:nowrap; }
+        .jacina-lozinke[data-jacina="Slaba"] { --jacina-boja: var(--red); }
+        .jacina-lozinke[data-jacina="Srednja"] { --jacina-boja: #f59e0b; }
+        .jacina-lozinke[data-jacina="Jaka"] { --jacina-boja: #16a34a; }
+        .jacina-lozinke[data-jacina="Slaba"] .jacina-traka span:nth-child(-n+1),
+        .jacina-lozinke[data-jacina="Srednja"] .jacina-traka span:nth-child(-n+2),
+        .jacina-lozinke[data-jacina="Jaka"] .jacina-traka span { background:var(--jacina-boja); }
+
     </style>
 </head>
 <body>
@@ -539,9 +552,8 @@
                             </div>
                             <div class="field"><label asp-for="KlijentDTO.Email" class="field-label">E-mail adresa</label><input asp-for="KlijentDTO.Email" class="field-input field-input--plain" /><span asp-validation-for="KlijentDTO.Email" class="field-error"></span></div>
                             <div class="two-col">
-                                <div class="field"><label asp-for="KlijentDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="KlijentDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="KlijentDTO.Lozinka" class="field-error"></span></div>
+                                <div class="field"><label asp-for="KlijentDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="KlijentDTO.Lozinka" class="field-input field-input--plain" type="password" /><div class="jacina-lozinke" data-lozinka="KlijentDTO_Lozinka" data-email="KlijentDTO_Email" hidden><div class="jacina-traka" aria-hidden="true"><span></span><span></span><span></span></div><span class="jacina-tekst" aria-live="polite"></span></div><span asp-validation-for="KlijentDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="KlijentDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="KlijentDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="KlijentDTO.PotvrdaLozinke" class="field-error"></span></div>
-                                <div class="jacina-lozinke" data-lozinka="KlijentDTO_Lozinka" data-email="KlijentDTO_Email" aria-live="polite"></div>
                             </div>
 
                             <div class="field">
@@ -597,9 +609,8 @@
                             </div>
                             <div class="field"><label asp-for="MajstorDTO.Email" class="field-label">E-mail adresa</label><input asp-for="MajstorDTO.Email" class="field-input field-input--plain" /><span asp-validation-for="MajstorDTO.Email" class="field-error"></span></div>
                             <div class="two-col">
-                                <div class="field"><label asp-for="MajstorDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="MajstorDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="MajstorDTO.Lozinka" class="field-error"></span></div>
+                                <div class="field"><label asp-for="MajstorDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="MajstorDTO.Lozinka" class="field-input field-input--plain" type="password" /><div class="jacina-lozinke" data-lozinka="MajstorDTO_Lozinka" data-email="MajstorDTO_Email" hidden><div class="jacina-traka" aria-hidden="true"><span></span><span></span><span></span></div><span class="jacina-tekst" aria-live="polite"></span></div><span asp-validation-for="MajstorDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="MajstorDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="MajstorDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="MajstorDTO.PotvrdaLozinke" class="field-error"></span></div>
-                                <div class="jacina-lozinke" data-lozinka="MajstorDTO_Lozinka" data-email="MajstorDTO_Email" aria-live="polite"></div>
                             </div>
 
                             <div class="field">
@@ -698,9 +709,8 @@
                             <div class="field"><label asp-for="FirmaDTO.NazivFirme" class="field-label">Naziv firme</label><input asp-for="FirmaDTO.NazivFirme" class="field-input field-input--plain" /><span asp-validation-for="FirmaDTO.NazivFirme" class="field-error"></span></div>
                             <div class="field"><label asp-for="FirmaDTO.Email" class="field-label">E-mail adresa</label><input asp-for="FirmaDTO.Email" class="field-input field-input--plain" /><span asp-validation-for="FirmaDTO.Email" class="field-error"></span></div>
                             <div class="two-col">
-                                <div class="field"><label asp-for="FirmaDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="FirmaDTO.Lozinka" class="field-input field-input--plain" type="password" /><span asp-validation-for="FirmaDTO.Lozinka" class="field-error"></span></div>
+                                <div class="field"><label asp-for="FirmaDTO.Lozinka" class="field-label">Lozinka</label><input asp-for="FirmaDTO.Lozinka" class="field-input field-input--plain" type="password" /><div class="jacina-lozinke" data-lozinka="FirmaDTO_Lozinka" data-email="FirmaDTO_Email" hidden><div class="jacina-traka" aria-hidden="true"><span></span><span></span><span></span></div><span class="jacina-tekst" aria-live="polite"></span></div><span asp-validation-for="FirmaDTO.Lozinka" class="field-error"></span></div>
                                 <div class="field"><label asp-for="FirmaDTO.PotvrdaLozinke" class="field-label">Potvrda lozinke</label><input asp-for="FirmaDTO.PotvrdaLozinke" class="field-input field-input--plain" type="password" /><span asp-validation-for="FirmaDTO.PotvrdaLozinke" class="field-error"></span></div>
-                                <div class="jacina-lozinke" data-lozinka="FirmaDTO_Lozinka" data-email="FirmaDTO_Email" aria-live="polite"></div>
                             </div>
                             <div class="field"><label asp-for="FirmaDTO.VelicinaFirme" class="field-label">Veličina firme</label><select asp-for="FirmaDTO.VelicinaFirme" asp-items="Html.GetEnumSelectList<PopravkaBa.Domain.Enums.VelicinaFirme>()" class="field-input field-input--plain"></select><span asp-validation-for="FirmaDTO.VelicinaFirme" class="field-error"></span></div>
                             <div class="field"><label asp-for="FirmaDTO.WebStranica" class="field-label">Web stranica <span style="color:var(--text-soft);font-weight:400;">(opcionalno)</span></label><input asp-for="FirmaDTO.WebStranica" class="field-input field-input--plain" placeholder="https://..." /><span asp-validation-for="FirmaDTO.WebStranica" class="field-error"></span></div>
@@ -1032,6 +1042,52 @@
        radi zaštite od dvostrukog slanja forme (double POST). *@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
+    <script>
+        // Jačina lozinke: procjenu radi server (JacinaLozinke), ovdje se samo prikazuje rezultat
+        (function () {
+            const tokenEl = document.querySelector('input[name="__RequestVerificationToken"]');
+
+            document.querySelectorAll('.jacina-lozinke').forEach(function (prikaz) {
+                const lozinka = document.getElementById(prikaz.dataset.lozinka);
+                const email = document.getElementById(prikaz.dataset.email);
+                const tekst = prikaz.querySelector('.jacina-tekst');
+                if (!lozinka) return;
+                let timer;
+
+                function sakrij() {
+                    prikaz.hidden = true;
+                    prikaz.removeAttribute('data-jacina');
+                    tekst.textContent = '';
+                }
+
+                lozinka.addEventListener('input', function () {
+                    clearTimeout(timer);
+                    if (!lozinka.value.trim()) { sakrij(); return; }
+
+                    timer = setTimeout(async function () {
+                        const poslana = lozinka.value;
+                        try {
+                            const odgovor = await fetch('/register/jacina-lozinke', {
+                                method: 'POST',
+                                headers: { 'RequestVerificationToken': tokenEl ? tokenEl.value : '' },
+                                body: new URLSearchParams({ lozinka: poslana, email: email ? email.value : '' })
+                            });
+                            if (lozinka.value !== poslana) return; // stigao je stariji odgovor
+                            if (!odgovor.ok) { sakrij(); return; }
+
+                            const podaci = await odgovor.json();
+                            prikaz.dataset.jacina = podaci.jacina;
+                            tekst.textContent = podaci.jacina;
+                            prikaz.hidden = false;
+                        } catch {
+                            sakrij();
+                        }
+                    }, 300);
+                });
+            });
+        })();
+    </script>
+
     @section Scripts {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="" crossorigin="anonymous"></script>
@@ -1072,38 +1128,6 @@
                 });
                 })();
             </script>
-
-            <script>
-        (function () {
-            const tekstovi = { Slaba: 'Slaba', Srednja: 'Srednja', Jaka: 'Jaka' };
-            const boje = { Slaba: '#c0392b', Srednja: '#e67e22', Jaka: '#27ae60' };
-            const tokenEl = document.querySelector('input[name="__RequestVerificationToken"]');
-            let timer;
-
-            document.querySelectorAll('.jacina-lozinke').forEach(function (prikaz) {
-                const lozinka = document.getElementById(prikaz.dataset.lozinka);
-                const email = document.getElementById(prikaz.dataset.email);
-                if (!lozinka) return;
-
-                lozinka.addEventListener('input', function () {
-                    clearTimeout(timer);
-                    if (!lozinka.value.trim()) { prikaz.textContent = ''; return; }
-                    timer = setTimeout(async function () {
-                        const tijelo = new URLSearchParams({ lozinka: lozinka.value, email: email ? email.value : '' });
-                        const odgovor = await fetch('/register/jacina-lozinke', {
-                            method: 'POST',
-                            headers: { 'RequestVerificationToken': tokenEl ? tokenEl.value : '' },
-                            body: tijelo
-                        });
-                        if (!odgovor.ok) { prikaz.textContent = ''; return; }
-                        const podaci = await odgovor.json();
-                        prikaz.textContent = 'Jačina lozinke: ' + tekstovi[podaci.jacina];
-                        prikaz.style.color = boje[podaci.jacina];
-                    }, 300);
-                });
-            });
-        })();
-        </script>
     }
 </body>
 </html>
