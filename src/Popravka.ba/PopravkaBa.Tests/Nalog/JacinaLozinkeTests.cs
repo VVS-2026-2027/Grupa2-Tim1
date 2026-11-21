@@ -270,6 +270,20 @@ namespace PopravkaBa.Tests.Nalog
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
 
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_NepostojeciDatum_VracaJaka()
+        {
+            // Arrange: 32. dan i 13. mjesec ne postoje, pa ovo nije datum
+            var lozinka = "Kuca!32.13.1998";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Jaka, rezultat);
+        }
+
         public static IEnumerable<object[]> SlucajeviIzCsv =>
     DataDrivenInputParser.CitajCsv<string, string?, Jacina>("TestData/csv/JacinaLozinke.csv");
 
