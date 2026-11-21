@@ -13,8 +13,24 @@ namespace PopravkaBa.Domain.Shared
 
         private static readonly string[] CesteLozinke =
         {
-            "lozinka", "password", "qwerty", "12345678", "20092005", "sifra", "admin123", "abc12345"
+            "lozinka", "password", "qwerty", "12345678", "sifra", "admin123", "abc12345"
         };
+
+        // Datum sa razdvajačem: 15.03.1998, 15-03-98, 15/03/1998 ili 1998-03-15
+        private static readonly Regex DatumSaRazdvajacem =
+            new(@"\d{1,2}[./-]\d{1,2}[./-]\d{2}(?:\d{2})?|\d{4}[./-]\d{1,2}[./-]\d{1,2}", RegexOptions.Compiled);
+
+        // Svaki niz od 8 cifara, i kad se preklapaju (u "x150319981" su to 15031998 i 50319981)
+        private static readonly Regex OsamCifara = new(@"(?=(\d{8}))", RegexOptions.Compiled);
+
+        private static readonly string[] FormatiSaRazdvajacem =
+        {
+            "d.M.yyyy", "d-M-yyyy", "d/M/yyyy",
+            "d.M.yy", "d-M-yy", "d/M/yy",
+            "yyyy.M.d", "yyyy-M-d", "yyyy/M/d"
+        };
+
+        private static readonly string[] FormatiBezRazdvajaca = { "ddMMyyyy", "yyyyMMdd" };
 
         public static Jacina Procijeni(string lozinka, string? email)
         {
@@ -46,14 +62,11 @@ namespace PopravkaBa.Domain.Shared
             CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
 
         private static bool SadrziDatum(string lozinka) =>
-            Regex.Matches(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{2}(?:\d{2})?|\d{4}[./-]\d{1,2}[./-]\d{1,2}")
-                .Any(kandidat => DateTime.TryParseExact(kandidat.Value,
-                    new[] { "d.M.yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy.M.d", "yyyy-M-d", "yyyy/M/d", "d.M.yy", "d-M-yy", "d/M/yy" },
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
-            || Regex.Matches(lozinka, @"(?=(\d{8}))")
-                .Any(kandidat => DateTime.TryParseExact(kandidat.Groups[1].Value,
-                    new[] { "ddMMyyyy", "yyyyMMdd" },
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out _));
+            DatumSaRazdvajacem.Matches(lozinka).Any(kandidat => JeDatum(kandidat.Value, FormatiSaRazdvajacem))
+            || OsamCifara.Matches(lozinka).Any(kandidat => JeDatum(kandidat.Groups[1].Value, FormatiBezRazdvajaca));
+
+        private static bool JeDatum(string tekst, string[] formati) =>
+            DateTime.TryParseExact(tekst, formati, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
 
         private static int IzracunajBodove(string lozinka)
         {
