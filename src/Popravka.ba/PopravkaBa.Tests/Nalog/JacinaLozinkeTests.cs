@@ -1,9 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Shared;
-using PopravkaBa.Tests.Helpers;
 
-namespace PopravkaBa.Tests.Zajednicko
+namespace PopravkaBa.Tests.Nalog
 {
     [TestClass]
     [TestCategory("Domain")]
