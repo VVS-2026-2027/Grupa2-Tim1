@@ -78,7 +78,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
-    public async Task UkloniSveVozackeDozvoleOglasa_TudjiOglasOstaje()
+    public async Task UkloniSveVozackeDozvoleOglasa_DvaOglasaSDozvolama_BriseSamoDozvoleTrazenogOglasa()
     {
         // Arrange
         _db.OglasVozackeDozvole.AddRange(Red(10, VozackaDozvola.B), Red(20, VozackaDozvola.C));

@@ -22,7 +22,7 @@ namespace PopravkaBa.Tests.Specifikacije
         }
 
         [TestMethod]
-        public void ToExpression_Poziv_VracaIzrazUnutrasnjeSpecifikacije()
+        public void ToExpression_OmotanaSpecifikacija_VracaIzrazUnutrasnjeSpecifikacije()
         {
             // Arrange
             Expression<Func<OglasUsluge, bool>> izraz = o => o.MinBudzet > 0;

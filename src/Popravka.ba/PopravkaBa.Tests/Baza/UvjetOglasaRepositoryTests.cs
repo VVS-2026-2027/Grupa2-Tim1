@@ -97,7 +97,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
-    public async Task UkloniSveUvjeteOglasa_TudjiOglasOstaje()
+    public async Task UkloniSveUvjeteOglasa_DvaOglasaSUvjetima_BriseSamoUvjeteTrazenogOglasa()
     {
         // Arrange
         _db.UvjetiOglasa.AddRange(

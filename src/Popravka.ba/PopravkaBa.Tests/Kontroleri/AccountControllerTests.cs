@@ -203,13 +203,28 @@ public class AccountControllerTests
     // ---------- Logout ----------
 
     [TestMethod]
-    public async Task Logout_Poziv_OdjavljujeKorisnikaIPreusmjeravaNaPocetnu()
+    public async Task Logout_PrijavljenKorisnik_OdjavljujeKorisnika()
     {
+        // Arrange
+        TestHelpers.PrijaviKorisnika(_kontroler, "k1", "Klijent");
+
+        // Act
+        await _kontroler.Logout();
+
+        // Assert
+        _signInManager.Verify(s => s.SignOutAsync(), Times.Once);
+    }
+
+    [TestMethod]
+    public async Task Logout_PrijavljenKorisnik_PreusmjeravaNaPocetnu()
+    {
+        // Arrange
+        TestHelpers.PrijaviKorisnika(_kontroler, "k1", "Klijent");
+
         // Act
         var rezultat = await _kontroler.Logout();
 
         // Assert
-        _signInManager.Verify(s => s.SignOutAsync(), Times.Once);
         var redirect = Assert.IsInstanceOfType<RedirectToActionResult>(rezultat);
         Assert.AreEqual("Home", redirect.ControllerName);
     }

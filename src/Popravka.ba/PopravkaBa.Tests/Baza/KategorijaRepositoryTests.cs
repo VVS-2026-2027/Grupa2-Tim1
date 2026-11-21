@@ -94,7 +94,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
-    public async Task UkloniSveKategorijeOglasa_TudjiOglasOstaje()
+    public async Task UkloniSveKategorijeOglasa_DvaOglasaSKategorijama_BriseSamoKategorijeTrazenogOglasa()
     {
         // Arrange
         _db.OglasKategorije.AddRange(
@@ -152,7 +152,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
-    public async Task UkloniSveKategorijeIzvrsiocu_BriseSamoTrazenog()
+    public async Task UkloniSveKategorijeIzvrsiocu_DvaIzvrsiocaSKategorijom_BriseSamoKategorijeTrazenog()
     {
         // Arrange
         _db.IzvrsilacKategorija.AddRange(

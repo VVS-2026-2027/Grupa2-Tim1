@@ -45,7 +45,7 @@ namespace PopravkaBa.Tests.Kontroleri
         }
 
         [TestMethod]
-        public async Task Index_Poziv_ServisSePozivaTacnoJednom()
+        public async Task Index_ValidanZahtjev_PozivaServisTacnoJednom()
         {
             // Act
             await _kontroler.Index(null, null, null, null, CancellationToken.None);
