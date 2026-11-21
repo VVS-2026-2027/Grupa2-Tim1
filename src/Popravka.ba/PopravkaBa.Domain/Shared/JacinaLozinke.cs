@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 using PopravkaBa.Domain.Enums;
 
@@ -45,8 +46,10 @@ namespace PopravkaBa.Domain.Shared
             CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
 
         private static bool SadrziDatum(string lozinka) =>
-            Regex.IsMatch(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}")
-            || Regex.IsMatch(lozinka, @"\d{4}[./-]\d{1,2}[./-]\d{1,2}");
+            Regex.Matches(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}|\d{4}[./-]\d{1,2}[./-]\d{1,2}")
+                .Any(kandidat => DateTime.TryParseExact(kandidat.Value,
+                    new[] { "d.M.yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy.M.d", "yyyy-M-d", "yyyy/M/d" },
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out _));
 
         private static int IzracunajBodove(string lozinka)
         {
