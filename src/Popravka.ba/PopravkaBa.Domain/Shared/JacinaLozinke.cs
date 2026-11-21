@@ -45,7 +45,8 @@ namespace PopravkaBa.Domain.Shared
             CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
 
         private static bool SadrziDatum(string lozinka) =>
-            Regex.IsMatch(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}");
+            Regex.IsMatch(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}")
+            || Regex.IsMatch(lozinka, @"\d{4}[./-]\d{1,2}[./-]\d{1,2}");
 
         private static int IzracunajBodove(string lozinka)
         {
