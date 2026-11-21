@@ -4,7 +4,7 @@ using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Domain.Specifications.Interface;
 
-namespace PopravkaBa.Tests.Strategije;
+namespace PopravkaBa.Tests.Pretraga;
 
 // Pomoćne metode koje samo pripremaju podatke za testove
 internal static class PretragaStrategijaTestHelper

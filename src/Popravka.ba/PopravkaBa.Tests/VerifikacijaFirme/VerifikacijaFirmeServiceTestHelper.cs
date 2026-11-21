@@ -4,7 +4,7 @@ using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
 
-namespace PopravkaBa.Tests.Verifikacija;
+namespace PopravkaBa.Tests.VerifikacijaFirme;
 
 // Pomoćne metode koje samo pripremaju podatke za testove
 internal static class VerifikacijaFirmeServiceTestHelper

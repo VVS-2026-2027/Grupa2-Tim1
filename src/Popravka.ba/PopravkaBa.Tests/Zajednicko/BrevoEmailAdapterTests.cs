@@ -3,9 +3,9 @@ using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
-using static PopravkaBa.Tests.Adapteri.BrevoEmailAdapterTestHelper;
+using static PopravkaBa.Tests.Zajednicko.BrevoEmailAdapterTestHelper;
 
-namespace PopravkaBa.Tests.Adapteri;
+namespace PopravkaBa.Tests.Zajednicko;
 
 // Pravi SMTP server se ne koristi: testovi koriste neispravne adrese primaoca (greška prije konekcije)
 // i server koji ne postoji na lokalnoj mašini (greška pri konekciji).

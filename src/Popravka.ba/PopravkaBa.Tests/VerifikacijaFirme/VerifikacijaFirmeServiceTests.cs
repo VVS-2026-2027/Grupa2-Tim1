@@ -3,9 +3,9 @@ using PopravkaBa.Application.Services.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
-using static PopravkaBa.Tests.Verifikacija.VerifikacijaFirmeServiceTestHelper;
+using static PopravkaBa.Tests.VerifikacijaFirme.VerifikacijaFirmeServiceTestHelper;
 
-namespace PopravkaBa.Tests.Verifikacija;
+namespace PopravkaBa.Tests.VerifikacijaFirme;
 
 [TestClass]
 public class VerifikacijaFirmeServiceTests

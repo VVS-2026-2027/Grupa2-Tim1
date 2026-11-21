@@ -3,9 +3,9 @@ using PopravkaBa.Application.Strategies.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Domain.Specifications.Interface;
-using static PopravkaBa.Tests.Strategije.PretragaStrategijaTestHelper;
+using static PopravkaBa.Tests.Pretraga.PretragaStrategijaTestHelper;
 
-namespace PopravkaBa.Tests.Strategije;
+namespace PopravkaBa.Tests.Pretraga;
 
 // Strategija pretrage sklapa specifikaciju od filtera. Testira se tako da se specifikacija primijeni
 // na listu objekata u memoriji i provjeri koji su objekti ostali.

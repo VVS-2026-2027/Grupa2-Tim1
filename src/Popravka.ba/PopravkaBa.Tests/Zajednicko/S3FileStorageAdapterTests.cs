@@ -3,7 +3,7 @@ using Amazon.S3.Model;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
 
-namespace PopravkaBa.Tests.Adapteri;
+namespace PopravkaBa.Tests.Zajednicko;
 
 [TestClass]
 public class S3FileStorageAdapterTests

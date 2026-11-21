@@ -4,7 +4,7 @@ using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
 
-namespace PopravkaBa.Tests.Adapteri;
+namespace PopravkaBa.Tests.Zajednicko;
 
 // Pomoćne metode koje samo pripremaju podatke za testove
 internal static class BrevoEmailAdapterTestHelper
