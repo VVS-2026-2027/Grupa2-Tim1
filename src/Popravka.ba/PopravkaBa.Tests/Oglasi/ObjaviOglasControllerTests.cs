@@ -208,29 +208,50 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
-    [DataRow(true)]
-    [DataRow(false)]
-    public async Task ObjaviOglasRadnoMjesto_IspravanModel_NormaliziraUvjetеIObjavljuje(
-        bool imaUvjeta)
+    public async Task ObjaviOglasRadnoMjesto_UvjetiSaPraznimStavkama_UklanjaPrazneUvjete()
     {
         // Arrange
         TestHelpers.PrijaviKorisnika(_kontroler, VlasnikId, "Firma");
-        var dto = new ObjaviOglasRadnoMjestoDto
-        {
-            Uvjeti = imaUvjeta ? new List<string> { "", "Iskustvo", " " } : null!
-        };
-        var ocekivaniUvjeti = imaUvjeta ? new[] { "Iskustvo" } : Array.Empty<string>();
+        var dto = new ObjaviOglasRadnoMjestoDto { Uvjeti = new List<string> { "", "Iskustvo", " " } };
+        _radnaMjesta.Setup(s => s.ObjaviOglas(dto, VlasnikId)).ReturnsAsync(OglasId);
+
+        // Act
+        await _kontroler.ObjaviOglasRadnoMjesto(dto, null);
+
+        // Assert
+        CollectionAssert.AreEqual(new[] { "Iskustvo" }, dto.Uvjeti.ToArray());
+    }
+
+    [TestMethod]
+    public async Task ObjaviOglasRadnoMjesto_UvjetiNisuPoslani_PostavljaPraznuListuUvjeta()
+    {
+        // Arrange
+        TestHelpers.PrijaviKorisnika(_kontroler, VlasnikId, "Firma");
+        var dto = new ObjaviOglasRadnoMjestoDto { Uvjeti = null! };
+        _radnaMjesta.Setup(s => s.ObjaviOglas(dto, VlasnikId)).ReturnsAsync(OglasId);
+
+        // Act
+        await _kontroler.ObjaviOglasRadnoMjesto(dto, null);
+
+        // Assert
+        CollectionAssert.AreEqual(Array.Empty<string>(), dto.Uvjeti.ToArray());
+    }
+
+    [TestMethod]
+    public async Task ObjaviOglasRadnoMjesto_IspravanModel_ObjavljujeOglasIPrikazujeDetalje()
+    {
+        // Arrange
+        TestHelpers.PrijaviKorisnika(_kontroler, VlasnikId, "Firma");
+        var dto = new ObjaviOglasRadnoMjestoDto { Uvjeti = new List<string> { "Iskustvo" } };
         _radnaMjesta.Setup(s => s.ObjaviOglas(dto, VlasnikId)).ReturnsAsync(OglasId);
 
         // Act
         var rezultat = await _kontroler.ObjaviOglasRadnoMjesto(dto, null);
 
-        // Assert
-        ProvjeriDetalje(rezultat, "OglasRadnoMjesto");
-        CollectionAssert.AreEqual(ocekivaniUvjeti, dto.Uvjeti.ToArray());
-        Assert.AreEqual("Oglas radnog mjesta je uspješno objavljen.",
-            _kontroler.TempData["Success"]);
+        // Assert: oglas je objavljen i korisnik ide na njegove detalje sa porukom o uspjehu
         _radnaMjesta.Verify(s => s.ObjaviOglas(dto, VlasnikId), Times.Once());
+        ProvjeriDetalje(rezultat, "OglasRadnoMjesto");
+        Assert.AreEqual("Oglas radnog mjesta je uspješno objavljen.", _kontroler.TempData["Success"]);
     }
 
     [TestMethod]

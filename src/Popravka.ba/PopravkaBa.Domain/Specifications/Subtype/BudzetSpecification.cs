@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace PopravkaBa.Domain.Specifications.Subtype
 {
-    public class BudzеtSpecification : BaseSpecification<OglasUsluge>
+    public class BudzetSpecification : BaseSpecification<OglasUsluge>
     {
         private readonly int _filterOd;
         private readonly int _filterDo;
 
-        public BudzеtSpecification(int filterOd, int filterDo)
+        public BudzetSpecification(int filterOd, int filterDo)
         {
             _filterOd = filterOd;
             _filterDo = filterDo;
@@ -45,8 +45,8 @@ namespace PopravkaBa.Domain.Specifications.Subtype
 
         public override Expression<Func<OglasRadnoMjesto, bool>> ToExpression()
         {
-            if(_filterOd > _filterDo)
-                return oglas => oglas.MinPrihod < 0 && oglas.MaxPrihod < 0;
+            if (_filterOd > _filterDo)
+                return oglas => false;
 
             return oglas => oglas.MinPrihod <= _filterDo &&
                         oglas.MaxPrihod >= _filterOd;

@@ -1,9 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Domain.Specifications.Subtype;
-// Klasa u projektu ima cirilicno slovo "e" u imenu (Budz\u0435tSpecification),
-// pa se ovdje koristi alias da test ne zavisi od tog slova.
-using BudzetSpecification = PopravkaBa.Domain.Specifications.Subtype.Budz\u0435tSpecification;
 
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
@@ -55,12 +52,13 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
             Assert.AreEqual(ocekivano, rezultat);
         }
 
+        // Filter "od" veći od "do" je nemoguć raspon, pa ne smije proći nijedan oglas
         [TestMethod]
-        [DataRow(-1, -1, true)]
-        [DataRow(500, 800, false)]
-        [DataRow(-1, 5, false)]
-        public void ToExpression_ObrnutRaspon_VracaTrueSamoZaNegativnePrihode(
-            int minPrihod, int maxPrihod, bool ocekivano)
+        [DataRow(0, 0)]
+        [DataRow(500, 800)]
+        [DataRow(1500, 3000)]
+        [DataRow(0, 5000)]
+        public void ToExpression_ObrnutRaspon_NeVracaNijedanOglas(int minPrihod, int maxPrihod)
         {
             // Arrange
             var specifikacija = new PlataSpecification(3000, 1500);
@@ -70,7 +68,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
             var rezultat = specifikacija.ToExpression().Compile()(oglas);
 
             // Assert
-            Assert.AreEqual(ocekivano, rezultat);
+            Assert.IsFalse(rezultat);
         }
     }
 }
