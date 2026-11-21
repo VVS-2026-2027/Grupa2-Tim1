@@ -3,6 +3,7 @@ using PopravkaBa.Application.Services.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
+using static PopravkaBa.Tests.VerifikacijaEmaila.VerifikacijaEmailaServiceTestHelper;
 
 namespace PopravkaBa.Tests.VerifikacijaEmaila;
 
@@ -11,8 +12,6 @@ public class VerifikacijaEmailaServiceTests
 {
     // SHA-256 (HEX, velika slova) teksta "sirovi-token-123"
     private const string SiroviToken = "sirovi-token-123";
-    private const string HashSirovogTokena = "A81AA4D06D67C8A71A50FEC7796D0008FC87DA4CE398CBCFD94C94F4B6129285";
-
     private Mock<IVerifikacijskiTokenRepository> _tokenRepo = null!;
     private Mock<UserManager<ApplicationUser>> _userManager = null!;
     private VerifikacijaEmailaService _servis = null!;
@@ -24,19 +23,6 @@ public class VerifikacijaEmailaServiceTests
         _userManager = TestHelpers.MockUserManager();
         _servis = new VerifikacijaEmailaService(_tokenRepo.Object, _userManager.Object);
     }
-
-    private static ApplicationUser Korisnik() => new() { Id = "k1", Email = "k1@popravka.ba" };
-
-    private static VerifikacijskiToken Token(DateTime? koristen = null, int minutaDoIsteka = 10) => new()
-    {
-        ID = 1,
-        KorisnikID = "k1",
-        TokenHash = HashSirovogTokena,
-        Tip = TipTokena.PotvrdaEmaila,
-        VrijemeGenerisanja = DateTime.UtcNow.AddMinutes(-5),
-        VrijemeIsteka = DateTime.UtcNow.AddMinutes(minutaDoIsteka),
-        VrijemeKoristenja = koristen
-    };
 
     // Priprema repozitorij i UserManager prema redu iz XML-a
     private void PostaviStanje(bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji)

@@ -5,7 +5,7 @@ using PopravkaBa.Infrastructure.Repositories;
 
 namespace PopravkaBa.Tests.PonudeUsluga;
 
-internal static class PonudaUslugeRepositoryTestPomoc
+internal static class PonudaUslugeRepositoryTestHelper
 {
     internal static async Task UbaciPonude(ApplicationDbContext baza, params PonudaUsluge[] ponude)
     {

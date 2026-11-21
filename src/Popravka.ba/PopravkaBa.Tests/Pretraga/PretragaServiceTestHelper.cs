@@ -8,7 +8,7 @@ using PopravkaBa.Infrastructure.Wrappers;
 
 namespace PopravkaBa.Tests.Pretraga;
 
-internal static class PretragaServiceTestPomoc
+internal static class PretragaServiceTestHelper
 {
     internal static FilterPretrageDto NoviFilter(string tab) => new()
     {

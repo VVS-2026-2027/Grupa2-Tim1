@@ -6,7 +6,7 @@ using PopravkaBa.Domain.Models;
 
 namespace PopravkaBa.Tests.PonudeUsluga;
 
-internal static class PonudaUslugeServiceTestPomoc
+internal static class PonudaUslugeServiceTestHelper
 {
     internal const int OglasId = 10;
     internal const string KlijentId = "k1";

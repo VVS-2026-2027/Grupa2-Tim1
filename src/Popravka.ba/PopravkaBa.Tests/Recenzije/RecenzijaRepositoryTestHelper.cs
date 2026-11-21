@@ -5,7 +5,7 @@ using PopravkaBa.Infrastructure.Repositories;
 
 namespace PopravkaBa.Tests.Recenzije;
 
-internal static class RecenzijaRepositoryTestPomoc
+internal static class RecenzijaRepositoryTestHelper
 {
     internal static Recenzija NovaRecenzija(
         int id, string klijentId = "k1", string izvrsilacId = "m1")

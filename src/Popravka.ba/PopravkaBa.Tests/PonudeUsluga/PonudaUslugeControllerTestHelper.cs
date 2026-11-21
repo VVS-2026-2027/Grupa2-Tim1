@@ -9,7 +9,7 @@ using PopravkaBa.Web.Controllers;
 
 namespace PopravkaBa.Tests.PonudeUsluga;
 
-internal static class PonudaUslugeControllerTestPomoc
+internal static class PonudaUslugeControllerTestHelper
 {
     internal const int OglasId = 10;
 

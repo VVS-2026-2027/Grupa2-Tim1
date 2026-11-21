@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using PopravkaBa.Application.DTOs;
 using PopravkaBa.Application.Services.Interface;
 using PopravkaBa.Domain.Models;
-using static PopravkaBa.Tests.Oglasi.PrijavaOglasControllerTestPomoc;
+using static PopravkaBa.Tests.Oglasi.PrijavaOglasControllerTestHelper;
 
 namespace PopravkaBa.Tests.Oglasi;
 

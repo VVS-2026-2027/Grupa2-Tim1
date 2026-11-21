@@ -5,7 +5,7 @@ using PopravkaBa.Domain.Models;
 
 namespace PopravkaBa.Tests.Pretraga;
 
-internal static class StrategijaTestPodaci
+internal static class StrategijaTestHelper
 {
     internal static Majstor NoviMajstor(
         string id, int cijena, decimal ocjena, int kategorija = 1, int mjesto = 1,

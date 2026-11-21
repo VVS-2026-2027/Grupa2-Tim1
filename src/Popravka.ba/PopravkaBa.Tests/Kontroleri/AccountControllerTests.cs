@@ -13,6 +13,7 @@ using PopravkaBa.Domain.Models;
 using PopravkaBa.Web.Controllers;
 using PopravkaBa.Web.Models.Enums;
 using PopravkaBa.Web.Models.ViewModels;
+using static PopravkaBa.Tests.Account.AccountControllerTestHelper;
 
 namespace PopravkaBa.Tests.Account;
 
@@ -64,55 +65,9 @@ public class AccountControllerTests
 
     // ---------- Pomoćne metode (priprema podataka) ----------
 
-    private static RegistracijaViewModel PrijavaVm(string unos = "haso", string lozinka = "Lozinka1") =>
-        new() { Login = new LoginDto { EmailUsername = unos, Lozinka = lozinka } };
-
-    private static RegistracijaKlijentaDto KlijentDto() => new()
-    {
-        KorisnickoIme = "haso", Ime = "Haso", Prezime = "Hasić", Email = "haso@popravka.ba",
-        Lozinka = "Lozinka1", PotvrdaLozinke = "Lozinka1", MjestaID = new List<int> { 1 }
-    };
-
-    private static RegistracijaMajstoraDto MajstorDto() => new()
-    {
-        KorisnickoIme = "mujo", Ime = "Mujo", Prezime = "Mujić", Email = "mujo@popravka.ba",
-        Lozinka = "Lozinka1", PotvrdaLozinke = "Lozinka1",
-        KategorijeID = new List<int> { 1 }, MjestaID = new List<int> { 1 }
-    };
-
-    private static RegistracijaFirmeDto FirmaDto() => new()
-    {
-        KorisnickoIme = "elektro", NazivFirme = "Elektro Servis", Email = "firma@popravka.ba",
-        Lozinka = "Lozinka1", PotvrdaLozinke = "Lozinka1", VelicinaFirme = VelicinaFirme.Mala,
-        KategorijeID = new List<int> { 2 }, MjestaID = new List<int> { 3 }
-    };
-
-    private static Mock<IFormFile> Logo(string imeFajla, long velicina)
-    {
-        var fajl = new Mock<IFormFile>();
-        fajl.Setup(f => f.FileName).Returns(imeFajla);
-        fajl.Setup(f => f.Length).Returns(velicina);
-        fajl.Setup(f => f.ContentType).Returns("image/png");
-        fajl.Setup(f => f.OpenReadStream()).Returns(() => new MemoryStream());
-        return fajl;
-    }
-
-    private static IdentityResult Greske(params string[] opisi) =>
-        IdentityResult.Failed(opisi.Select(o => new IdentityError { Description = o }).ToArray());
-
-    private static (Status, VerifikacijskiToken?, ApplicationUser?) Validacija(
-        Status status, VerifikacijskiToken? token = null, ApplicationUser? korisnik = null) => (status, token, korisnik);
-
     private void PostaviPrijavljenogKorisnika(ApplicationUser? korisnik)
     {
         _userManager.Setup(m => m.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(korisnik);
-    }
-
-    private static ApplicationUser AktivanKorisnik()
-    {
-        var korisnik = new Klijent { Id = "k1", Email = "haso@popravka.ba", EmailConfirmed = true };
-        korisnik.OsvjeziStatusAktivnosti();
-        return korisnik;
     }
 
     // ---------- Login (GET) ----------
@@ -754,9 +709,6 @@ public class AccountControllerTests
     }
 
     // ---------- ResetLozinke (POST) ----------
-
-    private static ResetLozinkeViewModel ResetVm() =>
-        new() { Token = "tok", NovaLozinka = "NovaLozinka1", PotvrdaLozinke = "NovaLozinka1" };
 
     [TestMethod]
     public async Task ResetLozinke_Post_NevalidanModel_VracaIstiViewModel()

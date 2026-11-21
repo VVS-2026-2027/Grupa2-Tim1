@@ -1,6 +1,7 @@
 using PopravkaBa.Application.Services;
 using PopravkaBa.Domain.Interfaces.Repositories;
 using PopravkaBa.Domain.Models;
+using static PopravkaBa.Tests.MaliServisi.KategorijaServiceTestHelper;
 
 namespace PopravkaBa.Tests.MaliServisi;
 
@@ -16,8 +17,6 @@ public class KategorijaServiceTests
         _repo = new Mock<IKategorijaRepository>();
         _servis = new KategorijaService(_repo.Object);
     }
-
-    private static Kategorija Kategorija(int id, string naziv) => new() { ID = id, Naziv = naziv };
 
     [TestMethod]
     public async Task DajSveKategorije_PozivaRepozitorij_VracaSveKategorije()

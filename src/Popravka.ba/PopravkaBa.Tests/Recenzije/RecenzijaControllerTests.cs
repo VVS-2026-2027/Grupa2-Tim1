@@ -6,7 +6,7 @@ using PopravkaBa.Application.DTOs;
 using PopravkaBa.Application.Services.Interface;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Web.Controllers;
-using static PopravkaBa.Tests.Recenzije.RecenzijaControllerTestPomoc;
+using static PopravkaBa.Tests.Recenzije.RecenzijaControllerTestHelper;
 
 namespace PopravkaBa.Tests.Recenzije;
 

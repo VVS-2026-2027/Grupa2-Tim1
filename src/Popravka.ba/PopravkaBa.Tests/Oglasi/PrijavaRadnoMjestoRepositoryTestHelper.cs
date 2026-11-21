@@ -5,7 +5,7 @@ using PopravkaBa.Infrastructure.Repositories;
 
 namespace PopravkaBa.Tests.Oglasi;
 
-internal static class PrijavaRadnoMjestoRepositoryTestPomoc
+internal static class PrijavaRadnoMjestoRepositoryTestHelper
 {
     internal static async Task UbaciPrijave(ApplicationDbContext baza, params PrijavaRadnoMjesto[] prijave)
     {

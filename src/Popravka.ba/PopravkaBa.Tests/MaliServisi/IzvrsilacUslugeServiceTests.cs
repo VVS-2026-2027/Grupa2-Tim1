@@ -1,6 +1,7 @@
 using PopravkaBa.Application.Services.Implementation;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
+using static PopravkaBa.Tests.MaliServisi.IzvrsilacUslugeServiceTestHelper;
 
 namespace PopravkaBa.Tests.MaliServisi;
 
@@ -16,14 +17,6 @@ public class IzvrsilacUslugeServiceTests
         _repo = new Mock<IIzvrsilacUslugeRepository>();
         _servis = new IzvrsilacUslugeService(_repo.Object);
     }
-
-    private static Majstor Majstor(string id) => new()
-    {
-        Id = id,
-        UserName = id,
-        Email = $"{id}@test.ba",
-        Adresa = ""
-    };
 
     [TestMethod]
     public async Task DajProfilPoIdAsync_PostojeciId_VracaProfil()

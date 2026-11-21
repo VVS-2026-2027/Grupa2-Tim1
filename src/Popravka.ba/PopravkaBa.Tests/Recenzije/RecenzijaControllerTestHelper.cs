@@ -9,7 +9,7 @@ using PopravkaBa.Web.Controllers;
 
 namespace PopravkaBa.Tests.Recenzije;
 
-internal static class RecenzijaControllerTestPomoc
+internal static class RecenzijaControllerTestHelper
 {
     internal const string IzvrsilacId = "m1";
     internal const string KlijentId = "k1";

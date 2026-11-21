@@ -3,6 +3,7 @@ using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
+using static PopravkaBa.Tests.Adapteri.BrevoEmailAdapterTestHelper;
 
 namespace PopravkaBa.Tests.Adapteri;
 
@@ -27,14 +28,6 @@ public class BrevoEmailAdapterTests
         });
         _adapter = new BrevoEmailAdapter(opcije);
     }
-
-    private static EmailVerifikacijaFirme Verifikacija(string adminEmail, string firmaEmail) => new()
-    {
-        NazivFirme = "Haso instalacije d.o.o.",
-        AdminEmail = adminEmail,
-        StatusVerifikacije = Status.Prihvaceno,
-        Firma = new Firma { Email = firmaEmail, NazivFirme = "Haso instalacije d.o.o." }
-    };
 
     [TestMethod]
     public async Task PosaljiEmailAsync_NeispravnaAdresaPrimaoca_BacaFormatException()
@@ -72,7 +65,7 @@ public class BrevoEmailAdapterTests
         bool zaAdmina, string adminEmail, string firmaEmail, bool formatGreska)
     {
         // Arrange
-        var verifikacija = Verifikacija(adminEmail, firmaEmail);
+        var verifikacija = NovaVerifikacija(adminEmail, firmaEmail);
 
         // Act (greška formata znači da je ta adresa uzeta kao primalac, inače je greška na konekciji)
         var izuzetak = await Assert.ThrowsAsync<Exception>(() => _adapter.PosaljiEmailAsync(verifikacija, zaAdmina));

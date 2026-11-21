@@ -2,7 +2,7 @@ using PopravkaBa.Application.DTOs;
 using PopravkaBa.Application.Strategies.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
-using static PopravkaBa.Tests.Pretraga.StrategijaTestPodaci;
+using static PopravkaBa.Tests.Pretraga.StrategijaTestHelper;
 
 namespace PopravkaBa.Tests.Pretraga;
 

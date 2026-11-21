@@ -3,7 +3,7 @@ using PopravkaBa.Application.Services.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
-using static PopravkaBa.Tests.Oglasi.PrijavaOglasServiceTestPomoc;
+using static PopravkaBa.Tests.Oglasi.PrijavaOglasServiceTestHelper;
 
 namespace PopravkaBa.Tests.Oglasi;
 

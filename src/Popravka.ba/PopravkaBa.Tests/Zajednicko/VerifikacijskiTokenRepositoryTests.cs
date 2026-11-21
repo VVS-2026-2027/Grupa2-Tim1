@@ -2,6 +2,7 @@ using Popravka.ba.Data;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Repositories;
+using static PopravkaBa.Tests.Tokeni.VerifikacijskiTokenRepositoryTestHelper;
 
 namespace PopravkaBa.Tests.Tokeni;
 
@@ -21,18 +22,6 @@ public class VerifikacijskiTokenRepositoryTests
 
     [TestCleanup]
     public void Pocisti() => _db.Dispose();
-
-    private static VerifikacijskiToken Token(
-        string hash, string korisnikId = "k1", TipTokena tip = TipTokena.PotvrdaEmaila,
-        int minutaOdGenerisanja = 10, DateTime? koristen = null) => new()
-    {
-        KorisnikID = korisnikId,
-        TokenHash = hash,
-        Tip = tip,
-        VrijemeGenerisanja = DateTime.UtcNow.AddMinutes(-minutaOdGenerisanja),
-        VrijemeIsteka = DateTime.UtcNow.AddMinutes(15 - minutaOdGenerisanja),
-        VrijemeKoristenja = koristen
-    };
 
     private async Task Dodaj(params VerifikacijskiToken[] tokeni)
     {

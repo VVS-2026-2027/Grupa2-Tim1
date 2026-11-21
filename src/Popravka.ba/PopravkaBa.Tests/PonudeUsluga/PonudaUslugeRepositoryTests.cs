@@ -2,7 +2,7 @@ using Popravka.ba.Data;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Repositories;
-using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeRepositoryTestPomoc;
+using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeRepositoryTestHelper;
 
 namespace PopravkaBa.Tests.PonudeUsluga;
 

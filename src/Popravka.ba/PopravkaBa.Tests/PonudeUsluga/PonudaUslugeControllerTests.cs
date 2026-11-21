@@ -6,7 +6,7 @@ using PopravkaBa.Application.DTOs;
 using PopravkaBa.Application.Services.Interface;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Web.Controllers;
-using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeControllerTestPomoc;
+using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeControllerTestHelper;
 
 namespace PopravkaBa.Tests.PonudeUsluga;
 

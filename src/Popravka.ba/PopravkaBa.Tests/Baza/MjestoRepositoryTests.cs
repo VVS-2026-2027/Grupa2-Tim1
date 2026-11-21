@@ -2,6 +2,7 @@ using Popravka.ba.Data;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Repositories;
+using static PopravkaBa.Tests.Baza.MjestoRepositoryTestHelper;
 
 namespace PopravkaBa.Tests.Baza;
 
@@ -20,9 +21,6 @@ public class MjestoRepositoryTests
 
     [TestCleanup]
     public void Pocisti() => _db.Dispose();
-
-    private static Mjesto Mjesto(int id, string naziv, Kanton kanton = Kanton.Sarajevski) =>
-        new() { MjestoID = id, Naziv = naziv, Kanton = kanton };
 
     public static IEnumerable<object[]> MjestaPoId =>
         DataDrivenInputParser.CitajXml<int, string>("TestData/xml/MjestoRepository_poId.xml");

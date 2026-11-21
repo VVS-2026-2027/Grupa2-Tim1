@@ -5,6 +5,7 @@ using PopravkaBa.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static PopravkaBa.Tests.Zajednicko.BosanskiValidationMetadataProviderTestHelper;
 
 namespace PopravkaBa.Tests.Zajednicko
 {
@@ -17,15 +18,6 @@ namespace PopravkaBa.Tests.Zajednicko
         public void Inicijaliziraj()
         {
             _provider = new BosanskiValidationMetadataProvider();
-        }
-
-        private static ValidationMetadataProviderContext NapraviKontekstZaSvojstvo(object validator)
-        {
-            var identitet = ModelMetadataIdentity.ForProperty(typeof(List<int>), "KategorijeID", typeof(object));
-            var atributi = ModelAttributes.GetAttributesForType(typeof(List<int>));
-            var kontekst = new ValidationMetadataProviderContext(identitet, atributi);
-            kontekst.ValidationMetadata.ValidatorMetadata.Add(validator);
-            return kontekst;
         }
 
         [TestMethod]

@@ -1,6 +1,7 @@
 using PopravkaBa.Application.Services;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
+using static PopravkaBa.Tests.MaliServisi.MjestoServiceTestHelper;
 
 namespace PopravkaBa.Tests.MaliServisi;
 
@@ -16,8 +17,6 @@ public class MjestoServiceTests
         _repo = new Mock<IMjestoRepository>();
         _servis = new MjestoService(_repo.Object);
     }
-
-    private static Mjesto Mjesto(int id, string naziv) => new() { MjestoID = id, Naziv = naziv };
 
     [TestMethod]
     public async Task DajSvaMjestaAsync_PozivaRepozitorij_VracaSvaMjesta()

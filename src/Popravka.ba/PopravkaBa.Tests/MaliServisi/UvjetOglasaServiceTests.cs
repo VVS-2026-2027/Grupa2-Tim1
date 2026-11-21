@@ -1,6 +1,7 @@
 using PopravkaBa.Application.Services;
 using PopravkaBa.Domain.Interfaces.Repositories;
 using PopravkaBa.Domain.Models;
+using static PopravkaBa.Tests.MaliServisi.UvjetOglasaServiceTestHelper;
 
 namespace PopravkaBa.Tests.MaliServisi;
 
@@ -16,9 +17,6 @@ public class UvjetOglasaServiceTests
         _repo = new Mock<IUvjetOglasaRepository>();
         _servis = new UvjetOglasaService(_repo.Object);
     }
-
-    private static UvjetOglasa Uvjet(int id, int oglasId, string tekst) =>
-        new() { ID = id, OglasID = oglasId, TekstUvjeta = tekst };
 
     [TestMethod]
     public async Task DajSveUvjeteOglasa_ProslijedjenId_VracaUvjete()

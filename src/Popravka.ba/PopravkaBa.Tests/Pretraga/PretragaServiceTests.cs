@@ -5,7 +5,7 @@ using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Domain.Specifications.Interface;
 using PopravkaBa.Infrastructure.Wrappers;
-using static PopravkaBa.Tests.Pretraga.PretragaServiceTestPomoc;
+using static PopravkaBa.Tests.Pretraga.PretragaServiceTestHelper;
 
 namespace PopravkaBa.Tests.Pretraga;
 

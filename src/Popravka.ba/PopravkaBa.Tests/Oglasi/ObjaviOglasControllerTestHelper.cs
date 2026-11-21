@@ -10,7 +10,7 @@ using PopravkaBa.Web.Controllers;
 
 namespace PopravkaBa.Tests.Oglasi;
 
-internal static class ObjaviOglasControllerTestPomoc
+internal static class ObjaviOglasControllerTestHelper
 {
     internal const int OglasId = 42;
 

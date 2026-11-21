@@ -7,7 +7,7 @@ using PopravkaBa.Domain.Models;
 
 namespace PopravkaBa.Tests.Oglasi;
 
-internal static class PrijavaOglasControllerTestPomoc
+internal static class PrijavaOglasControllerTestHelper
 {
     internal const int OglasId = 10;
     internal const int PrijavaId = 5;

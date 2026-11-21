@@ -7,7 +7,7 @@ using PopravkaBa.Application.Services.Interface;
 using PopravkaBa.Domain.Interfaces;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Web.Controllers;
-using static PopravkaBa.Tests.Oglasi.ObjaviOglasControllerTestPomoc;
+using static PopravkaBa.Tests.Oglasi.ObjaviOglasControllerTestHelper;
 
 namespace PopravkaBa.Tests.Oglasi;
 
