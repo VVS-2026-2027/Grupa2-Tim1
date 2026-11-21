@@ -49,6 +49,10 @@ namespace PopravkaBa.Domain.Shared
             Regex.Matches(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}|\d{4}[./-]\d{1,2}[./-]\d{1,2}")
                 .Any(kandidat => DateTime.TryParseExact(kandidat.Value,
                     new[] { "d.M.yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy.M.d", "yyyy-M-d", "yyyy/M/d" },
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            || Regex.Matches(lozinka, @"(?=(\d{8}))")
+                .Any(kandidat => DateTime.TryParseExact(kandidat.Groups[1].Value,
+                    new[] { "ddMMyyyy", "yyyyMMdd" },
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out _));
 
         private static int IzracunajBodove(string lozinka)
