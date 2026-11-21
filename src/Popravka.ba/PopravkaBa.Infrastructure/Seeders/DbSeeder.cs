@@ -29,10 +29,10 @@ public class DbSeeder
     }
     string? HasoId() => _userManager.FindByEmailAsync("kontakt@hasoinstalacije.ba").Result?.Id;
     string? RijadId() => _userManager.FindByEmailAsync("rijad.kasapovic@popravka.ba").Result?.Id;
-    string? ErmedinId() => _userManager.FindByEmailAsync("ermedin.demic@popravka.ba").Result?.Id;
+    string? ErmedinId() => _userManager.FindByEmailAsync("ermedin.demirovic@popravka.ba").Result?.Id;
     string? MirzaId() => _userManager.FindByEmailAsync("mirza.kovacevic@popravka.ba").Result?.Id;
-    string? FarukId() => _userManager.FindByEmailAsync("faruk.hadzic@popravka.ba").Result?.Id;
-    string? SeadId() => _userManager.FindByEmailAsync("sead.mujic@popravka.ba").Result?.Id;
+    string? FarukId() => _userManager.FindByEmailAsync("faruk.fazlinovic@popravka.ba").Result?.Id;
+    string? SevkoId() => _userManager.FindByEmailAsync("sevko.rahimic@popravka.ba").Result?.Id;
     string? SemaId() => _userManager.FindByEmailAsync("info@semagradnja.ba").Result?.Id;
     string? ZukanId() => _userManager.FindByEmailAsync("info@zukanvolt.ba").Result?.Id;
     string? HVId() => _userManager.FindByEmailAsync("hvojvodic@hvobrt.ba").Result?.Id;
@@ -110,6 +110,7 @@ public class DbSeeder
             new() { Naziv = "Staklarski radovi",                        NadkategorijaID = nadkategorije["Građevinski radovi"].ID },
             new() { Naziv = "Bravarski radovi",                         NadkategorijaID = nadkategorije["Građevinski radovi"].ID },
             new() { Naziv = "Metalne konstrukcije",                     NadkategorijaID = nadkategorije["Građevinski radovi"].ID },
+            new() { Naziv = "Zavarivacki radovi",                       NadkategorijaID = nadkategorije["Građevinski radovi"].ID },
 
             // Instalacije
             new() { Naziv = "Vodoinstalaterske usluge",                 NadkategorijaID = nadkategorije["Instalacije"].ID },
@@ -498,7 +499,7 @@ public class DbSeeder
             minCijena: 35, ocjena: 4.8m, zavrsenih: 61);
 
         await SeedMajstoraAsync(
-            email: "faruk.fazlinović@popravka.ba", username: "farukfazlinović",
+            email: "faruk.fazlinovic@popravka.ba", username: "farukfazlinovic",
             ime: "Faruk", prezime: "Fazlinović",
             opis: "Ovlašteni serviser klima uređaja i rashladne tehnike svih vodećih brendova.",
             password: "Majstor#1234",
@@ -566,7 +567,7 @@ public class DbSeeder
             opis: "Profesionalno čišćenje dimnjaka, peći i ventilacionih sistema.",
             password: "Majstor#1234",
             kategorije: new[] { "Dimnjačarski radovi" },
-            mjesta: new[] { "Bugojno", "Donji Vakuf", "Gornji Vakuf" },
+            mjesta: new[] { "Bugojno", "Donji Vakuf", "Gornji Vakuf-Uskoplje" },
             minCijena: 17, ocjena: 4.2m, zavrsenih: 24);
 
         await SeedMajstoraAsync(
@@ -974,7 +975,7 @@ public class DbSeeder
                 DatumObjave = DateTime.UtcNow.AddDays(-6),
                 VlasnikOglasaID = farukId,
             });
-        if (SeadId() is string seadId)
+        if (SevkoId() is string sevkoId)
             oglasiMajstora.Add(new()
             {
                 Naslov = "Keramičar i moler",
@@ -983,7 +984,7 @@ public class DbSeeder
                 MinCijena = 22,
                 TipIsplate = TipIsplate.PoSatu,
                 DatumObjave = DateTime.UtcNow.AddDays(-4),
-                VlasnikOglasaID = seadId,
+                VlasnikOglasaID = sevkoId,
             });
 
         if (oglasiMajstora.Any())
@@ -1132,7 +1133,7 @@ public class DbSeeder
             recenzije.Add(new() { KlijentID = k2, IzvrsilacID = eId, Ocjena = 4, Komentar = "Dobra fasada, radove završio u roku. Malo više prašine nego što sam očekivao.", DatumRecenzije = DateTime.UtcNow.AddDays(-12) });
         if (FarukId() is string fId && !string.IsNullOrEmpty(k4))
             recenzije.Add(new() { KlijentID = k4, IzvrsilacID = fId, Ocjena = 5, Komentar = "Super serviser, korektno postupao i dao savjete za održavanje. Hvala!", DatumRecenzije = DateTime.UtcNow.AddDays(-4) });
-        if (SeadId() is string sId && !string.IsNullOrEmpty(k5))
+        if (SevkoId() is string sId && !string.IsNullOrEmpty(k5))
             recenzije.Add(new() { KlijentID = k5, IzvrsilacID = sId, Ocjena = 4, Komentar = "Solidno postavljena keramika, prekoračio malo dogovoren rok.", DatumRecenzije = DateTime.UtcNow.AddDays(-6) });
         if (SemaId() is string semaRec && !string.IsNullOrEmpty(k3))
             recenzije.Add(new() { KlijentID = k3, IzvrsilacID = semaRec, Ocjena = 5, Komentar = "Firma odradila kompletno renoviranje — rezultat je fantastičan!", DatumRecenzije = DateTime.UtcNow.AddDays(-15) });

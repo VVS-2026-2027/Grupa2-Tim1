@@ -3,9 +3,10 @@ using Amazon.S3.Model;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
 
-namespace PopravkaBa.Tests.Adapteri;
+namespace PopravkaBa.Tests.Zajednicko;
 
 [TestClass]
+[TestCategory("Infrastructure")]
 public class S3FileStorageAdapterTests
 {
     private Mock<IAmazonS3> _s3 = null!;
@@ -35,6 +36,8 @@ public class S3FileStorageAdapterTests
         DataDrivenInputParser.CitajXml<string, string>("TestData/xml/S3FileStorageAdapter_ekstenzije.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviEkstenzija))]
     public void Extension_PodaciIzXml_VracaOcekivanuEkstenziju(string contentType, string ekstenzija)
     {
@@ -46,6 +49,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void Extension_NepoznatContentType_VracaPrazanString()
     {
         // Act
@@ -58,6 +62,7 @@ public class S3FileStorageAdapterTests
     // ---------- SpremiPublic ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task SpremiPublic_PngSlika_VracaJavniUrlSaKljucemUSlikeFolderu()
     {
         // Arrange
@@ -72,6 +77,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task SpremiPublic_PngSlika_SaljeZahtjevNaJavniBucket()
     {
         // Arrange
@@ -90,6 +96,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task SpremiPublic_S3BacaGresku_ProsljedjujeIzuzetak()
     {
         // Arrange
@@ -104,6 +111,7 @@ public class S3FileStorageAdapterTests
     // ---------- SpremiPrivate ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task SpremiPrivate_PdfFajl_VracaKljucSaEkstenzijomIzImenaFajla()
     {
         // Arrange
@@ -118,6 +126,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task SpremiPrivate_PdfFajl_SaljeZahtjevNaPrivatniBucket()
     {
         // Arrange
@@ -136,6 +145,7 @@ public class S3FileStorageAdapterTests
     // ---------- GetSignedURL ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void GetSignedURL_PostojeciKljuc_VracaUrlKojiJeNapravioS3Klijent()
     {
         // Arrange
@@ -149,6 +159,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void GetSignedURL_PostojeciKljuc_TraziHttpsGetZaPrivatniBucket()
     {
         // Arrange
@@ -168,6 +179,7 @@ public class S3FileStorageAdapterTests
     // ---------- ObrisiPublic / ObrisiPrivate (mock: metode ništa ne vraćaju) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ObrisiPublic_JavniUrl_BriseObjekatPoKljucuBezBaznogUrla()
     {
         // Act
@@ -180,6 +192,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ObrisiPrivate_PostojeciKljuc_BriseObjekatIzPrivatnogBucketa()
     {
         // Act
@@ -192,6 +205,7 @@ public class S3FileStorageAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ObrisiPrivate_S3BacaGresku_ProsljedjujeIzuzetak()
     {
         // Arrange

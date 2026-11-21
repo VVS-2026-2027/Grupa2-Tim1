@@ -197,7 +197,7 @@ namespace PopravkaBa.Application.Strategies.Implementation
 
             if (filteri.MinBudzet.HasValue && filteri.MaxBudzet.HasValue)
                 spec = new AndSpecification<OglasUsluge>(spec,
-                           new BudzеtSpecification(
+                           new BudzetSpecification(
                                filteri.MinBudzet.Value,
                                filteri.MaxBudzet.Value));
 

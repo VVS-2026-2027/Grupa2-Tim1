@@ -96,9 +96,6 @@ namespace PopravkaBa.Web.Controllers
         [HttpPost("/login")]
         public async Task<IActionResult> Login(RegistracijaViewModel vm, string? returnUrl = null)
         {
-
-            returnUrl ??= Request.Form["returnUrl"].FirstOrDefault();
-
             if (!ModelState.IsValid)
             {
                 ViewData["ReturnUrl"] = returnUrl;

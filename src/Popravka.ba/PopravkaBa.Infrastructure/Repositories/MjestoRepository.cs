@@ -21,7 +21,7 @@ namespace PopravkaBa.Infrastructure.Repositories
 
         public async Task<IEnumerable<Mjesto>?> DajMjestaPoKantonuAsync(int kantonID)
             => await _context.Mjesta
-                    .Where(m => m.Kanton.Equals(kantonID))
+                    .Where(m => (int)m.Kanton == kantonID)
                     .ToListAsync();
         public async Task<Mjesto?> DajPoIdAsync(int id)
             => await _context.Mjesta
@@ -30,6 +30,7 @@ namespace PopravkaBa.Infrastructure.Repositories
 
         public async Task<IEnumerable<Mjesto>> PronadjiMjestaAsync(string pretraga)
             => await _context.Mjesta
+                  .Where(m => m.Naziv.ToLower().Contains(pretraga.ToLower()))
                   .ToListAsync();
 
         public async Task<IEnumerable<Mjesto>> DajSveKorisnikeMjestaAsync(string korisnikId)

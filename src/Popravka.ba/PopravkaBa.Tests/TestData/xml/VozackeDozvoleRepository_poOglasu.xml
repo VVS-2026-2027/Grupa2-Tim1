@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- oglasId, ocekivaniBroj -->
+<slucajevi>
+  <slucaj>
+    <oglasId>1</oglasId>
+    <ocekivaniBroj>3</ocekivaniBroj>
+  </slucaj>
+  <slucaj>
+    <oglasId>2</oglasId>
+    <ocekivaniBroj>1</ocekivaniBroj>
+  </slucaj>
+  <slucaj>
+    <oglasId>99</oglasId>
+    <ocekivaniBroj>0</ocekivaniBroj>
+  </slucaj>
+</slucajevi>

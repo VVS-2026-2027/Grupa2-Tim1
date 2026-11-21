@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- naziv migracije (klasa u PopravkaBa.Infrastructure.Migrations) -->
+<slucajevi>
+  <slucaj>
+    <naziv>initialCreate</naziv>
+  </slucaj>
+  <slucaj>
+    <naziv>OglasSlikaMigration</naziv>
+  </slucaj>
+  <slucaj>
+    <naziv>notificationMigration</naziv>
+  </slucaj>
+</slucajevi>

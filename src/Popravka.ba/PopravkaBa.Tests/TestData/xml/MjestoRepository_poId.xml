@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- id, ocekivaniNaziv (prazna celija = null) -->
+<slucajevi>
+  <slucaj>
+    <id>1</id>
+    <naziv>Sarajevo</naziv>
+  </slucaj>
+  <slucaj>
+    <id>2</id>
+    <naziv>Mostar</naziv>
+  </slucaj>
+  <slucaj>
+    <id>99</id>
+    <naziv></naziv>
+  </slucaj>
+</slucajevi>

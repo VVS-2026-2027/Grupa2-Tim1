@@ -1,17 +1,26 @@
 using System.Net.Sockets;
+using MailKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Infrastructure.Adapters;
 using PopravkaBa.Infrastructure.Adapters.Options;
+using static PopravkaBa.Tests.Zajednicko.BrevoEmailAdapterTestHelper;
 
-namespace PopravkaBa.Tests.Adapteri;
+namespace PopravkaBa.Tests.Zajednicko;
 
-// Pravi SMTP server se ne koristi: testovi koriste neispravne adrese primaoca (greška prije konekcije)
-// i server koji ne postoji na lokalnoj mašini (greška pri konekciji).
+// Pravi SMTP server se ne koristi. _adapter koristi pravi SmtpClient prema serveru koji ne postoji
+// (greška pri konekciji), a _adapterSaMockom dobija mock SMTP klijenta preko buildMailClient,
+// pa se može provjeriti cijelo slanje bez mreže.
 [TestClass]
+[TestCategory("Infrastructure")]
 public class BrevoEmailAdapterTests
 {
     private BrevoEmailAdapter _adapter = null!;
+    private Mock<ISmtpClient> _mailClient = null!;
+    private BrevoEmailAdapter _adapterSaMockom = null!;
 
     [TestInitialize]
     public void Postavi()
@@ -26,17 +35,64 @@ public class BrevoEmailAdapterTests
             FromName = "Popravka.ba"
         });
         _adapter = new BrevoEmailAdapter(opcije);
+
+        _mailClient = new Mock<ISmtpClient>();
+        _adapterSaMockom = new BrevoEmailAdapter(opcije, () => _mailClient.Object);
     }
 
-    private static EmailVerifikacijaFirme Verifikacija(string adminEmail, string firmaEmail) => new()
-    {
-        NazivFirme = "Haso instalacije d.o.o.",
-        AdminEmail = adminEmail,
-        StatusVerifikacije = Status.Prihvaceno,
-        Firma = new Firma { Email = firmaEmail, NazivFirme = "Haso instalacije d.o.o." }
-    };
+    // ---------- Slanje preko mock SMTP klijenta ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
+    public async Task PosaljiEmailAsync_IspravnaAdresa_PovezujeSeNaServerIzPostavki()
+    {
+        // Act
+        await _adapterSaMockom.PosaljiEmailAsync("primalac@popravka.ba", "Naslov", "<p>Tijelo</p>");
+
+        // Assert
+        _mailClient.Verify(c => c.ConnectAsync("127.0.0.1", 1, SecureSocketOptions.StartTls, It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [TestMethod]
+    [Owner("Emina Vatrić")]
+    public async Task PosaljiEmailAsync_IspravnaAdresa_PrijavljujeSePodacimaIzPostavki()
+    {
+        // Act
+        await _adapterSaMockom.PosaljiEmailAsync("primalac@popravka.ba", "Naslov", "<p>Tijelo</p>");
+
+        // Assert
+        _mailClient.Verify(c => c.AuthenticateAsync("login", "kljuc", It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [TestMethod]
+    [Owner("Emina Vatrić")]
+    public async Task PosaljiEmailAsync_IspravnaAdresa_SaljePorukuPrimaocuSaNaslovom()
+    {
+        // Act
+        await _adapterSaMockom.PosaljiEmailAsync("primalac@popravka.ba", "Naslov", "<p>Tijelo</p>");
+
+        // Assert
+        _mailClient.Verify(c => c.SendAsync(
+            It.Is<MimeMessage>(m => m.To.Mailboxes.Single().Address == "primalac@popravka.ba" && m.Subject == "Naslov"),
+            It.IsAny<CancellationToken>(),
+            It.IsAny<ITransferProgress>()), Times.Once);
+    }
+
+    [TestMethod]
+    [Owner("Emina Vatrić")]
+    public async Task PosaljiEmailAsync_IspravnaAdresa_ZatvaraKonekciju()
+    {
+        // Act
+        await _adapterSaMockom.PosaljiEmailAsync("primalac@popravka.ba", "Naslov", "<p>Tijelo</p>");
+
+        // Assert
+        _mailClient.Verify(c => c.DisconnectAsync(true, It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    // ---------- Greške bez mock klijenta ----------
+
+    [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_NeispravnaAdresaPrimaoca_BacaFormatException()
     {
         // Act + Assert
@@ -45,6 +101,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_SmtpServerNedostupan_BacaIzuzetakPriKonekciji()
     {
         // Act + Assert
@@ -53,6 +110,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_NotifikacijaOglasa_ProsljedjujeAdresuPrimaoca()
     {
         // Arrange
@@ -67,12 +125,14 @@ public class BrevoEmailAdapterTests
         DataDrivenInputParser.CitajXml<bool, string, string, bool>("TestData/xml/BrevoEmailAdapter_neispravniPrimaoci.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviPrimaoca))]
     public async Task PosaljiEmailAsync_VerifikacijaFirmePodaciIzXml_KoristiAdresuAdminaIliFirme(
         bool zaAdmina, string adminEmail, string firmaEmail, bool formatGreska)
     {
         // Arrange
-        var verifikacija = Verifikacija(adminEmail, firmaEmail);
+        var verifikacija = NovaVerifikacija(adminEmail, firmaEmail);
 
         // Act (greška formata znači da je ta adresa uzeta kao primalac, inače je greška na konekciji)
         var izuzetak = await Assert.ThrowsAsync<Exception>(() => _adapter.PosaljiEmailAsync(verifikacija, zaAdmina));

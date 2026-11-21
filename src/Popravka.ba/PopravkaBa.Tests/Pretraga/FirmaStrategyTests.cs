@@ -3,12 +3,14 @@ using PopravkaBa.Application.Strategies.Implementation;
 using PopravkaBa.Domain.Enums;
 using PopravkaBa.Domain.Models;
 using PopravkaBa.Domain.Specifications.Interface;
+using static PopravkaBa.Tests.Pretraga.PretragaStrategijaTestHelper;
 
-namespace PopravkaBa.Tests.Strategije;
+namespace PopravkaBa.Tests.Pretraga;
 
 // Strategija pretrage sklapa specifikaciju od filtera. Testira se tako da se specifikacija primijeni
 // na listu objekata u memoriji i provjeri koji su objekti ostali.
 [TestClass]
+[TestCategory("Domain")]
 public class FirmaStrategyTests
 {
     private FirmaStrategy _strategija = null!;
@@ -18,71 +20,10 @@ public class FirmaStrategyTests
 
     // ---------- Pomoćne metode (priprema podataka) ----------
 
-    private static List<IzvrsilacKategorija> Kat(params int[] ids) =>
-        ids.Select(id => new IzvrsilacKategorija { KategorijaID = id }).ToList();
-
-    private static List<KorisnikMjesto> Mjesta(params int[] ids) =>
-        ids.Select(id => new KorisnikMjesto { MjestoID = id }).ToList();
-
-    private static List<OglasKategorija> OglasKat(params int[] ids) =>
-        ids.Select(id => new OglasKategorija { KategorijaID = id }).ToList();
-
-    private static List<IzvrsilacUsluge> Izvrsioci() => new()
-    {
-        new Majstor { Id = "m1", Ime = "Haso", Prezime = "Hasić", Opis = "Vodoinstalater za kuće",
-            MinCijenaUsluge = 50, ProsjecnaOcjena = 3.0m, Kategorije = Kat(1), Mjesta = Mjesta(1) },
-        new Majstor { Id = "m2", Ime = "Mujo", Prezime = "Mujić", Opis = "Električar",
-            MinCijenaUsluge = 100, ProsjecnaOcjena = 4.5m, Kategorije = Kat(2), Mjesta = Mjesta(2) },
-        new Firma { Id = "f1", NazivFirme = "Elektro Servis d.o.o.", Opis = "Popravke svih vrsta",
-            MinCijenaUsluge = 200, ProsjecnaOcjena = 5.0m, Kategorije = Kat(2), Mjesta = Mjesta(1) },
-        new Majstor { Id = "m3", Ime = "Suljo", Prezime = "Suljić", Opis = null,
-            MinCijenaUsluge = null, ProsjecnaOcjena = 2.0m, Kategorije = Kat(), Mjesta = Mjesta() }
-    };
-
-    private static List<OglasUsluge> OglasiUsluga() => new()
-    {
-        new OglasUsluge { OglasID = 1, Naslov = "Popravak slavine", Opis = "Curi voda u kuhinji",
-            MjestoID = 1, MinBudzet = 100, MaxBudzet = 300, Kategorije = OglasKat(1) },
-        new OglasUsluge { OglasID = 2, Naslov = "Farbanje stana", Opis = "Potrebno okrečiti dvije sobe",
-            MjestoID = 2, MinBudzet = 500, MaxBudzet = 1000, Kategorije = OglasKat(2) },
-        new OglasUsluge { OglasID = 3, Naslov = "Zamjena sijalica", Opis = "Potreban električar",
-            MjestoID = 1, MinBudzet = 0, MaxBudzet = 50, Kategorije = OglasKat(2) },
-        new OglasUsluge { OglasID = 4, Naslov = "Neaktivan oglas", Opis = "Nije vidljiv",
-            MjestoID = 1, MinBudzet = 100, MaxBudzet = 300, Kategorije = OglasKat(1), StatusOglasa = Status.Neaktivan }
-    };
-
-    private static List<OglasRadnoMjesto> OglasiRadnihMjesta() => new()
-    {
-        new OglasRadnoMjesto { OglasID = 1, Naslov = "Vodoinstalater", Opis = "Traži se iskusan majstor",
-            MjestoID = 1, VrstaZaposlenja = VrstaZaposlenja.PunoRadnoVrijeme,
-            MinPrihod = 1000, MaxPrihod = 1500, MinIskustvo = 2, Kategorije = OglasKat(1) },
-        new OglasRadnoMjesto { OglasID = 2, Naslov = "Električar", Opis = "Potreban za manje radove",
-            MjestoID = 2, VrstaZaposlenja = VrstaZaposlenja.PolaRadnogVrijema,
-            MinPrihod = 500, MaxPrihod = 800, MinIskustvo = 0, Kategorije = OglasKat(2) },
-        new OglasRadnoMjesto { OglasID = 3, Naslov = "Pomoćni radnik", Opis = "Rad na gradilištu",
-            MjestoID = 1, VrstaZaposlenja = VrstaZaposlenja.PunoRadnoVrijeme,
-            MinPrihod = 1500, MaxPrihod = 2500, MinIskustvo = 5, Kategorije = OglasKat(1) },
-        new OglasRadnoMjesto { OglasID = 4, Naslov = "Neaktivan posao", Opis = "Nije vidljiv",
-            MjestoID = 1, VrstaZaposlenja = VrstaZaposlenja.PunoRadnoVrijeme,
-            MinPrihod = 1000, MaxPrihod = 1500, MinIskustvo = 0, Kategorije = OglasKat(1), StatusOglasa = Status.Neaktivan }
-    };
-
-    private static List<T> Primijeni<T>(ISpecification<T>? specifikacija, IEnumerable<T> podaci) =>
-        podaci.Where(specifikacija!.ToExpression().Compile()).ToList();
-
-    private static List<string> IdIzvrsilaca(IEnumerable<IzvrsilacUsluge> izvrsioci) =>
-        izvrsioci.Select(i => i.Id).ToList();
-
-    private static List<int> IdOglasa(IEnumerable<Oglas> oglasi) =>
-        oglasi.Select(o => o.OglasID).ToList();
-
-    private static FilterPretrageDto FilterIzvrsilaca() => new() { AktivniTab = "Izvrsioci usluga" };
-    private static FilterPretrageDto FilterUsluga() => new() { AktivniTab = "Oglasi za popravke" };
-    private static FilterPretrageDto FilterRadnihMjesta() => new() { AktivniTab = "Oglasi za posao" };
-
     // ---------- Osnovni podaci strategije ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void DajUlogu_Poziv_VracaFirma()
     {
         // Act
@@ -93,6 +34,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void DajDozvoljeneTabove_Poziv_VracaSveTriTaba()
     {
         // Act
@@ -103,6 +45,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void DajDefaultniTab_Poziv_VracaIzvrsiociUsluga()
     {
         // Act
@@ -115,6 +58,7 @@ public class FirmaStrategyTests
     // ---------- Pogrešan tab ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_PogresanTab_VracaNull()
     {
         // Act
@@ -125,6 +69,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_PogresanTab_VracaNull()
     {
         // Act
@@ -135,6 +80,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_PogresanTab_VracaNull()
     {
         // Act
@@ -147,6 +93,7 @@ public class FirmaStrategyTests
     // ---------- Izvršioci usluga ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_BezFiltera_VracaSveIzvrsioce()
     {
         // Act
@@ -157,6 +104,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_FilterKategorije_VracaIzvrsiocePoKategoriji()
     {
         // Arrange
@@ -171,6 +119,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_FilterLokacije_VracaIzvrsiocePoMjestu()
     {
         // Arrange
@@ -185,6 +134,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_KljucnaRijecUOpisu_VracaIzvrsiocaSaTimOpisom()
     {
         // Arrange
@@ -199,6 +149,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_KljucnaRijecUNazivuFirme_VracaFirmu()
     {
         // Arrange
@@ -213,6 +164,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_KljucnaRijecImeIPrezime_VracaMajstora()
     {
         // Arrange
@@ -230,6 +182,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<int?, int?, int>("TestData/xml/Strategije_budzetIzvrsioci.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(BudzetiIzvrsilaca))]
     public void NapraviIzvrsilacUslugeSpec_BudzetIzXml_VracaOcekivaniBrojIzvrsilaca(
         int? minBudzet, int? maxBudzet, int ocekivano)
@@ -247,6 +201,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_ObjeGraniceOcjene_VracaIzvrsiocePrekoMinimalneOcjene()
     {
         // Arrange
@@ -262,6 +217,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_SamoMinimalnaOcjena_NeFiltrira()
     {
         // Arrange
@@ -279,6 +235,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<SortiranjeIzvrsilacaUsluga, bool>("TestData/xml/Strategije_sortiranjeIzvrsioci.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SortiranjaIzvrsilaca))]
     public void NapraviIzvrsilacUslugeSpec_SortiranjeIzXml_PostavljaSmjerSortiranja(
         SortiranjeIzvrsilacaUsluga sortiranje, bool silazno)
@@ -296,6 +254,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviIzvrsilacUslugeSpec_BezSortiranja_KoristiOcjenuOpadajuce()
     {
         // Arrange
@@ -312,6 +271,7 @@ public class FirmaStrategyTests
     // ---------- Oglasi za popravke (usluge) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_BezFiltera_VracaSamoAktivneOglase()
     {
         // Act
@@ -322,6 +282,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_FilterKategorije_VracaOglasePoKategoriji()
     {
         // Arrange
@@ -336,6 +297,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_FilterLokacije_VracaAktivneOglasePoMjestu()
     {
         // Arrange
@@ -350,6 +312,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_KljucnaRijecUNaslovu_VracaOglasSaTimNaslovom()
     {
         // Arrange
@@ -364,6 +327,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_KljucnaRijecUOpisu_VracaOglasSaTimOpisom()
     {
         // Arrange
@@ -381,6 +345,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<int?, int?, int>("TestData/xml/Strategije_budzetOglasiUsluga.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(BudzetiUsluga))]
     public void NapraviUslugeSpec_BudzetIzXml_VracaOcekivaniBrojOglasa(int? minBudzet, int? maxBudzet, int ocekivano)
     {
@@ -400,6 +366,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<SortiranjeOglasaUsluge, bool>("TestData/xml/Strategije_sortiranjeOglasiUsluga.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SortiranjaUsluga))]
     public void NapraviUslugeSpec_SortiranjeIzXml_PostavljaSmjerSortiranja(SortiranjeOglasaUsluge sortiranje, bool silazno)
     {
@@ -416,6 +384,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviUslugeSpec_BezSortiranja_KoristiMinimalniBudzetOpadajuce()
     {
         // Arrange
@@ -432,6 +401,7 @@ public class FirmaStrategyTests
     // ---------- Oglasi za posao ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_BezFiltera_VracaSamoAktivneOglase()
     {
         // Act
@@ -442,6 +412,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_FilterKategorije_VracaOglasePoKategoriji()
     {
         // Arrange
@@ -456,6 +427,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_FilterLokacije_VracaOglasePoMjestu()
     {
         // Arrange
@@ -470,6 +442,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_KljucnaRijecUNaslovu_VracaOglasSaTimNaslovom()
     {
         // Arrange
@@ -484,6 +457,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_KljucnaRijecUOpisu_VracaOglasSaTimOpisom()
     {
         // Arrange
@@ -501,6 +475,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<int?, int>("TestData/xml/Strategije_iskustvoRadnaMjesta.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(IskustvaRadnihMjesta))]
     public void NapraviRadnoMjestoSpec_GodineIskustvaIzXml_VracaOcekivaniBrojOglasa(int? godine, int ocekivano)
     {
@@ -516,6 +492,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_TipZaposlenja_VracaOglaseSaTimTipom()
     {
         // Arrange
@@ -533,6 +510,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<int?, int?, int>("TestData/xml/Strategije_budzetRadnaMjesta.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(PrihodiRadnihMjesta))]
     public void NapraviRadnoMjestoSpec_PrihodIzXml_VracaOcekivaniBrojOglasa(int? minPrihod, int? maxPrihod, int ocekivano)
     {
@@ -552,6 +531,8 @@ public class FirmaStrategyTests
         DataDrivenInputParser.CitajXml<SortiranjeOglasaRadnoMjesto, bool>("TestData/xml/Strategije_sortiranjeRadnaMjesta.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SortiranjaRadnihMjesta))]
     public void NapraviRadnoMjestoSpec_SortiranjeIzXml_PostavljaSmjerSortiranja(
         SortiranjeOglasaRadnoMjesto sortiranje, bool silazno)
@@ -569,6 +550,7 @@ public class FirmaStrategyTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void NapraviRadnoMjestoSpec_BezSortiranja_KoristiMinimalniPrihodOpadajuce()
     {
         // Arrange

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- topN, ocekivaniBroj, ocekivaniPrviId (0 = nema rezultata) -->
+<slucajevi>
+  <slucaj>
+    <topN>0</topN>
+    <ocekivaniBroj>0</ocekivaniBroj>
+    <ocekivaniPrviId>0</ocekivaniPrviId>
+  </slucaj>
+  <slucaj>
+    <topN>1</topN>
+    <ocekivaniBroj>1</ocekivaniBroj>
+    <ocekivaniPrviId>1</ocekivaniPrviId>
+  </slucaj>
+  <slucaj>
+    <topN>2</topN>
+    <ocekivaniBroj>2</ocekivaniBroj>
+    <ocekivaniPrviId>1</ocekivaniPrviId>
+  </slucaj>
+  <slucaj>
+    <topN>10</topN>
+    <ocekivaniBroj>3</ocekivaniBroj>
+    <ocekivaniPrviId>1</ocekivaniPrviId>
+  </slucaj>
+</slucajevi>

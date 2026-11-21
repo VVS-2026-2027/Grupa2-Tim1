@@ -5,10 +5,12 @@ using PopravkaBa.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static PopravkaBa.Tests.Zajednicko.BosanskiValidationMetadataProviderTestHelper;
 
 namespace PopravkaBa.Tests.Zajednicko
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class BosanskiValidationMetadataProviderTests
     {
         private BosanskiValidationMetadataProvider _provider = null!;
@@ -19,16 +21,8 @@ namespace PopravkaBa.Tests.Zajednicko
             _provider = new BosanskiValidationMetadataProvider();
         }
 
-        private static ValidationMetadataProviderContext NapraviKontekstZaSvojstvo(object validator)
-        {
-            var identitet = ModelMetadataIdentity.ForProperty(typeof(List<int>), "KategorijeID", typeof(object));
-            var atributi = ModelAttributes.GetAttributesForType(typeof(List<int>));
-            var kontekst = new ValidationMetadataProviderContext(identitet, atributi);
-            kontekst.ValidationMetadata.ValidatorMetadata.Add(validator);
-            return kontekst;
-        }
-
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredBezPoruke_PostavljaBosanskuPoruku()
         {
             // Arrange
@@ -43,6 +37,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredSaPorukom_NePrepisujePoruku()
         {
             // Arrange
@@ -57,6 +52,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredSaResursom_NePostavljaPoruku()
         {
             // Arrange
@@ -71,6 +67,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_DrugiAtribut_NeMijenjaAtribut()
         {
             // Arrange
@@ -85,6 +82,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_KljucBezImena_KoristiPodrazumijevaniNaziv()
         {
             // Arrange
@@ -102,6 +100,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_BezValidatora_NeBacaIzuzetak()
         {
             // Arrange
