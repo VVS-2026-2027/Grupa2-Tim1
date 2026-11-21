@@ -2,11 +2,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Popravka.ba.Data;
 using PopravkaBa.Infrastructure.BackgroundServices;
+using static PopravkaBa.Tests.Nalog.VerifikacijskiTokenCleanupJobTestHelper;
 
 namespace PopravkaBa.Tests.Nalog;
 
-// Job briše tokene sa ExecuteDeleteAsync, koji InMemory baza ne podržava. Zato se ovdje testira
-// kako se job ponaša kad baza baci grešku: loguje je i nastavlja raditi (ne ruši aplikaciju).
+// Job briše tokene sa ExecuteDeleteAsync. Dva načina testiranja:
+// - _job radi nad InMemory bazom, koja ExecuteDeleteAsync ne podržava, pa se tu testira ponašanje kod greške
+//   (loguje je i nastavlja raditi);
+// - _jobSqlite radi nad SQLite bazom u memoriji, gdje brisanje stvarno radi, pa se tu testira uspješno čišćenje.
 [TestClass]
 public class VerifikacijskiTokenCleanupJobTests
 {
@@ -15,6 +18,11 @@ public class VerifikacijskiTokenCleanupJobTests
     private ApplicationDbContext _db = null!;
     private ServiceProvider _provider = null!;
     private VerifikacijskiTokenCleanupJob _job = null!;
+
+    private SqliteTestBaza _sqlite = null!;
+    private TaskCompletionSource _krajKruga = null!;
+    private ServiceProvider _providerSqlite = null!;
+    private VerifikacijskiTokenCleanupJob _jobSqlite = null!;
 
     [TestInitialize]
     public void Postavi()
@@ -35,6 +43,15 @@ public class VerifikacijskiTokenCleanupJobTests
         _provider = new ServiceCollection().AddScoped(_ => _db).BuildServiceProvider();
         _job = new VerifikacijskiTokenCleanupJob(
             _provider.GetRequiredService<IServiceScopeFactory>(), _logger.Object);
+
+        // SQLite: svaki scope dobija kontekst koji javi testu kad ga job zatvori na kraju kruga
+        _sqlite = new SqliteTestBaza();
+        _krajKruga = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _providerSqlite = new ServiceCollection()
+            .AddScoped<ApplicationDbContext>(_ => new KontekstKojiJavljaKrajKruga(_sqlite.Opcije, _krajKruga))
+            .BuildServiceProvider();
+        _jobSqlite = new VerifikacijskiTokenCleanupJob(
+            _providerSqlite.GetRequiredService<IServiceScopeFactory>(), _logger.Object);
     }
 
     [TestCleanup]
@@ -42,6 +59,9 @@ public class VerifikacijskiTokenCleanupJobTests
     {
         _job.Dispose();
         _provider.Dispose();
+        _jobSqlite.Dispose();
+        _providerSqlite.Dispose();
+        _sqlite.Dispose();
     }
 
     [TestMethod]
@@ -88,5 +108,78 @@ public class VerifikacijskiTokenCleanupJobTests
 
         // Assert
         Assert.IsTrue(_job.ExecuteTask!.IsCompleted);
+    }
+
+    // ---------- Uspješno čišćenje (SQLite) ----------
+
+    [TestMethod]
+    public async Task ExecuteAsync_IstekliIVazeciTokeni_BriseSamoIstekle()
+    {
+        // Arrange: jedan token je istekao prije 5 minuta, drugi ističe za 10 minuta
+        using (var db = _sqlite.NoviKontekst())
+        {
+            db.Users.Add(Vlasnik());
+            db.Tokeni.AddRange(Token("istekao", -5), Token("vazeci", 10));
+            await db.SaveChangesAsync();
+        }
+
+        // Act
+        await _jobSqlite.StartAsync(CancellationToken.None);
+        await _krajKruga.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        await _jobSqlite.StopAsync(CancellationToken.None);
+
+        // Assert
+        using var provjera = _sqlite.NoviKontekst();
+        CollectionAssert.AreEqual(new[] { "vazeci" }, provjera.Tokeni.Select(t => t.TokenHash).ToArray());
+    }
+
+    [TestMethod]
+    public async Task ExecuteAsync_ImaIsteklihTokena_LogujeBrojObrisanih()
+    {
+        // Arrange: dva istekla tokena
+        using (var db = _sqlite.NoviKontekst())
+        {
+            db.Users.Add(Vlasnik());
+            db.Tokeni.AddRange(Token("prvi", -5), Token("drugi", -60));
+            await db.SaveChangesAsync();
+        }
+
+        // Act
+        await _jobSqlite.StartAsync(CancellationToken.None);
+        await _krajKruga.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        await _jobSqlite.StopAsync(CancellationToken.None);
+
+        // Assert: jedna Information poruka koja sadrži broj obrisanih tokena
+        _logger.Verify(l => l.Log(
+            LogLevel.Information,
+            It.IsAny<EventId>(),
+            It.Is<It.IsAnyType>((poruka, _) => poruka.ToString()!.Contains("Obrisano 2")),
+            null,
+            (Func<It.IsAnyType, Exception?, string>)It.IsAny<object>()), Times.Once);
+    }
+
+    [TestMethod]
+    public async Task ExecuteAsync_NemaIsteklihTokena_NistaNeLoguje()
+    {
+        // Arrange: samo važeći token
+        using (var db = _sqlite.NoviKontekst())
+        {
+            db.Users.Add(Vlasnik());
+            db.Tokeni.Add(Token("vazeci", 10));
+            await db.SaveChangesAsync();
+        }
+
+        // Act
+        await _jobSqlite.StartAsync(CancellationToken.None);
+        await _krajKruga.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        await _jobSqlite.StopAsync(CancellationToken.None);
+
+        // Assert: krug je završen, a logger nije pozvan (ni informacija ni greška)
+        _logger.Verify(l => l.Log(
+            It.IsAny<LogLevel>(),
+            It.IsAny<EventId>(),
+            It.IsAny<It.IsAnyType>(),
+            It.IsAny<Exception>(),
+            (Func<It.IsAnyType, Exception?, string>)It.IsAny<object>()), Times.Never);
     }
 }
