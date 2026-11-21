@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using PopravkaBa.Domain.Enums;
 
 namespace PopravkaBa.Domain.Shared
@@ -19,7 +20,7 @@ namespace PopravkaBa.Domain.Shared
             ArgumentException.ThrowIfNullOrWhiteSpace(lozinka);
             var bezRazmaka = UkloniRazmake(lozinka);
 
-            if (SadrziDioEmaila(bezRazmaka, email) || JeCestaLozinka(bezRazmaka))
+            if (SadrziDioEmaila(bezRazmaka, email) || JeCestaLozinka(bezRazmaka) || SadrziDatum(bezRazmaka))
                 return Jacina.Slaba;
 
             var bodovi = IzracunajBodove(bezRazmaka);
@@ -42,6 +43,9 @@ namespace PopravkaBa.Domain.Shared
 
         private static bool JeCestaLozinka(string lozinka) =>
             CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
+
+        private static bool SadrziDatum(string lozinka) =>
+            Regex.IsMatch(lozinka, @"\d{1,2}\.\d{1,2}\.\d{4}");
 
         private static int IzracunajBodove(string lozinka)
         {
