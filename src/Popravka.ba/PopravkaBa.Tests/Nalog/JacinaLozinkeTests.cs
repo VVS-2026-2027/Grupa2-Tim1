@@ -256,6 +256,20 @@ namespace PopravkaBa.Tests.Nalog
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
 
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_LozinkaSaDatumomGodinaPrva_VracaSlaba()
+        {
+            // Arrange: datum u formatu godina-mjesec-dan
+            var lozinka = "Kuca!1998-03-15";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
+
         public static IEnumerable<object[]> SlucajeviIzCsv =>
     DataDrivenInputParser.CitajCsv<string, string?, Jacina>("TestData/csv/JacinaLozinke.csv");
 
