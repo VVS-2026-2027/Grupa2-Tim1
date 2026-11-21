@@ -145,6 +145,90 @@ namespace PopravkaBa.Tests.Nalog
             Assert.AreEqual(Jacina.Slaba, rezultat);
         }
 
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_SedamZnakova_NeDobijaBodZaDuzinu()
+        {
+            // Arrange: cifra, veliko slovo i specijalni znak, ali samo 7 znakova
+            var lozinka = "Abcde1!";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Srednja, rezultat);
+        }
+
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_OsamZnakova_DobijaBodZaDuzinu()
+        {
+            // Arrange: isti kriteriji kao gore, sa tačno 8 znakova
+            var lozinka = "Abcdef1!";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Jaka, rezultat);
+        }
+
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_DioEmailaOdCetiriZnaka_VracaJaka()
+        {
+            // Arrange: "mina" ima 4 znaka, a pravilo emaila važi tek od 5
+            var lozinka = "Mina123!x";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, "mina@gmail.com");
+
+            // Assert
+            Assert.AreEqual(Jacina.Jaka, rezultat);
+        }
+
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_DioEmailaOdPetZnakova_VracaSlaba()
+        {
+            // Arrange: "emina" ima tačno 5 znakova
+            var lozinka = "Emina123!x";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, "emina@gmail.com");
+
+            // Assert
+            Assert.AreEqual(Jacina.Slaba, rezultat);
+        }
+
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_VelikoSlovoSaDijakritikom_DobijaBodZaVelikoSlovo()
+        {
+            // Arrange: dužina + veliko slovo Č = 2 boda
+            var lozinka = "Čabcdefg";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Srednja, rezultat);
+        }
+
+        [TestMethod]
+        [Owner("Amina Bukvić")]
+        public void Procijeni_ViseCifara_BodZaCifruSeDajeJednom()
+        {
+            // Arrange: tri cifre i dalje daju samo 1 bod, pa je ukupno 2 (dužina + cifra)
+            var lozinka = "abcdefg123";
+
+            // Act
+            var rezultat = JacinaLozinke.Procijeni(lozinka, Email);
+
+            // Assert
+            Assert.AreEqual(Jacina.Srednja, rezultat);
+        }
+
         public static IEnumerable<object[]> SlucajeviIzCsv =>
     DataDrivenInputParser.CitajCsv<string, string?, Jacina>("TestData/csv/JacinaLozinke.csv");
 
