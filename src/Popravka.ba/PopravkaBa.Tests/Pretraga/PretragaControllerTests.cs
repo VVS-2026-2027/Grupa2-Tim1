@@ -10,6 +10,7 @@ using PopravkaBa.Web.Models.ViewModels;
 namespace PopravkaBa.Tests.Pretraga;
 
 [TestClass]
+[TestCategory("Controller")]
 public class PretragaControllerTests
 {
     private Mock<IPretragaService> _pretraga = null!;
@@ -40,6 +41,7 @@ public class PretragaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_BezUloge_PreusmjeravaNaPrijavu()
     {
         // Arrange
@@ -57,6 +59,7 @@ public class PretragaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_UlogaBezStrategije_VracaForbid()
     {
         // Arrange
@@ -74,6 +77,7 @@ public class PretragaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(KorisnickeUloge.Klijent)]
     [DataRow(KorisnickeUloge.Majstor)]
     public async Task Index_UlogaSaStrategijom_VracaPopunjenModelPretrage(

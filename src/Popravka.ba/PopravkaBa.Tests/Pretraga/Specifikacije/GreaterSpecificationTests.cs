@@ -7,6 +7,7 @@ using System.Collections.Generic;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class GreaterThanSpecificationTests
     {
         // Data-driven test: podaci se citaju iz TestData/csv/GreaterThanSpecification_poredjenjeVrijednosti.csv
@@ -14,6 +15,8 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
             DataDrivenInputParser.CitajCsv<int, int, bool>("TestData/csv/GreaterThanSpecification_poredjenjeVrijednosti.csv");
 
         [TestMethod]
+        [TestCategory("DataDriven")]
+        [Owner("Sajra Malkić")]
         [DynamicData(nameof(SlucajeviIzCsv))]
         public void ToExpression_PodaciIzCsv_VracaOcekivano(int vrijednost, int prag, bool ocekivano)
         {
@@ -30,9 +33,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class GreaterThanOrEqualSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(101, 100, true)]
         [DataRow(100, 100, true)]
         [DataRow(99, 100, false)]

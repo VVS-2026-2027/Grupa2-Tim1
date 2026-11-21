@@ -6,6 +6,7 @@ using PopravkaBa.Domain.Models;
 namespace PopravkaBa.Tests.Oglasi;
 
 [TestClass]
+[TestCategory("Service")]
 public class VozackeDozvoleServiceTests
 {
     private Mock<IVozackeDozvoleRepository> _repo = null!;
@@ -19,6 +20,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveVozackeDozvoleOglasa_ProslijedjenId_VracaDozvole()
     {
         // Arrange
@@ -33,6 +35,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajVozackeDozvoleOglasu_ProslijedjeneDozvole_PozivaRepozitorij()
     {
         // Arrange
@@ -46,6 +49,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajVozackeDozvoleOglasu_NullLista_ProsljedjujeNull()
     {
         // Act
@@ -56,6 +60,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveVozackeDozvoleOglasa_ProslijedjenId_PozivaRepozitorij()
     {
         // Act
@@ -66,6 +71,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajVozackeDozvoleOglasa_ProslijedjeneDozvole_PozivaRepozitorij()
     {
         // Arrange
@@ -79,6 +85,7 @@ public class VozackeDozvoleServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveVozackeDozvoleOglasa_RepozitorijBacaIzuzetak_PropagiraGa()
     {
         // Arrange

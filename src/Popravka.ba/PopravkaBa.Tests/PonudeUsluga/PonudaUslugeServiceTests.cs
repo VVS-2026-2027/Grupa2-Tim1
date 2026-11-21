@@ -8,6 +8,7 @@ using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeServiceTestHelper;
 namespace PopravkaBa.Tests.PonudeUsluga;
 
 [TestClass]
+[TestCategory("Service")]
 public class PonudaUslugeServiceTests
 {
     private const int PonudaId = 5;
@@ -28,6 +29,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPonuduPoId_PostojecaPonuda_VracaPonudu()
     {
         // Arrange
@@ -42,6 +44,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePonude_PostojePonude_VracaListuIzRepozitorija()
     {
         // Arrange
@@ -56,6 +59,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePonudeOglasa_ZadaniOglas_VracaNjegovePonude()
     {
         // Arrange
@@ -70,6 +74,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePonudeIzvrsioca_ZadaniIzvrsilac_VracaNjegovePonude()
     {
         // Arrange
@@ -85,6 +90,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiPonudu_ZadaniId_TraziBrisanjePonude()
     {
         // Arrange
@@ -98,6 +104,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PosaljiPonudu_NepostojeciOglas_BacaKeyNotFoundException()
     {
         // Arrange
@@ -113,6 +120,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PosaljiPonudu_NeaktivanOglas_BacaInvalidOperationException()
     {
         // Arrange
@@ -128,6 +136,7 @@ public class PonudaUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true)]
     [DataRow(false)]
     public async Task PosaljiPonudu_AktivanOglas_SpremaPonuduSaUtcDatumima(
@@ -164,6 +173,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_NepostojecaPonuda_BacaKeyNotFoundException()
     {
         // Arrange
@@ -178,6 +188,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_VisePonuda_PrihvataOdabranuPonudu()
     {
         // Arrange
@@ -196,6 +207,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_VisePonuda_OdbijaOstaleNaCekanju()
     {
         // Arrange: jedna ponuda čeka, jedna je već isporučena
@@ -218,6 +230,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_VisePonuda_ZatvaraOglas()
     {
         // Arrange
@@ -235,6 +248,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijPonudu_PostojecaPonuda_SpremaOdbijeniStatus()
     {
         // Arrange
@@ -250,6 +264,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijPonudu_NepostojecaPonuda_BacaKeyNotFoundException()
     {
         // Arrange
@@ -264,6 +279,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ZavrsiPosao_NepostojeciOglas_BacaKeyNotFoundException()
     {
         // Arrange
@@ -277,6 +293,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ZavrsiPosao_KlijentNijeVlasnik_BacaUnauthorizedAccessException()
     {
         // Arrange
@@ -291,6 +308,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ZavrsiPosao_VecIsporucen_BacaInvalidOperationException()
     {
         // Arrange
@@ -305,6 +323,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ZavrsiPosao_BezPrihvacenePonude_BacaInvalidOperationException()
     {
         // Arrange
@@ -322,6 +341,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ZavrsiPosao_PrihvacenaPonuda_OznacavaIsporukuIPovecavaBrojPoslova()
     {
         // Arrange
@@ -344,6 +364,7 @@ _ponude.Verify(r => r.DodajAsync(It.Is<PonudaUsluge>(p =>
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajProsjekCijenePoKategorijama_ZadaneKategorije_VracaProsjek()
     {
         // Arrange

@@ -8,6 +8,7 @@ using PopravkaBa.Application.DTOs;
 namespace PopravkaBa.Tests.Recenzije;
 
 [TestClass]
+[TestCategory("Service")]
 public class RecenzijaServiceTests
 {
     private Mock<IRecenzijaRepository> _recenzijaRepo = null!;
@@ -29,6 +30,7 @@ public void PripremiTest()
 }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiRecenziju_NepostojecaRecenzija_BacaKeyNotFoundException()
     {
         // Arrange
@@ -49,6 +51,8 @@ public void PripremiTest()
         "TestData/csv/RecenzijaService_mozeOstavitiRecenziju.csv");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Amina Bukvić")]
     [DynamicData(nameof(SlucajeviIzCsv))]
     public async Task MozeOstavitiRecenziju_PodaciIzCsv_VracaOcekivano(
         bool zavrsenPosao, bool vecPostoji, bool ocekivano)
@@ -73,6 +77,7 @@ public void PripremiTest()
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
 public async Task DajRecenzijuPoId_PostojecaRecenzija_VracaRecenziju()
 {
     // Arrange
@@ -90,6 +95,7 @@ public async Task DajRecenzijuPoId_PostojecaRecenzija_VracaRecenziju()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task OdbaciPrijavu_NepostojecaRecenzija_BacaKeyNotFoundException()
 {
     // Arrange
@@ -106,6 +112,7 @@ public async Task OdbaciPrijavu_NepostojecaRecenzija_BacaKeyNotFoundException()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task OdbaciPrijavu_PostojecaPrijava_OdbijaPrijavuICuvaRecenziju()
 {
     // Arrange
@@ -131,6 +138,7 @@ public async Task OdbaciPrijavu_PostojecaPrijava_OdbijaPrijavuICuvaRecenziju()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task PrijaviRecenziju_NeprijavljenaRecenzija_PostavljaStatusNaCekanjuICuva()
 {
     // Arrange
@@ -156,6 +164,7 @@ public async Task PrijaviRecenziju_NeprijavljenaRecenzija_PostavljaStatusNaCekan
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task PrijaviRecenziju_PrijavaVecNaCekanju_BacaInvalidOperationException()
 {
     // Arrange
@@ -187,6 +196,7 @@ public async Task PrijaviRecenziju_PrijavaVecNaCekanju_BacaInvalidOperationExcep
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task PrijaviRecenziju_NepostojecaRecenzija_BacaKeyNotFoundException()
 {
     // Arrange
@@ -211,6 +221,7 @@ public async Task PrijaviRecenziju_NepostojecaRecenzija_BacaKeyNotFoundException
         Times.Never());
 }
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task ObjaviRecenziju_NezavrsenPosao_BacaInvalidOperationException()
 {
     // Arrange
@@ -237,6 +248,7 @@ public async Task ObjaviRecenziju_NezavrsenPosao_BacaInvalidOperationException()
         Times.Never());
 }
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task ObjaviRecenziju_ZavrsenPosaoBezRecenzije_CuvaRecenzijuIOsvjezavaOcjenu()
 {
     // Arrange
@@ -282,6 +294,7 @@ public async Task ObjaviRecenziju_ZavrsenPosaoBezRecenzije_CuvaRecenzijuIOsvjeza
         Times.Once());
 }
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task ObrisiRecenziju_PosljednjaRecenzija_BriseRecenzijuIPostavljaOcjenuNaNulu()
 {
     // Arrange
@@ -316,6 +329,7 @@ public async Task ObrisiRecenziju_PosljednjaRecenzija_BriseRecenzijuIPostavljaOc
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task DajSveRecenzije_PostojecaRecenzija_VracaListuIzRepozitorija()
 {
     // Arrange
@@ -336,6 +350,7 @@ public async Task DajSveRecenzije_PostojecaRecenzija_VracaListuIzRepozitorija()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task DajRecenzijePoId_ZadaniIzvrsilac_VracaNjegoveRecenzije()
 {
     // Arrange
@@ -360,6 +375,7 @@ public async Task DajRecenzijePoId_ZadaniIzvrsilac_VracaNjegoveRecenzije()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task DajRecenzijeKlijenta_ZadaniKlijent_VracaNjegoveRecenzije()
 {
     // Arrange
@@ -384,6 +400,7 @@ public async Task DajRecenzijeKlijenta_ZadaniKlijent_VracaNjegoveRecenzije()
 }
 
 [TestMethod]
+[Owner("Amina Bukvić")]
 public async Task DajPrijavljeneRecenzije_PostojecaPrijava_VracaPrijavljeneRecenzije()
 {
     // Arrange

@@ -5,9 +5,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class LessThanSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(99, 100, true)]
         [DataRow(100, 100, false)]
         [DataRow(101, 100, false)]
@@ -26,9 +28,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class LessThanOrEqualSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(99, 100, true)]
         [DataRow(100, 100, true)]
         [DataRow(101, 100, false)]

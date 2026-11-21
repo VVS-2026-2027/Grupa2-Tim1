@@ -18,6 +18,7 @@ using static PopravkaBa.Tests.Nalog.AccountControllerTestHelper;
 namespace PopravkaBa.Tests.Nalog;
 
 [TestClass]
+[TestCategory("Controller")]
 public class AccountControllerTests
 {
     private Mock<UserManager<ApplicationUser>> _userManager = null!;
@@ -69,6 +70,7 @@ public class AccountControllerTests
     // ---------- Login (GET) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_Get_VracaViewRegistracijaSaTabomPrijava()
     {
         // Act
@@ -85,6 +87,7 @@ public class AccountControllerTests
     // ---------- Login (POST) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_NevalidanModel_VracaViewSaReturnUrlom()
     {
         // Arrange
@@ -103,6 +106,8 @@ public class AccountControllerTests
         DataDrivenInputParser.CitajXml<string, int, int>("TestData/xml/AccountController_prijavaUnos.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(UnosiZaPrijavu))]
     public async Task Login_UnosIzXml_KorisnikaTraziPoEmailuIliKorisnickomImenu(string unos, int poEmailu, int poImenu)
     {
@@ -117,6 +122,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_NepostojeciKorisnik_VracaViewSaGreskomIBezPokusajaPrijave()
     {
         // Arrange
@@ -133,6 +139,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_PogresnaLozinka_VracaViewSaPorukomOPogresnimPodacima()
     {
         // Arrange
@@ -149,6 +156,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_UspjesnaPrijavaSaLokalnimReturnUrlom_PreusmjeravaNaReturnUrl()
     {
         // Arrange
@@ -168,6 +176,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_UspjesnaPrijavaSaVanjskimReturnUrlom_PreusmjeravaNaPocetnu()
     {
         // Arrange
@@ -185,6 +194,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Login_UspjesnaPrijavaBezReturnUrla_PreusmjeravaNaPocetnu()
     {
         // Arrange
@@ -203,6 +213,7 @@ public class AccountControllerTests
     // ---------- Logout ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Logout_PrijavljenKorisnik_OdjavljujeKorisnika()
     {
         // Arrange
@@ -216,6 +227,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Logout_PrijavljenKorisnik_PreusmjeravaNaPocetnu()
     {
         // Arrange
@@ -232,6 +244,7 @@ public class AccountControllerTests
     // ---------- Registracija (GET) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Registracija_Get_VracaViewSaTabomRegistracijaIPodacima()
     {
         // Act
@@ -248,6 +261,7 @@ public class AccountControllerTests
     // ---------- RegistracijaKlijenta ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_NevalidanModel_VracaViewBezLozinkeUModelu()
     {
         // Arrange
@@ -266,6 +280,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_KreiranjeNeuspjesno_VracaViewSaGreskamaIdentityja()
     {
         // Arrange
@@ -282,6 +297,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_IspravniPodaci_DodjeljujeUlogu()
     {
         // Act
@@ -292,6 +308,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_IspravniPodaci_DodajeMjestaKorisnikuIPrijavljujeGa()
     {
         // Arrange
@@ -306,6 +323,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_TokenGenerisan_SaljeVerifikacijskiEmailIPreusmjeravaNaPoruku()
     {
         // Arrange
@@ -322,6 +340,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaKlijenta_TokenNijeGenerisan_NeSaljeEmail()
     {
         // Arrange
@@ -338,6 +357,7 @@ public class AccountControllerTests
     // ---------- RegistracijaMajstora ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaMajstora_NevalidanModel_VracaViewBezLozinkeUModelu()
     {
         // Arrange
@@ -353,6 +373,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaMajstora_KreiranjeNeuspjesno_VracaViewSaGreskamaIdentityja()
     {
         // Arrange
@@ -368,6 +389,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaMajstora_IspravniPodaci_DodjeljujeUloguKategorijeIMjesta()
     {
         // Arrange
@@ -383,6 +405,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaMajstora_TokenGenerisan_SaljeVerifikacijskiEmail()
     {
         // Arrange
@@ -399,6 +422,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaMajstora_TokenNijeGenerisan_NeSaljeEmail()
     {
         // Arrange
@@ -415,6 +439,7 @@ public class AccountControllerTests
     // ---------- RegistracijaFirme ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_NevalidanModel_VracaViewBezLozinkeUModelu()
     {
         // Arrange
@@ -433,6 +458,8 @@ public class AccountControllerTests
         DataDrivenInputParser.CitajXml<string, long, bool>("TestData/xml/AccountController_logotipi.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(Logotipi))]
     public async Task RegistracijaFirme_LogotipIzXml_PrihvataSamoDozvoljenFormatIVelicinu(
         string imeFajla, long velicina, bool prihvacen)
@@ -448,6 +475,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_NedozvoljenFormatLogotipa_NeKreiraKorisnika()
     {
         // Arrange
@@ -462,6 +490,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_ValidanLogotip_SpremaLogotipNaStorage()
     {
         // Arrange
@@ -475,6 +504,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_BezLogotipa_NeSpremaNistaNaStorage()
     {
         // Act
@@ -486,6 +516,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_PrazanLogotip_PreskaceValidacijuISpremanje()
     {
         // Arrange
@@ -500,6 +531,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_KreiranjeNeuspjesno_VracaViewSaGreskamaIdentityja()
     {
         // Arrange
@@ -515,6 +547,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_IspravniPodaci_DodjeljujeUloguKategorijeIMjesta()
     {
         // Arrange
@@ -530,6 +563,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_TokenGenerisan_SaljeVerifikacijskiEmail()
     {
         // Arrange
@@ -544,6 +578,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task RegistracijaFirme_TokenNijeGenerisan_NeSaljeEmail()
     {
         // Arrange
@@ -560,6 +595,7 @@ public class AccountControllerTests
     // ---------- ZaboravljenaLozinka ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ZaboravljenaLozinka_Get_VracaView()
     {
         // Act
@@ -573,6 +609,8 @@ public class AccountControllerTests
         DataDrivenInputParser.CitajXml<string>("TestData/xml/AccountController_neispravniEmailovi.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(NeispravniEmailovi))]
     public async Task ZaboravljenaLozinka_NeispravanEmailIzXml_VracaViewSaGreskomBezTrazenjaKorisnika(string? email)
     {
@@ -587,6 +625,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ZaboravljenaLozinka_NepostojeciKorisnik_VracaPotvrduBezGenerisanjaTokena()
     {
         // Arrange
@@ -602,6 +641,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ZaboravljenaLozinka_PostojeciKorisnik_SaljeEmailZaResetLozinke()
     {
         // Arrange
@@ -620,6 +660,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ZaboravljenaLozinka_PostojeciKorisnik_PamtiEmailUTempData()
     {
         // Arrange
@@ -635,6 +676,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ZaboravljenaLozinka_TokenNijeGenerisan_NeSaljeEmail()
     {
         // Arrange
@@ -652,6 +694,7 @@ public class AccountControllerTests
     // ---------- ResetLozinke (GET) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Get_PrazanToken_VracaNotFound()
     {
         // Act
@@ -662,6 +705,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Get_NullToken_VracaNotFound()
     {
         // Act
@@ -675,6 +719,8 @@ public class AccountControllerTests
         DataDrivenInputParser.CitajXml<Status, bool>("TestData/xml/AccountController_statusResetTokena.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(StatusiResetTokena))]
     public async Task ResetLozinke_Get_StatusTokenaIzXml_OtvaraFormuSamoZaAktivanToken(Status status, bool preusmjerenje)
     {
@@ -689,6 +735,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Get_NevalidanToken_PreusmjeravaNaStranicuSaKodom403()
     {
         // Arrange
@@ -705,6 +752,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Get_AktivanToken_VracaViewSaTokenomUModelu()
     {
         // Arrange
@@ -722,6 +770,7 @@ public class AccountControllerTests
     // ---------- ResetLozinke (POST) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_NevalidanModel_VracaIstiViewModel()
     {
         // Arrange
@@ -737,6 +786,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_TokenNijeAktivan_VracaErrorView()
     {
         // Arrange
@@ -751,6 +801,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_ResetNeuspjesan_VracaViewSaGreskama()
     {
         // Arrange: token je aktivan, ali Identity odbija novu lozinku
@@ -770,6 +821,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_ResetNeuspjesan_NeOznacavaTokenKoristenim()
     {
         // Arrange: token je aktivan, ali Identity odbija novu lozinku
@@ -788,6 +840,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_ResetUspjesan_OznacavaTokenKoristenim()
     {
         // Arrange: token je aktivan i Identity prihvata novu lozinku
@@ -806,6 +859,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ResetLozinke_Post_ResetUspjesan_VracaPotvrdu()
     {
         // Arrange: token je aktivan i Identity prihvata novu lozinku
@@ -827,6 +881,7 @@ public class AccountControllerTests
     // ---------- PotvrdiEmail ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiEmail_BezTokena_VracaOdbijenoBezPozivaServisa()
     {
         // Act
@@ -839,6 +894,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiEmail_ValidanToken_VracaStatusIzServisa()
     {
         // Arrange
@@ -855,6 +911,7 @@ public class AccountControllerTests
     // ---------- VerifikacijaPoslana ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task VerifikacijaPoslana_NemaPrijavljenogKorisnika_PreusmjeravaNaLogin()
     {
         // Arrange
@@ -869,6 +926,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task VerifikacijaPoslana_VecAktivanKorisnik_PreusmjeravaNaPocetnu()
     {
         // Arrange
@@ -883,6 +941,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task VerifikacijaPoslana_NeaktivanKorisnik_VracaViewSaEmailomUViewData()
     {
         // Arrange
@@ -899,6 +958,7 @@ public class AccountControllerTests
     // ---------- PosaljiVerifikaciju ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiVerifikaciju_NemaPrijavljenogKorisnika_PreusmjeravaNaLogin()
     {
         // Arrange
@@ -913,6 +973,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiVerifikaciju_VecAktivanKorisnik_PreusmjeravaNaPocetnuBezSlanja()
     {
         // Arrange
@@ -929,6 +990,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiVerifikaciju_PreRanoNoviZahtjev_PrikazujeGreskuBezSlanjaEmaila()
     {
         // Arrange
@@ -947,6 +1009,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiVerifikaciju_TokenGenerisan_SaljeEmailKorisniku()
     {
         // Arrange

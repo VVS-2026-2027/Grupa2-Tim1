@@ -7,6 +7,7 @@ using static PopravkaBa.Tests.Zajednicko.MjestoRepositoryTestHelper;
 namespace PopravkaBa.Tests.Zajednicko;
 
 [TestClass]
+[TestCategory("Repository")]
 public class MjestoRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -26,6 +27,7 @@ public class MjestoRepositoryTests
         DataDrivenInputParser.CitajXml<int, string>("TestData/xml/MjestoRepository_poId.xml");
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSvaMjestaAsync_ViseMjesta_VracaSva()
     {
         // Arrange
@@ -40,6 +42,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSvaMjestaAsync_PraznaBaza_VracaPraznuListu()
     {
         // Act
@@ -50,6 +53,8 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(MjestaPoId))]
     public async Task DajPoIdAsync_PodaciIzXml_VracaOcekivano(int id, string? ocekivaniNaziv)
     {
@@ -65,6 +70,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajMjestaPoKantonuAsync_PostojeciKanton_VracaSamoMjestaUTomKantonu()
     {
         // Arrange
@@ -82,6 +88,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task PronadjiMjestaAsync_PretragaPoNazivu_VracaSamoPoklapajuca()
     {
         // Arrange
@@ -97,6 +104,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveKorisnikeMjestaAsync_KorisnikImaMjesta_VracaSamoNjegova()
     {
         // Arrange
@@ -119,6 +127,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveKorisnikeMjestaAsync_KorisnikBezMjesta_VracaPrazno()
     {
         // Arrange
@@ -133,6 +142,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajMjestaKorisniku_NovaMjesta_SnimaRedove()
     {
         // Act
@@ -143,6 +153,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSvaMjestaKorisniku_ViseKorisnika_BriseSamoTrazenog()
     {
         // Arrange
@@ -161,6 +172,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSvaMjestaKorisniku_KorisnikBezMjesta_NeBriseNista()
     {
         // Arrange
@@ -175,6 +187,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajMjestaKorisnika_PostojecaMjesta_ZamjenjujeSkup()
     {
         // Arrange
@@ -193,6 +206,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajOglaseMajstoraPoMjestu_DvaMjesta_VracaSamoTrazenoMjesto()
     {
         // Arrange
@@ -207,6 +221,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajOglaseRadnogMjestaPoMjestu_DvaMjesta_VracaSamoTrazenoMjesto()
     {
         // Arrange
@@ -221,6 +236,7 @@ public class MjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajOglaseUslugePoMjestu_DvaMjesta_VracaSamoTrazenoMjesto()
     {
         // Arrange

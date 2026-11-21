@@ -8,6 +8,7 @@ using PopravkaBa.Infrastructure.Seeders;
 namespace PopravkaBa.Tests.Baza;
 
 [TestClass]
+[TestCategory("Infrastructure")]
 public class DbSeederTests
 {
     private ApplicationDbContext _db = null!;
@@ -63,6 +64,7 @@ public class DbSeederTests
     public void Pocisti() => _db.Dispose();
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_PraznaBaza_PopunjavaUlogeKategorijeIMjesta()
     {
         // Act
@@ -75,6 +77,7 @@ public class DbSeederTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_PraznaBaza_KreiraKorisnikeIOglase()
     {
         // Act
@@ -89,6 +92,7 @@ public class DbSeederTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_PozivDvaPut_NeDupliraPodatke()
     {
         // Arrange
@@ -107,6 +111,7 @@ public class DbSeederTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_AdminCreateFails_BacaException()
     {
         // Arrange
@@ -122,6 +127,7 @@ public class DbSeederTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_MajstoriIFirmeSeNeKreiraju_NeDodajeNjihoveOglase()
     {
         // Arrange
@@ -140,6 +146,7 @@ public class DbSeederTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task SeedAsync_KlijentiSeNeKreiraju_PreskaceNjihoveLokacijeIOglase()
     {
         // Arrange

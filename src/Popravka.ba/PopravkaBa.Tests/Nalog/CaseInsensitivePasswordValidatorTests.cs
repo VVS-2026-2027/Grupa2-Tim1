@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace PopravkaBa.Tests.Nalog
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class CaseInsensitivePasswordValidatorTests
     {
         private UserManager<ApplicationUser> _upraviteljKorisnika = null!;
@@ -21,6 +22,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("abc123")]
         [DataRow("LOZINKA")]
         [DataRow("12345a")]
@@ -35,6 +37,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("12345678")]
         [DataRow("!#$%&")]
         [DataRow("")]
@@ -49,6 +52,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task ValidateAsync_NullLozinka_VracaGresku()
         {
             // Act
@@ -59,6 +63,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task ValidateAsync_LozinkaBezSlova_VracaBosanskiOpisGreske()
         {
             // Act

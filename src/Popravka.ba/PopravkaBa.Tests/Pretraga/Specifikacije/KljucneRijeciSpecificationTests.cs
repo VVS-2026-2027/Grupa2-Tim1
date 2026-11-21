@@ -6,9 +6,11 @@ using System;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class KljucneRijeciNaslovOglasaSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("Popravka krova", "krov", true)]
         [DataRow("POPRAVKA KROVA", "krov", true)]
         [DataRow("Popravka krova", "KROV", true)]
@@ -27,6 +29,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_NaslovNijePostavljen_BacaNullReferenceException()
         {
             // Arrange
@@ -39,6 +42,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void Konstruktor_NullKljucnaRijec_BacaNullReferenceException()
         {
             // Arrange
@@ -51,9 +55,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class KljucneRijeciOpisOglasaSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("Potrebna zamjena cijevi", "cijev", true)]
         [DataRow("POTREBNA ZAMJENA CIJEVI", "cijev", true)]
         [DataRow("Potrebna zamjena cijevi", "CIJEV", true)]
@@ -72,6 +78,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OpisNijePostavljen_BacaNullReferenceException()
         {
             // Arrange
@@ -84,6 +91,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void Konstruktor_NullKljucnaRijec_BacaNullReferenceException()
         {
             // Arrange
@@ -96,9 +104,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class KljucneRijeciOpisIzvrsiocaSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("Iskusan vodoinstalater", "vodo", true)]
         [DataRow("ISKUSAN VODOINSTALATER", "vodo", true)]
         [DataRow("Iskusan vodoinstalater", "VODO", true)]
@@ -117,6 +127,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OpisNijePostavljen_VracaFalse()
         {
             // Arrange
@@ -132,9 +143,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class KljucneRijeciDisplayNameIzvrsiocaSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("mark", true)]
         [DataRow("MARK", true)]
         [DataRow("petr", true)]
@@ -154,6 +167,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_MajstorBezImenaIPrezimena_VracaFalse()
         {
             // Arrange
@@ -168,6 +182,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("gradnja", true)]
         [DataRow("GRADNJA", true)]
         [DataRow("alfa", true)]

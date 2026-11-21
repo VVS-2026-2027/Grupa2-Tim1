@@ -7,9 +7,11 @@ using System.Collections.Generic;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class KategorijaOglasSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OglasImaTrazenuKategoriju_VracaTrue()
         {
             // Arrange
@@ -27,6 +29,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OglasNemaTrazenuKategoriju_VracaFalse()
         {
             // Arrange
@@ -44,6 +47,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OglasBezKategorija_VracaFalse()
         {
             // Arrange
@@ -58,6 +62,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_PrazanSpisakTrazenihKategorija_VracaFalse()
         {
             // Arrange
@@ -75,6 +80,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_KategorijeNisuPostavljene_BacaArgumentNullException()
         {
             // Arrange
@@ -88,9 +94,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class KategorijaIzvrsilacSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_IzvrsilacImaTrazenuKategoriju_VracaTrue()
         {
             // Arrange
@@ -108,6 +116,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_IzvrsilacNemaTrazenuKategoriju_VracaFalse()
         {
             // Arrange
@@ -125,6 +134,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_KategorijeNisuPostavljene_BacaArgumentNullException()
         {
             // Arrange

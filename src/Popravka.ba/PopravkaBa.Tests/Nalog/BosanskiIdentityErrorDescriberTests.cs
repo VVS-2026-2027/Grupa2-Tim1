@@ -5,6 +5,7 @@ using PopravkaBa.Domain.Shared;
 namespace PopravkaBa.Tests.Nalog
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class BosanskiIdentityErrorDescriberTests
     {
         private BosanskiIdentityErrorDescriber _opisivac = null!;
@@ -16,6 +17,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void DefaultError_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -27,6 +29,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ConcurrencyFailure_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -38,6 +41,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordMismatch_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -49,6 +53,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void InvalidToken_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -60,6 +65,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void RecoveryCodeRedemptionFailed_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -71,6 +77,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void LoginAlreadyAssociated_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -82,6 +89,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void InvalidUserName_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -93,6 +101,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void InvalidEmail_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -104,6 +113,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void DuplicateUserName_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -115,6 +125,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void DuplicateEmail_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -126,6 +137,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void InvalidRoleName_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -137,6 +149,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void DuplicateRoleName_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -148,6 +161,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void UserAlreadyHasPassword_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -159,6 +173,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void UserLockoutNotEnabled_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -170,6 +185,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void UserAlreadyInRole_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -181,6 +197,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void UserNotInRole_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -192,6 +209,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordTooShort_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -203,6 +221,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordRequiresUniqueChars_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -214,6 +233,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordRequiresNonAlphanumeric_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -225,6 +245,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordRequiresDigit_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -236,6 +257,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordRequiresUpper_Poziv_VracaBosanskuPoruku()
         {
             // Act
@@ -247,6 +269,7 @@ namespace PopravkaBa.Tests.Nalog
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void PasswordRequiresLower_Poziv_VracaBosanskuPoruku()
         {
             // Act

@@ -7,6 +7,7 @@ using static PopravkaBa.Tests.Recenzije.RecenzijaRepositoryTestHelper;
 namespace PopravkaBa.Tests.Recenzije;
 
 [TestClass]
+[TestCategory("Repository")]
 public class RecenzijaRepositoryTests
 {
     private ApplicationDbContext _baza = null!;
@@ -35,6 +36,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DodajAsync_NovaRecenzija_SpremaRecenzijuUBazu()
     {
         // Arrange
@@ -57,6 +59,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task SacuvajAsync_IzmijenjenaRecenzija_SpremaNoveVrijednosti()
     {
         // Arrange
@@ -78,6 +81,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_PostojecaRecenzija_BriseSamoZadanuRecenziju()
     {
         // Arrange
@@ -93,6 +97,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_NepostojecaRecenzija_OstavljaPostojecuRecenziju()
     {
         // Arrange
@@ -108,6 +113,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_PostojeciId_VracaRecenzijuSKorisnicima()
     {
         // Arrange
@@ -124,6 +130,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_NepostojeciId_VracaNull()
     {
         // Arrange
@@ -137,6 +144,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow("k1", "m1", true)]
     [DataRow("k1", "m2", false)]
     [DataRow("k2", "m1", false)]
@@ -154,6 +162,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSveAsync_DvijeRecenzije_VracaObjeSPovezanimKorisnicima()
     {
         // Arrange
@@ -175,6 +184,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPrijavljeneAsync_RazlicitiStatusi_VracaNerijeseneOdNajstarije()
     {
         // Arrange
@@ -206,6 +216,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajRecenzijeIzvrsiocaAsync_ViseIzvrsilaca_FiltriraISortiraOdNajnovije()
     {
         // Arrange
@@ -226,6 +237,7 @@ public class RecenzijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajRecenzijeKlijentaAsync_ViseKlijenata_FiltriraISortiraOdNajnovije()
     {
         // Arrange

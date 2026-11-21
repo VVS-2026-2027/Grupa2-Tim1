@@ -6,6 +6,8 @@ using PopravkaBa.Web.Controllers;
 namespace PopravkaBa.Tests.Portfolio;
 
 [TestClass]
+[TestCategory("Controller")]
+[TestCategory("TDD")]
 public class PortfolioControllerTests
 {
     private Mock<IPortfolioService> _portfolioService = null!;
@@ -19,6 +21,7 @@ public class PortfolioControllerTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task Slika_PostojecaSlika_VracaJsonSaPrikazomSlike()
     {
         // Arrange
@@ -41,6 +44,7 @@ public class PortfolioControllerTests
 };
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     [DynamicData(nameof(PorukeServisa))]
     public async Task PortfolioSlika_MajstorIliSlikaNePostoji_VracaIstiNotFoundBezPoruke(string poruka)
     {
@@ -56,6 +60,7 @@ public class PortfolioControllerTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task PortfolioSlika_PrazanIdMajstora_VracaBadRequest()
     {
         // Arrange

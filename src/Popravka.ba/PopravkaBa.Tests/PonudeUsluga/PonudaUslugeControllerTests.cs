@@ -11,6 +11,7 @@ using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeControllerTestHelper;
 namespace PopravkaBa.Tests.PonudeUsluga;
 
 [TestClass]
+[TestCategory("Controller")]
 public class PonudaUslugeControllerTests
 {
     private const int PonudaId = 5;
@@ -40,6 +41,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_ZadaniOglas_VracaPonudeIOglasId()
     {
         // Arrange
@@ -56,6 +58,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task AplicirajGet_ZadaniOglas_VracaObrazacSOglasId()
     {
         // Arrange
@@ -70,6 +73,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task AplicirajPost_NeispravanModel_VracaUneseniModel()
     {
         // Arrange
@@ -84,6 +88,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task AplicirajPost_IspravanModel_VracaPogledBezModela()
     {
         // Arrange
@@ -97,6 +102,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PosaljiPonudu_NeispravanModel_PrikazujeGreskuIPreusmjerava()
     {
         // Arrange
@@ -115,6 +121,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PosaljiPonudu_ZavrsetakPrijePocetka_PrikazujeGreskuIPreusmjerava()
     {
         // Arrange
@@ -132,6 +139,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(null)]
     [DataRow(0)]
     [DataRow(1)]
@@ -154,6 +162,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PosaljiPonudu_IzuzetakIzServisa_PrikazujeGreskuIPreusmjerava()
     {
         // Arrange
@@ -174,6 +183,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiPonudu_GetZaZadanuPonudu_VracaPogled()
     {
         // Arrange
@@ -187,6 +197,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisanaPonuda_PostZaZadanuPonudu_PreusmjeravaNaIndex()
     {
         // Arrange
@@ -201,6 +212,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Success", "Ponuda je prihvaćena. Sve ostale ponude su automatski odbijene.")]
     [DataRow(false, "Error", "Greška pri prihvatanju ponude.")]
     public async Task Prihvati_IshodServisa_PrikazujePorukuIPreusmjerava(
@@ -220,6 +232,7 @@ public class PonudaUslugeControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Success", "Ponuda je odbijena.")]
     [DataRow(false, "Error", "Greška pri odbijanju ponude.")]
     public async Task Odbij_IshodServisa_PrikazujePorukuIPreusmjerava(

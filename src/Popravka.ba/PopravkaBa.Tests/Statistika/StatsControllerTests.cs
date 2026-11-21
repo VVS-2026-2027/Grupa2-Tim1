@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace PopravkaBa.Tests.Statistika
 {
     [TestClass]
+    [TestCategory("Controller")]
     public class StatsControllerTests
     {
         private Mock<IStatistikaService> _servis = null!;
@@ -31,6 +32,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_ValidanZahtjev_VracaViewSaRezultatomServisa()
         {
             // Act
@@ -45,6 +47,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_ValidanZahtjev_PozivaServisTacnoJednom()
         {
             // Act
@@ -57,6 +60,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("majstor", KoloneStatistike.Majstor)]
         [DataRow("kategorija", KoloneStatistike.Kategorija)]
         [DataRow("lokacija", KoloneStatistike.Lokacija)]
@@ -81,6 +85,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_SortNijeZadan_ServisuProslijedjujeKolonuOcjena()
         {
             // Act
@@ -95,6 +100,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("asc", Sortiranje.Ascending)]
         [DataRow("ASC", Sortiranje.Ascending)]
         [DataRow("desc", Sortiranje.Descending)]
@@ -115,6 +121,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_SmjerNijeZadan_ServisuProslijedjujeOpadajuciSmjer()
         {
             // Act
@@ -129,6 +136,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_ZadanaKategorijaIMjesto_ServisuProslijedjujeIdeve()
         {
             // Act
@@ -143,6 +151,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_NezadanaKategorijaIMjesto_FilterImaNullVrijednosti()
         {
             // Act
@@ -157,6 +166,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_ZadanToken_ProslijedjujeSeServisu()
         {
             // Arrange
@@ -172,6 +182,7 @@ namespace PopravkaBa.Tests.Statistika
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public async Task Index_ServisBacaIzuzetak_PropagiraIzuzetak()
         {
             // Arrange

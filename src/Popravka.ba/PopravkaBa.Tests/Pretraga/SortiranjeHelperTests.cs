@@ -6,9 +6,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga;
 
 [TestClass]
+[TestCategory("Domain")]
 public class SortiranjeHelperTests
 {
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(SortiranjeIzvrsilacaUsluga.ProsjecnaOcjena_Asc, false, "m2,m3,m1")]
     [DataRow(SortiranjeIzvrsilacaUsluga.ProsjecnaOcjena_Desc, true, "m1,m3,m2")]
     [DataRow(SortiranjeIzvrsilacaUsluga.MinCijena_Asc, false, "m1,m2,m3")]
@@ -39,6 +41,7 @@ public class SortiranjeHelperTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(SortiranjeOglasaUsluge.MinBudzet_Asc, false, "1,2,3")]
     [DataRow(SortiranjeOglasaUsluge.MinBudzet_Desc, true, "3,2,1")]
     [DataRow(SortiranjeOglasaUsluge.MaxBudzet_Asc, false, "2,3,1")]
@@ -70,6 +73,7 @@ public class SortiranjeHelperTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(SortiranjeOglasaRadnoMjesto.MinPrihod_Asc, false, "1,2,3")]
     [DataRow(SortiranjeOglasaRadnoMjesto.MinPrihod_Desc, true, "3,2,1")]
     [DataRow(SortiranjeOglasaRadnoMjesto.MaxPrihod_Asc, false, "2,3,1")]
@@ -101,6 +105,7 @@ public class SortiranjeHelperTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void Sortiranje_BezOpcije_VracaIzvorneSpecifikacije()
     {
         // Arrange
@@ -120,6 +125,7 @@ public class SortiranjeHelperTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void Sortiranje_NepoznataOpcija_VracaIzvorneSpecifikacije()
     {
         // Arrange

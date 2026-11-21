@@ -5,6 +5,7 @@ using PopravkaBa.Infrastructure.Repositories;
 namespace PopravkaBa.Tests.Zajednicko;
 
 [TestClass]
+[TestCategory("Repository")]
 public class KategorijaRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -26,6 +27,7 @@ public class KategorijaRepositoryTests
         DataDrivenInputParser.CitajXml<int, int, int>("TestData/xml/KategorijaRepository_topKategorije.xml");
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveAsync_ViseKategorija_VracaSve()
     {
         // Arrange
@@ -40,6 +42,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajPoIdAsync_PostojeciId_VracaKategoriju()
     {
         // Arrange
@@ -54,6 +57,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajPoIdAsync_NepostojeciId_VracaNull()
     {
         // Act
@@ -64,6 +68,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeOglasu_PraznaLista_NeDodajeNista()
     {
         // Act
@@ -74,6 +79,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeOglasu_NullLista_NeDodajeNista()
     {
         // Act
@@ -84,6 +90,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeOglasu_NoveKategorije_DodajeRedove()
     {
         // Act
@@ -94,6 +101,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveKategorijeOglasa_DvaOglasaSKategorijama_BriseSamoKategorijeTrazenogOglasa()
     {
         // Arrange
@@ -112,6 +120,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajKategorijeOglasa_PostojecaLista_ZamjenjujeRedove()
     {
         // Arrange
@@ -127,6 +136,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeIzvrsiocu_PostojecaKategorija_PreskaceDuplikat()
     {
         // Arrange
@@ -142,6 +152,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeIzvrsiocu_NoveKategorije_DodajeSamoNove()
     {
         // Act
@@ -152,6 +163,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveKategorijeIzvrsiocu_DvaIzvrsiocaSKategorijom_BriseSamoKategorijeTrazenog()
     {
         // Arrange
@@ -169,6 +181,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajKategorijeIzvrsioca_PostojecaLista_ZamjenjujeSkup()
     {
         // Arrange
@@ -184,6 +197,8 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(TopKategorije))]
     public async Task DajTopKategorijePoMajstorimaAsync_PodaciIzXml_VracaOcekivaniBrojIPrviId(
         int topN, int ocekivaniBroj, int ocekivaniPrviId)
@@ -208,6 +223,7 @@ public class KategorijaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajTopKategorijePoMajstorimaAsync_NepostojecaKategorija_IgnoriseSe()
     {
         // Arrange

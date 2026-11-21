@@ -5,6 +5,7 @@ using PopravkaBa.Infrastructure.Repositories;
 namespace PopravkaBa.Tests.Oglasi;
 
 [TestClass]
+[TestCategory("Repository")]
 public class UvjetOglasaRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -27,6 +28,8 @@ public class UvjetOglasaRepositoryTests
         DataDrivenInputParser.CitajXml<int, int>("TestData/xml/UvjetOglasaRepository_poOglasu.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(UvjetiPoOglasu))]
     public async Task DajSveUvjeteOglasa_PodaciIzXml_VracaOcekivaniBroj(int oglasId, int ocekivaniBroj)
     {
@@ -43,6 +46,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajUvjetPoIdAsync_PostojeciId_VracaUvjet()
     {
         // Arrange
@@ -57,6 +61,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajUvjetPoIdAsync_NepostojeciId_VracaNull()
     {
         // Act
@@ -67,6 +72,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajUvjeteOglasu_PraznaLista_NeDodajeNista()
     {
         // Act
@@ -77,6 +83,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajUvjeteOglasu_NullLista_NeDodajeNista()
     {
         // Act
@@ -87,6 +94,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajUvjeteOglasu_NoveUvjete_DodajeRedove()
     {
         // Act
@@ -97,6 +105,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveUvjeteOglasa_DvaOglasaSUvjetima_BriseSamoUvjeteTrazenogOglasa()
     {
         // Arrange
@@ -113,6 +122,7 @@ public class UvjetOglasaRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajUvjeteOglasa_PostojecaLista_ZamjenjujeRedove()
     {
         // Arrange

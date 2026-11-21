@@ -8,6 +8,7 @@ using static PopravkaBa.Tests.PrijaveOglasRadnoMjesto.PrijavaOglasServiceTestHel
 namespace PopravkaBa.Tests.PrijaveOglasRadnoMjesto;
 
 [TestClass]
+[TestCategory("Service")]
 public class PrijavaOglasServiceTests
 {
     private const int PrijavaId = 5;
@@ -25,6 +26,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPrijavuPoId_PostojecaPrijava_VracaPrijavu()
     {
         // Arrange
@@ -39,6 +41,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePrijave_ZadaniOglas_VracaNjegovePrijave()
     {
         // Arrange
@@ -54,6 +57,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task KreirajPrijavu_NepostojeciOglas_BacaKeyNotFoundException()
     {
         // Arrange
@@ -71,6 +75,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task KreirajPrijavu_NeaktivanOglas_OdbijaPrijavu()
     {
         // Arrange
@@ -88,6 +93,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task KreirajPrijavu_MajstorVecPrijavljen_OdbijaDuplikat()
     {
         // Arrange
@@ -106,6 +112,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(false)]
     [DataRow(true)]
     public async Task KreirajPrijavu_AktivanOglasBezDuplikata_SpremaPrijavuNaCekanju(
@@ -131,6 +138,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_NepostojecaPrijava_BacaKeyNotFoundException()
     {
         // Arrange
@@ -146,6 +154,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_NepostojeciOglas_BacaKeyNotFoundException()
     {
         // Arrange
@@ -164,6 +173,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_ImaSlobodnihMjesta_OstavljaOglasAktivnim()
     {
         // Arrange
@@ -188,6 +198,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_PopunjenOglas_OdbijaPrijaveNaCekanju()
     {
         // Arrange: oglas traži 2 izvršioca, jedna prijava je ranije prihvaćena, jedna čeka
@@ -210,6 +221,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrihvatiPonudu_PopunjenOglas_ZatvaraOglas()
     {
         // Arrange: oglas traži 2 izvršioca, jedna prijava je ranije prihvaćena
@@ -230,6 +242,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijPrijavu_PostojecaPrijava_SpremaOdbijeniStatus()
     {
         // Arrange
@@ -245,6 +258,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijPrijavu_NepostojecaPrijava_BacaKeyNotFoundException()
     {
         // Arrange
@@ -261,6 +275,7 @@ public class PrijavaOglasServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiPrijavu_ZadaniId_TraziBrisanjePrijave()
     {
         // Arrange

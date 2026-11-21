@@ -8,6 +8,7 @@ using static PopravkaBa.Tests.VerifikacijaFirme.VerifikacijaFirmeServiceTestHelp
 namespace PopravkaBa.Tests.VerifikacijaFirme;
 
 [TestClass]
+[TestCategory("Service")]
 public class VerifikacijaFirmeServiceTests
 {
     private Mock<IVerifikacijaFirmeRepository> _repo = null!;
@@ -25,6 +26,7 @@ public class VerifikacijaFirmeServiceTests
     // ---------- Stub: servis samo vraća ono što dobije od repozitorija ----------
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajZadnjiZahtjevAsync_PostojiZahtjev_VracaZahtjevIzRepozitorija()
     {
         var zahtjev = ZahtjevNaCekanju();
@@ -36,6 +38,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajZahtjeveNaCekanjuAsync_DvaZahtjeva_VracaOba()
     {
         var zahtjevi = new[] { ZahtjevNaCekanju(), ZahtjevNaCekanju() };
@@ -49,6 +52,7 @@ public class VerifikacijaFirmeServiceTests
     // ---------- PodnesiZahtjevAsync ----------
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task PodnesiZahtjevAsync_IspravanDto_SnimaZahtjevNaCekanju()
     {
         var dto = new PodnesiVerifikacijuDto { NazivFirme = "Haso instalacije d.o.o.", JIB = "4200000000001", Logotip = "logo.png" };
@@ -63,6 +67,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task PodnesiZahtjevAsync_BezLogotipa_LogotipJePrazanString()
     {
         var dto = new PodnesiVerifikacijuDto { NazivFirme = "Firma", Logotip = null };
@@ -75,6 +80,7 @@ public class VerifikacijaFirmeServiceTests
     // ---------- ObradiZahtjevAsync: slučajevi kad se ništa ne radi ----------
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_NepostojeciZahtjev_VracaNullINeSnima()
     {
         _repo.Setup(r => r.DajPoIdAsync(99)).ReturnsAsync((EmailVerifikacijaFirme?)null);
@@ -90,6 +96,8 @@ public class VerifikacijaFirmeServiceTests
         DataDrivenInputParser.CitajCsv<Status>("TestData/csv/VerifikacijaFirme_vecObradjeni.csv");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Aid Mustafić")]
     [DynamicData(nameof(VecObradjeniStatusi))]
     public async Task ObradiZahtjevAsync_VecObradjenZahtjev_VracaNull(Status status)
     {
@@ -105,6 +113,7 @@ public class VerifikacijaFirmeServiceTests
     // ---------- ObradiZahtjevAsync: odobravanje ----------
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_Odobren_PrepisujePodatkeUFirmu()
     {
         var firma = new Firma { Slika = "stara.png" };
@@ -120,6 +129,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_OdobrenBezNovogLogotipa_ZadrzavaStaruSliku()
     {
         var firma = new Firma { Slika = "stara.png" };
@@ -133,6 +143,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_Odobren_NeBriseNijedanFajl()
     {
         _repo.Setup(r => r.DajPoIdAsync(1)).ReturnsAsync(ZahtjevNaCekanju(new Firma()));
@@ -145,6 +156,7 @@ public class VerifikacijaFirmeServiceTests
     // ---------- ObradiZahtjevAsync: odbijanje ----------
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_Odbijen_BriseLogotipIDokumente()
     {
         _repo.Setup(r => r.DajPoIdAsync(1)).ReturnsAsync(ZahtjevNaCekanju(new Firma()));
@@ -159,6 +171,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_OdbijenBezFajlova_NistaNeBrise()
     {
         var zahtjev = ZahtjevNaCekanju();
@@ -174,6 +187,7 @@ public class VerifikacijaFirmeServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task ObradiZahtjevAsync_ZahtjevBezFirme_MijenjaSamoStatus()
     {
         _repo.Setup(r => r.DajPoIdAsync(1)).ReturnsAsync(ZahtjevNaCekanju(firma: null));

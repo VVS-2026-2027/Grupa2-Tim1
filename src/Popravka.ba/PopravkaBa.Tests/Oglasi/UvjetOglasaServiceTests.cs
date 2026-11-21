@@ -6,6 +6,7 @@ using static PopravkaBa.Tests.Oglasi.UvjetOglasaServiceTestHelper;
 namespace PopravkaBa.Tests.Oglasi;
 
 [TestClass]
+[TestCategory("Service")]
 public class UvjetOglasaServiceTests
 {
     private Mock<IUvjetOglasaRepository> _repo = null!;
@@ -19,6 +20,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveUvjeteOglasa_ProslijedjenId_VracaUvjete()
     {
         // Arrange
@@ -33,6 +35,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajUvjeteOglasu_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -46,6 +49,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajUvjeteOglasa_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -59,6 +63,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajUvjetPoIdAsync_PostojeciUvjet_VracaUvjet()
     {
         // Arrange
@@ -73,6 +78,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajUvjetPoIdAsync_NepostojeciUvjet_VracaNull()
     {
         // Arrange
@@ -86,6 +92,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveUvjeteOglasa_ProslijedjenId_PozivaRepozitorij()
     {
         // Act
@@ -96,6 +103,7 @@ public class UvjetOglasaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveUvjeteOglasa_RepozitorijBacaIzuzetak_PropagiraGa()
     {
         // Arrange

@@ -6,6 +6,7 @@ using static PopravkaBa.Tests.Zajednicko.KategorijaServiceTestHelper;
 namespace PopravkaBa.Tests.Zajednicko;
 
 [TestClass]
+[TestCategory("Service")]
 public class KategorijaServiceTests
 {
     private Mock<IKategorijaRepository> _repo = null!;
@@ -19,6 +20,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveKategorije_PozivaRepozitorij_VracaSveKategorije()
     {
         // Arrange
@@ -33,6 +35,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeOglasu_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -46,6 +49,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveKategorijeOglasa_ProslijedjenId_PozivaRepozitorij()
     {
         // Act
@@ -56,6 +60,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajKategorijeOglasa_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -69,6 +74,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajKategorijeIzvrsiocu_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -82,6 +88,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveKategorijeIzvrsiocu_ProslijedjenId_PozivaRepozitorij()
     {
         // Act
@@ -92,6 +99,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajKategorijeIzvrsioca_ProslijedjeniPodaci_PozivaRepozitorij()
     {
         // Arrange
@@ -105,6 +113,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajTopKategorijePoMajstorimaAsync_ProslijedjenTopN_VracaRezultat()
     {
         // Arrange
@@ -122,6 +131,7 @@ public class KategorijaServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveKategorije_RepozitorijBacaIzuzetak_PropagiraGa()
     {
         // Arrange

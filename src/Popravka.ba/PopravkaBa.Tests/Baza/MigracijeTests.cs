@@ -7,12 +7,15 @@ using PopravkaBa.Infrastructure.Migrations;
 namespace PopravkaBa.Tests.Baza;
 
 [TestClass]
+[TestCategory("Infrastructure")]
 public class MigracijeTests
 {
     public static IEnumerable<object[]> Migracije =>
         DataDrivenInputParser.CitajXml<string>("TestData/xml/Migracije_spisak.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(Migracije))]
     public void Migracija_PodaciIzXml_UpDownIImaTargetModel(string naziv)
     {
@@ -34,6 +37,7 @@ public class MigracijeTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void ModelSnapshot_BuildModel_GradiModelSaEntitetima()
     {
         // Arrange

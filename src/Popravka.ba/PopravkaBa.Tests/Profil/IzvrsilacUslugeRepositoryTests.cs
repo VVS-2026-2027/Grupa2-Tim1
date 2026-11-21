@@ -9,6 +9,7 @@ using PopravkaBa.Infrastructure.Repositories;
 namespace PopravkaBa.Tests.Profil;
 
 [TestClass]
+[TestCategory("Repository")]
 public class IzvrsilacUslugeRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -42,6 +43,7 @@ public class IzvrsilacUslugeRepositoryTests
         DataDrivenInputParser.CitajXml<int, int, int, int>("TestData/xml/IzvrsilacUslugeRepository_stranice.xml");
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajProfilPoIdAsync_PostojeciMajstor_VracaProfilSaNavigacijama()
     {
         // Arrange
@@ -70,6 +72,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajProfilPoIdAsync_NepostojeciId_VracaNull()
     {
         // Act
@@ -80,6 +83,8 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(Stranice))]
     public async Task PronadjiAsync_StraniceIzXml_VracaOcekivaniBrojIUkupno(
         int stranica, int stavkiPoStranici, int ocekivanoNaStranici, int ukupno)
@@ -99,6 +104,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task PronadjiAsync_OrderBy_RastuceSortiranje()
     {
         // Arrange
@@ -117,6 +123,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task PronadjiAsync_OrderByDescending_OpadajuceSortiranje()
     {
         // Arrange
@@ -135,6 +142,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_NepostojeciIzvrsilac_NeMijenjaNista()
     {
         // Act
@@ -145,6 +153,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_PostojeciIzvrsilac_MijenjaOpis()
     {
         // Arrange
@@ -160,6 +169,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_PostojecaSlikaNijeUListi_BriseSe()
     {
         // Arrange
@@ -182,6 +192,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_NovaSlikaBezId_DodajeSe()
     {
         // Arrange
@@ -201,6 +212,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_NullListaSlica_BriseSveSlike()
     {
         // Arrange
@@ -220,6 +232,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task OsvjeziOcjeneAsync_PostojeciIzvrsilac_AzuriraOcjenuIBrojRecenzija()
     {
         // Arrange
@@ -236,6 +249,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task OsvjeziOcjeneAsync_NepostojeciIzvrsilac_NeMijenjaNista()
     {
         // Act
@@ -246,6 +260,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task PovecajBrojZavrsenihPoslovaAsync_PostojeciIzvrsilac_PovecavaBroj()
     {
         // Arrange
@@ -261,6 +276,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task PovecajBrojZavrsenihPoslovaAsync_NepostojeciIzvrsilac_NeMijenjaNista()
     {
         // Act
@@ -271,6 +287,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void DajSveAsync_NijeImplementirano_BacaNotImplementedException()
     {
         // Act & Assert
@@ -278,6 +295,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void DajPoIdAsync_NijeImplementirano_BacaNotImplementedException()
     {
         // Act & Assert
@@ -285,6 +303,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void DodajAsync_NijeImplementirano_BacaNotImplementedException()
     {
         // Act & Assert
@@ -292,6 +311,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void ObrisiAsync_NijeImplementirano_BacaNotImplementedException()
     {
         // Act & Assert
@@ -299,6 +319,7 @@ public class IzvrsilacUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public void IzvrsiPretraguTekstaAsync_NijeImplementirano_BacaNotImplementedException()
     {
         // Act & Assert

@@ -11,6 +11,7 @@ using static PopravkaBa.Tests.Recenzije.RecenzijaControllerTestHelper;
 namespace PopravkaBa.Tests.Recenzije;
 
 [TestClass]
+[TestCategory("Controller")]
 public class RecenzijaControllerTests
 {
 
@@ -36,6 +37,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_PrazanId_VracaNotFound()
     {
         // Arrange
@@ -50,6 +52,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_NepostojeciIzvrsilac_VracaNotFound()
     {
         // Arrange
@@ -65,6 +68,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(IzvrsilacId, true)]
     [DataRow(KlijentId, false)]
     public async Task Index_PostojeciIzvrsilac_VracaRecenzijeIOznakuVlasnika(
@@ -88,6 +92,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Objavi_NepostojeciIzvrsilac_VracaNotFound()
     {
         // Arrange
@@ -104,6 +109,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Objavi_NeispravanModel_VracaNaProfilSPorukom()
     {
         // Arrange
@@ -121,6 +127,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Objavi_IspravanModel_ObjavljujeZaPrijavljenogKlijenta()
     {
         // Arrange
@@ -139,6 +146,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Klijent ne može ostaviti recenziju.")]
     [DataRow(false, "Došlo je do greške pri objavi recenzije.")]
     public async Task Objavi_IzuzetakIzServisa_VracaNaProfilSPorukom(
@@ -160,6 +168,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrijaviGet_NepostojecaRecenzija_VracaNotFound()
     {
         // Arrange
@@ -173,6 +182,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrijaviGet_TudjaRecenzija_VracaForbid()
     {
         // Arrange
@@ -187,6 +197,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrijaviGet_VlastitaRecenzija_VracaFormu()
     {
         // Arrange
@@ -201,6 +212,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrijaviPost_NepostojecaRecenzija_VracaNotFound()
     {
         // Arrange
@@ -216,6 +228,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PrijaviPost_TudjaRecenzija_VracaForbid()
     {
         // Arrange
@@ -232,6 +245,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow("Razlog je prekratak.", "Razlog je prekratak.")]
     [DataRow("", "Razlog prijave nije validan.")]
     public async Task PrijaviPost_NeispravanModel_VracaFormuSUnosomIPorukom(
@@ -254,6 +268,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(KorisnickoIme, "Profil")]
     [DataRow(null, "Home")]
     public async Task PrijaviPost_IspravanModel_PrijavljujeIPreusmjerava(
@@ -277,6 +292,7 @@ public class RecenzijaControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Recenzija je već prijavljena.")]
     [DataRow(false, "Došlo je do greške pri prijavi recenzije.")]
     public async Task PrijaviPost_IzuzetakIzServisa_VracaNaProfilSPorukom(

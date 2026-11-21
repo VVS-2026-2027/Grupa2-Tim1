@@ -10,6 +10,7 @@ using static PopravkaBa.Tests.Zajednicko.BosanskiValidationMetadataProviderTestH
 namespace PopravkaBa.Tests.Zajednicko
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class BosanskiValidationMetadataProviderTests
     {
         private BosanskiValidationMetadataProvider _provider = null!;
@@ -21,6 +22,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredBezPoruke_PostavljaBosanskuPoruku()
         {
             // Arrange
@@ -35,6 +37,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredSaPorukom_NePrepisujePoruku()
         {
             // Arrange
@@ -49,6 +52,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_RequiredSaResursom_NePostavljaPoruku()
         {
             // Arrange
@@ -63,6 +67,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_DrugiAtribut_NeMijenjaAtribut()
         {
             // Arrange
@@ -77,6 +82,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_KljucBezImena_KoristiPodrazumijevaniNaziv()
         {
             // Arrange
@@ -94,6 +100,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void CreateValidationMetadata_BezValidatora_NeBacaIzuzetak()
         {
             // Arrange

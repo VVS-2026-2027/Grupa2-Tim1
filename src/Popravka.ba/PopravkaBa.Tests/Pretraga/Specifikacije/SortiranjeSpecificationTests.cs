@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class SortiranjeSpecificationTests
     {
         private Mock<ISpecification<OglasUsluge>> _unutrasnja = null!;
@@ -22,6 +23,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_OmotanaSpecifikacija_VracaIzrazUnutrasnjeSpecifikacije()
         {
             // Arrange
@@ -38,6 +40,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderBy_ZadanoAscending_VracaIzrazSortiranja()
         {
             // Arrange
@@ -51,6 +54,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderByDescending_ZadanoAscending_VracaNull()
         {
             // Arrange
@@ -64,6 +68,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderBy_Descending_VracaNull()
         {
             // Arrange
@@ -77,6 +82,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderByDescending_Descending_VracaIzrazSortiranja()
         {
             // Arrange

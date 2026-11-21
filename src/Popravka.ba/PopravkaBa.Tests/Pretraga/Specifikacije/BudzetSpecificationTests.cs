@@ -5,9 +5,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class BudzetSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(100, 200, 150, 300, true)]
         [DataRow(100, 200, 200, 300, true)]
         [DataRow(100, 200, 0, 100, true)]
@@ -30,9 +32,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class PlataSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(1000, 2000, 1500, 3000, true)]
         [DataRow(1000, 2000, 2000, 3000, true)]
         [DataRow(1000, 2000, 0, 1000, true)]
@@ -54,6 +58,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
 
         // Filter "od" veći od "do" je nemoguć raspon, pa ne smije proći nijedan oglas
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(0, 0)]
         [DataRow(500, 800)]
         [DataRow(1500, 3000)]

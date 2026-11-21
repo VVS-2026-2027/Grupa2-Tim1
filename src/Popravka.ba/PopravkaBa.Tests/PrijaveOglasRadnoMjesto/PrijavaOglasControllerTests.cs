@@ -9,6 +9,7 @@ using static PopravkaBa.Tests.PrijaveOglasRadnoMjesto.PrijavaOglasControllerTest
 namespace PopravkaBa.Tests.PrijaveOglasRadnoMjesto;
 
 [TestClass]
+[TestCategory("Controller")]
 public class PrijavaOglasControllerTests
 {
 
@@ -36,6 +37,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Index_ZadaniOglas_VracaPrijaveIOglasId()
     {
         // Arrange
@@ -52,6 +54,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task Posalji_PrijavljeniMajstor_SaljePrijavuIPreusmjerava()
     {
         // Arrange
@@ -69,6 +72,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Oglas više nije aktivan.")]
     [DataRow(false, "Došlo je do greške pri slanju prijave.")]
     public async Task Posalji_IzuzetakIzServisa_PrikazujeGreskuIPreusmjerava(
@@ -91,6 +95,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(nameof(PrijavaOglasController.ObrisiPrijavu))]
     [DataRow(nameof(PrijavaOglasController.PrihvatiPrijava))]
     [DataRow(nameof(PrijavaOglasController.OdbijPrijavu))]
@@ -107,6 +112,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(nameof(PrijavaOglasController.ObrisiPrijavu))]
     [DataRow(nameof(PrijavaOglasController.PrihvatiPrijava))]
     [DataRow(nameof(PrijavaOglasController.OdbijPrijavu))]
@@ -123,6 +129,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisanaPrijava_PostojecaPrijava_BriseIPreusmjerava()
     {
         // Arrange
@@ -139,6 +146,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisanaPrijava_NepostojecaPrijava_VracaNotFoundBezBrisanja()
     {
         // Arrange
@@ -153,6 +161,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisanaPrijava_PrijavaNestanePriBrisanju_VracaNotFound()
     {
         // Arrange
@@ -169,6 +178,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(false, false, "Prijava je prihvaćena.")]
     [DataRow(true, false, "Prijava je prihvaćena.")]
     [DataRow(false, true, "Prijava je prihvaćena. Popis je popunjen - sve preostale prijave su automatski odbijene.")]
@@ -190,6 +200,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(false)]
     [DataRow(true)]
     public async Task PrihvacenaPrijava_NepostojecaPrijava_VracaNotFound(bool direktno)
@@ -206,6 +217,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(false)]
     [DataRow(true)]
     public async Task PrihvacenaPrijava_IzuzetakIzServisa_PrikazujeGreskuIPreusmjerava(
@@ -226,6 +238,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijenaPrijava_PostojecaPrijava_OdbijaIPreusmjerava()
     {
         // Arrange
@@ -242,6 +255,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijenaPrijava_NepostojecaPrijava_VracaNotFound()
     {
         // Arrange
@@ -256,6 +270,7 @@ public class PrijavaOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task OdbijenaPrijava_IzuzetakIzServisa_PrikazujeGreskuIPreusmjerava()
     {
         // Arrange

@@ -5,9 +5,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class BetweenSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(15, 10, 20, true)]
         [DataRow(10, 10, 20, true)]
         [DataRow(20, 10, 20, true)]

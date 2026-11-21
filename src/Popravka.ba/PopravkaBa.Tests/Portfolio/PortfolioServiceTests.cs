@@ -9,6 +9,8 @@ using PopravkaBa.Domain.Models;
 namespace PopravkaBa.Tests.Portfolio;
 
 [TestClass]
+[TestCategory("Service")]
+[TestCategory("TDD")]
 public class PortfolioServiceTests
 {
     private Mock<IIzvrsilacUslugeRepository> _izvrsilacRepository = null!;
@@ -22,6 +24,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_SrednjaSlika_VracaSlikuIPokazujeNaOstale()
     {
         // Arrange
@@ -37,6 +40,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_PosljednjaSlika_SljedecuPrikazePrvu()
     {
         // Arrange
@@ -48,6 +52,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_PrvaSlika_PrethodnaPokazujeZadnju()
     {
         // Arrange
@@ -59,6 +64,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_SlikeNisuPoRedu_RedoslijedJePoId()
     {
         // Arrange: repozitorij vraća slike izmiješane
@@ -74,6 +80,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_JednaSlika_StrelicePokazujuNaSebe()
     {
         // Arrange
@@ -88,6 +95,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_DvijeSlike_ObjeStrelicePokazujuNaDrugu()
     {
         // Arrange
@@ -102,6 +110,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_NepostojecaSlika_BacaKeyNotFoundException()
     {
         // Arrange
@@ -112,6 +121,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_SlikaDrugogMajstora_BacaKeyNotFoundException()
     {
         // Arrange: m1 ima slike 10 i 20, a slika 50 stvarno postoji, ali pripada majstoru m2
@@ -124,6 +134,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_NepostojeciMajstor_BacaKeyNotFoundException()
     {
         // Arrange: za m99 nema Setup-a, pa mock vraća null
@@ -133,6 +144,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_PortfolioJeNull_BacaKeyNotFoundException()
     {
         // Arrange: majstor postoji, ali nema listu slika
@@ -144,6 +156,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_PraznaListaSlika_BacaKeyNotFoundException()
     {
         // Arrange: majstor postoji, ali nije dodao nijednu sliku
@@ -155,6 +168,7 @@ public class PortfolioServiceTests
 
     // ThrowsAsync, a ne ThrowsExactlyAsync: za null stiže ArgumentNullException, podtip ArgumentException
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_PrazanIdMajstora_BacaArgumentExceptionBezPozivaRepozitorija()
     {
         // Arrange: ništa, id majstora je prazan
@@ -165,6 +179,7 @@ public class PortfolioServiceTests
     }
 
     [TestMethod]
+    [Owner("Aid Mustafić")]
     public async Task DajPrikazSlike_IspravanZahtjev_RepozitorijSePozivaJednom()
     {
         // Arrange
@@ -182,6 +197,8 @@ public class PortfolioServiceTests
         DataDrivenInputParser.CitajCsv<string, int, int, int, int>("TestData/csv/PortfolioService.csv");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Aid Mustafić")]
     [DynamicData(nameof(SlucajeviNavigacije))]
     public async Task DajPrikazSlike_PodaciIzCsv_VracaOcekivaneSusjede(
         string slike, int trazena, int prethodna, int naredna, int pozicija)

@@ -5,9 +5,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class AllSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_BiloKojiOglas_VracaTrue()
         {
             // Arrange
@@ -22,6 +24,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderBy_ZadanoPonasanje_VracaNull()
         {
             // Arrange
@@ -35,6 +38,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void OrderByDescending_ZadanoPonasanje_VracaNull()
         {
             // Arrange

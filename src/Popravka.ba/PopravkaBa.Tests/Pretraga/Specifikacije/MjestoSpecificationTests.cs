@@ -7,9 +7,11 @@ using System.Collections.Generic;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class MjestoOglasSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(3, true)]
         [DataRow(1, true)]
         [DataRow(2, false)]
@@ -27,6 +29,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_PrazanSpisakMjesta_VracaFalse()
         {
             // Arrange
@@ -42,9 +45,11 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
     }
 
     [TestClass]
+    [TestCategory("Domain")]
     public class MjestoIzvrsilacSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_IzvrsilacImaTrazenoMjesto_VracaTrue()
         {
             // Arrange
@@ -62,6 +67,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_IzvrsilacNemaTrazenoMjesto_VracaFalse()
         {
             // Arrange
@@ -79,6 +85,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_MjestaNisuPostavljena_BacaArgumentNullException()
         {
             // Arrange

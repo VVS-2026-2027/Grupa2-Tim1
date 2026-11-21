@@ -15,6 +15,7 @@ namespace PopravkaBa.Tests.Zajednicko;
 // (greška pri konekciji), a _adapterSaMockom dobija mock SMTP klijenta preko buildMailClient,
 // pa se može provjeriti cijelo slanje bez mreže.
 [TestClass]
+[TestCategory("Infrastructure")]
 public class BrevoEmailAdapterTests
 {
     private BrevoEmailAdapter _adapter = null!;
@@ -42,6 +43,7 @@ public class BrevoEmailAdapterTests
     // ---------- Slanje preko mock SMTP klijenta ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_IspravnaAdresa_PovezujeSeNaServerIzPostavki()
     {
         // Act
@@ -52,6 +54,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_IspravnaAdresa_PrijavljujeSePodacimaIzPostavki()
     {
         // Act
@@ -62,6 +65,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_IspravnaAdresa_SaljePorukuPrimaocuSaNaslovom()
     {
         // Act
@@ -75,6 +79,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_IspravnaAdresa_ZatvaraKonekciju()
     {
         // Act
@@ -87,6 +92,7 @@ public class BrevoEmailAdapterTests
     // ---------- Greške bez mock klijenta ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_NeispravnaAdresaPrimaoca_BacaFormatException()
     {
         // Act + Assert
@@ -95,6 +101,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_SmtpServerNedostupan_BacaIzuzetakPriKonekciji()
     {
         // Act + Assert
@@ -103,6 +110,7 @@ public class BrevoEmailAdapterTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PosaljiEmailAsync_NotifikacijaOglasa_ProsljedjujeAdresuPrimaoca()
     {
         // Arrange
@@ -117,6 +125,8 @@ public class BrevoEmailAdapterTests
         DataDrivenInputParser.CitajXml<bool, string, string, bool>("TestData/xml/BrevoEmailAdapter_neispravniPrimaoci.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviPrimaoca))]
     public async Task PosaljiEmailAsync_VerifikacijaFirmePodaciIzXml_KoristiAdresuAdminaIliFirme(
         bool zaAdmina, string adminEmail, string firmaEmail, bool formatGreska)

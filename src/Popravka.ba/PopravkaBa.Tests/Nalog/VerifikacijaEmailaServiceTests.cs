@@ -8,6 +8,7 @@ using static PopravkaBa.Tests.Nalog.VerifikacijaEmailaServiceTestHelper;
 namespace PopravkaBa.Tests.Nalog;
 
 [TestClass]
+[TestCategory("Service")]
 public class VerifikacijaEmailaServiceTests
 {
     // SHA-256 (HEX, velika slova) teksta "sirovi-token-123"
@@ -28,6 +29,7 @@ public class VerifikacijaEmailaServiceTests
     // ---------- GenerisiTokenAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task GenerisiTokenAsync_NemaPrethodnogTokena_VracaSiroviTokenIKreiraHash()
     {
         // Arrange
@@ -48,6 +50,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task GenerisiTokenAsync_NemaPrethodnogTokena_PonistavaStareNeiskoristeneTokene()
     {
         // Arrange
@@ -65,6 +68,8 @@ public class VerifikacijaEmailaServiceTests
         DataDrivenInputParser.CitajXml<int, bool>("TestData/xml/VerifikacijaEmailaService_cooldown.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviCooldowna))]
     public async Task GenerisiTokenAsync_PodaciIzXml_TokenSeGenerisePoslijeCooldowna(int minuta, bool generisan)
     {
@@ -81,6 +86,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task GenerisiTokenAsync_ZahtjevUnutarCooldowna_NistaNeKreiraNiNePonistava()
     {
         // Arrange
@@ -102,6 +108,8 @@ public class VerifikacijaEmailaServiceTests
         DataDrivenInputParser.CitajXml<bool, bool, bool, bool, Status>("TestData/xml/VerifikacijaEmailaService_stanjaTokena.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviStanjaTokena))]
     public async Task PotvrdiAsync_PodaciIzXml_VracaOcekivaniStatus(
         bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji, Status ocekivano)
@@ -117,6 +125,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiAsync_ValidanToken_TrazeTokenPoSha256HashuSirovogTokena()
     {
         // Arrange
@@ -130,6 +139,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiAsync_ValidanToken_PotvrdjujeTokenZaKorisnika()
     {
         // Arrange
@@ -145,6 +155,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiAsync_IstekaoToken_NePotvrdjujeToken()
     {
         // Arrange
@@ -160,6 +171,8 @@ public class VerifikacijaEmailaServiceTests
     // ---------- ValidirajResetTokenAsync ----------
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(SlucajeviStanjaTokena))]
     public async Task ValidirajResetTokenAsync_PodaciIzXml_VracaOcekivaniStatus(
         bool tokenPostoji, bool iskoristen, bool istekao, bool korisnikPostoji, Status ocekivano)
@@ -175,6 +188,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ValidirajResetTokenAsync_ValidanToken_VracaTokenIKorisnika()
     {
         // Arrange
@@ -190,6 +204,7 @@ public class VerifikacijaEmailaServiceTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task ValidirajResetTokenAsync_NevalidanToken_VracaNullTokenINullKorisnika()
     {
         // Arrange
@@ -206,6 +221,7 @@ public class VerifikacijaEmailaServiceTests
     // ---------- OznaciKoristenimAsync (mock: metoda ništa ne vraća) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task OznaciKoristenimAsync_PostojeciToken_PozivaRepozitorijJednom()
     {
         // Arrange

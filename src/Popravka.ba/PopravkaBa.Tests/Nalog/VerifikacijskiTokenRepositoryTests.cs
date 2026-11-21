@@ -8,6 +8,7 @@ namespace PopravkaBa.Tests.Nalog;
 
 // Repozitorij se testira nad InMemory bazom (nema smisla mockati bazu).
 [TestClass]
+[TestCategory("Repository")]
 public class VerifikacijskiTokenRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -32,6 +33,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- DajNajnovijiZaKorisnikaAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task DajNajnovijiZaKorisnikaAsync_ViseTokena_VracaNajnovijiTogTipa()
     {
         // Arrange
@@ -49,6 +51,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task DajNajnovijiZaKorisnikaAsync_KorisnikBezTokena_VracaNull()
     {
         // Arrange
@@ -64,6 +67,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- DajTokenPoHashuAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task DajTokenPoHashuAsync_PostojeciHashITip_VracaToken()
     {
         // Arrange
@@ -77,6 +81,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task DajTokenPoHashuAsync_NepostojeciHash_VracaNull()
     {
         // Arrange
@@ -90,6 +95,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task DajTokenPoHashuAsync_PostojeciHashAliDrugiTip_VracaNull()
     {
         // Arrange
@@ -105,6 +111,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- KreirajAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task KreirajAsync_NoviToken_SnimaTokenUBazu()
     {
         // Arrange
@@ -120,6 +127,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- PotvrdiAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiAsync_NeiskoristenToken_PotvrdjujeEmailIOznacavaTokenKoristenim()
     {
         // Arrange
@@ -136,6 +144,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PotvrdiAsync_NeiskoristenToken_KorisnikPostajeAktivan()
     {
         // Arrange
@@ -153,6 +162,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- PonistiNeiskoristeneAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PonistiNeiskoristeneAsync_ViseTokena_PonistavaSamoNeiskoristeneTogKorisnikaITipa()
     {
         // Arrange
@@ -172,6 +182,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PonistiNeiskoristeneAsync_ViseTokena_NeDiraTokeneDrugogKorisnikaITipa()
     {
         // Arrange
@@ -188,6 +199,7 @@ public class VerifikacijskiTokenRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task PonistiNeiskoristeneAsync_NemaTokena_VracaPraznuListu()
     {
         // Act
@@ -200,6 +212,7 @@ public class VerifikacijskiTokenRepositoryTests
     // ---------- OznaciKoristenimAsync ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task OznaciKoristenimAsync_NeiskoristenToken_PostavljaVrijemeKoristenja()
     {
         // Arrange

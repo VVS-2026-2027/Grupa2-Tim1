@@ -10,6 +10,7 @@ using static PopravkaBa.Tests.Pretraga.PretragaServiceTestHelper;
 namespace PopravkaBa.Tests.Pretraga;
 
 [TestClass]
+[TestCategory("Service")]
 public class PretragaServiceTests
 {
     private Mock<IIzvrsilacUslugeRepository> _izvrsioci = null!;
@@ -35,6 +36,7 @@ public class PretragaServiceTests
     // ---------- Bez taba i specifikacije ----------
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_BezTaba_KoristiZadaniTabStrategije()
     {
         // Arrange
@@ -53,6 +55,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_NeispravnaStranicaIVelicina_KoristiPrvuStranicuOdDvadesetStavki()
     {
         // Arrange
@@ -68,6 +71,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_StrategijaBezSpecifikacije_VracaPrazneRezultateBezPozivaRepozitorija()
     {
         // Arrange: mock strategije ne vraća nijednu specifikaciju
@@ -90,6 +94,7 @@ public class PretragaServiceTests
     // ---------- Izvršioci ----------
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaIzvrsilaca_MapiraPoljaIzvrsilaca()
     {
         // Arrange
@@ -118,6 +123,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaIzvrsilaca_ProsljedjujeStranicuIVelicinu()
     {
         // Arrange
@@ -134,6 +140,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaIzvrsilaca_NePozivaOstaleRepozitorije()
     {
         // Arrange
@@ -151,6 +158,7 @@ public class PretragaServiceTests
     // ---------- Oglasi usluga ----------
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaUsluga_MapiraPoljaOglasaUsluga()
     {
         // Arrange
@@ -177,6 +185,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaUsluga_ProsljedjujeStranicuIVelicinu()
     {
         // Arrange
@@ -192,6 +201,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaUsluga_NePozivaOstaleRepozitorije()
     {
         // Arrange
@@ -209,6 +219,7 @@ public class PretragaServiceTests
     // ---------- Radna mjesta ----------
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaRadnihMjesta_MapiraPoljaRadnihMjesta()
     {
         // Arrange
@@ -235,6 +246,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaRadnihMjesta_ProsljedjujeStranicuIVelicinu()
     {
         // Arrange
@@ -250,6 +262,7 @@ public class PretragaServiceTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task PretraziAsync_SpecifikacijaRadnihMjesta_NePozivaOstaleRepozitorije()
     {
         // Arrange

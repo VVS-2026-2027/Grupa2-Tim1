@@ -6,6 +6,7 @@ using static PopravkaBa.Tests.Profil.IzvrsilacUslugeServiceTestHelper;
 namespace PopravkaBa.Tests.Profil;
 
 [TestClass]
+[TestCategory("Service")]
 public class IzvrsilacUslugeServiceTests
 {
     private Mock<IIzvrsilacUslugeRepository> _repo = null!;
@@ -19,6 +20,7 @@ public class IzvrsilacUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajProfilPoIdAsync_PostojeciId_VracaProfil()
     {
         // Arrange
@@ -33,6 +35,7 @@ public class IzvrsilacUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajProfilPoIdAsync_NepostojeciId_VracaNull()
     {
         // Arrange
@@ -46,6 +49,7 @@ public class IzvrsilacUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UrediAsync_ProslijedjenIzvrsilac_PozivaRepozitorij()
     {
         // Arrange
@@ -59,6 +63,7 @@ public class IzvrsilacUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajSveAsync_PozivaRepozitorij_VracaSve()
     {
         // Arrange
@@ -73,6 +78,7 @@ public class IzvrsilacUslugeServiceTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DajProfilPoIdAsync_RepozitorijBacaIzuzetak_PropagiraGa()
     {
         // Arrange

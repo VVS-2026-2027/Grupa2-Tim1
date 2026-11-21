@@ -6,9 +6,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class VrstaZaposlenjaSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(VrstaZaposlenja.PunoRadnoVrijeme, VrstaZaposlenja.PunoRadnoVrijeme, true)]
         [DataRow(VrstaZaposlenja.Praksa, VrstaZaposlenja.Praksa, true)]
         [DataRow(VrstaZaposlenja.PunoRadnoVrijeme, VrstaZaposlenja.Sezonski, false)]

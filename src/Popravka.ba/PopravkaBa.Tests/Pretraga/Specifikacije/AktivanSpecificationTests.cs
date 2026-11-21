@@ -6,9 +6,11 @@ using PopravkaBa.Domain.Specifications.Subtype;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class AktivanSpecificationTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(Status.Aktivan, true)]
         [DataRow(Status.Neaktivan, false)]
         [DataRow(Status.NaCekanju, false)]

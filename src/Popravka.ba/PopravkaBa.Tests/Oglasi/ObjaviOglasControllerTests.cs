@@ -12,6 +12,7 @@ using static PopravkaBa.Tests.Oglasi.ObjaviOglasControllerTestHelper;
 namespace PopravkaBa.Tests.Oglasi;
 
 [TestClass]
+[TestCategory("Controller")]
 public class ObjaviOglasControllerTests
 {
     private const string VlasnikId = "k1";
@@ -58,6 +59,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow("Klijent", null, "usluge")]
     [DataRow("Firma", null, "majstora")]
     [DataRow("Majstor", null, "majstora")]
@@ -79,6 +81,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasUsluge_ValidnaSlika_SpremaSlikuIObjavljujeOglas()
     {
         // Arrange
@@ -110,6 +113,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow("oglas.gif", 1L, "Nepodržan format slike (.jpg, .jpeg, .png, .webp).")]
     [DataRow("oglas.png", 5242881L, "Slika ne smije biti veća od 5MB.")]
     public async Task ObjaviOglasUsluge_NeispravnaSlika_VracaObrazacBezObjave(
@@ -136,6 +140,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasUsluge_IzuzetakFasade_VracaObrazacSPorukom()
     {
         // Arrange
@@ -152,6 +157,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasMajstora_IspravanUnos_ObjavljujeIPreusmjerava()
     {
         // Arrange
@@ -171,6 +177,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasMajstora_NeispravanModel_VracaObrazacBezObjave()
     {
         // Arrange
@@ -187,6 +194,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(true, "Poslovno pravilo nije ispunjeno.")]
     [DataRow(false, GreskaObjave)]
     public async Task ObjaviOglasMajstora_IzuzetakFasade_VracaOdgovarajucuPoruku(
@@ -208,6 +216,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasRadnoMjesto_UvjetiSaPraznimStavkama_UklanjaPrazneUvjete()
     {
         // Arrange
@@ -223,6 +232,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasRadnoMjesto_UvjetiNisuPoslani_PostavljaPraznuListuUvjeta()
     {
         // Arrange
@@ -238,6 +248,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasRadnoMjesto_IspravanModel_ObjavljujeOglasIPrikazujeDetalje()
     {
         // Arrange
@@ -255,6 +266,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasRadnoMjesto_NeispravanModel_VracaObrazacBezObjave()
     {
         // Arrange
@@ -271,6 +283,7 @@ public class ObjaviOglasControllerTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObjaviOglasRadnoMjesto_IzuzetakFasade_VracaObrazacSPorukom()
     {
         // Arrange

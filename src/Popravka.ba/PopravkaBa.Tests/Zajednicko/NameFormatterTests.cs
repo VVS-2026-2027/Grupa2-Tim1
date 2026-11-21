@@ -4,9 +4,11 @@ using PopravkaBa.Domain.Shared;
 namespace PopravkaBa.Tests.Zajednicko
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class NameFormatterTests
     {
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow("MARKO MARKOVIĆ", "Marko Marković")]
         [DataRow("ana jović", "Ana Jović")]
         [DataRow("  marko  ", "Marko")]
@@ -21,6 +23,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void NormalizeName_Null_VracaNull()
         {
             // Act
@@ -31,6 +34,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void NormalizeName_PrazanString_VracaPrazanString()
         {
             // Act
@@ -41,6 +45,7 @@ namespace PopravkaBa.Tests.Zajednicko
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void NormalizeName_SamoRazmaci_VracaIsteRazmake()
         {
             // Act

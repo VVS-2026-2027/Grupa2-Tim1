@@ -6,6 +6,7 @@ using PopravkaBa.Infrastructure.Repositories;
 namespace PopravkaBa.Tests.Oglasi;
 
 [TestClass]
+[TestCategory("Repository")]
 public class VozackeDozvoleRepositoryTests
 {
     private ApplicationDbContext _db = null!;
@@ -28,6 +29,8 @@ public class VozackeDozvoleRepositoryTests
         DataDrivenInputParser.CitajXml<int, int>("TestData/xml/VozackeDozvoleRepository_poOglasu.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Nerina Čengić")]
     [DynamicData(nameof(DozvolePoOglasu))]
     public async Task DajSveVozackeDozvoleOglasa_PodaciIzXml_VracaOcekivaniBroj(int oglasId, int ocekivaniBroj)
     {
@@ -47,6 +50,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajVozackeDozvoleOglasu_NullLista_NeDodajeNista()
     {
         // Act
@@ -57,6 +61,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajVozackeDozvoleOglasu_DuplikatiUListi_DodajeSamoJedinstvene()
     {
         // Act
@@ -68,6 +73,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task DodajVozackeDozvoleOglasu_NoveDozvole_DodajeRedove()
     {
         // Act
@@ -78,6 +84,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task UkloniSveVozackeDozvoleOglasa_DvaOglasaSDozvolama_BriseSamoDozvoleTrazenogOglasa()
     {
         // Arrange
@@ -93,6 +100,7 @@ public class VozackeDozvoleRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Nerina Čengić")]
     public async Task AzurirajVozackeDozvoleOglasa_PostojecaLista_ZamjenjujeRedove()
     {
         // Arrange

@@ -7,6 +7,7 @@ using static PopravkaBa.Tests.PrijaveOglasRadnoMjesto.PrijavaRadnoMjestoReposito
 namespace PopravkaBa.Tests.PrijaveOglasRadnoMjesto;
 
 [TestClass]
+[TestCategory("Repository")]
 public class PrijavaRadnoMjestoRepositoryTests
 {
     private ApplicationDbContext _baza = null!;
@@ -44,6 +45,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_PostojecaPrijava_VracaPrijavuSPovezanimPodacima()
     {
         // Arrange
@@ -62,6 +64,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_NepostojecaPrijava_VracaNull()
     {
         // Arrange
@@ -75,6 +78,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePrijaveOglasaAsync_ViseOglasa_FiltriraISortiraOdNajstarije()
     {
         // Arrange
@@ -98,6 +102,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DodajAsync_NovaPrijava_SpremaPrijavuUBazu()
     {
         // Arrange
@@ -117,6 +122,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task UrediAsync_IzmijenjenStatus_SpremaNoviStatus()
     {
         // Arrange
@@ -135,6 +141,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_PostojecaPrijava_BriseSamoZadanuPrijavu()
     {
         // Arrange
@@ -150,6 +157,7 @@ public class PrijavaRadnoMjestoRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_NepostojecaPrijava_OstavljaPostojecuPrijavu()
     {
         // Arrange

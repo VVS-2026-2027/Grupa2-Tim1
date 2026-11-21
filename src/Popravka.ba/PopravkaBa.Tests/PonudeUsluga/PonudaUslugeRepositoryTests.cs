@@ -7,6 +7,7 @@ using static PopravkaBa.Tests.PonudeUsluga.PonudaUslugeRepositoryTestHelper;
 namespace PopravkaBa.Tests.PonudeUsluga;
 
 [TestClass]
+[TestCategory("Repository")]
 public class PonudaUslugeRepositoryTests
 {
     private ApplicationDbContext _baza = null!;
@@ -42,6 +43,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_PostojecaPonuda_VracaPonuduSPovezanimPodacima()
     {
         // Arrange
@@ -58,6 +60,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajPoIdAsync_NepostojecaPonuda_VracaNull()
     {
         // Arrange
@@ -71,6 +74,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePonudeOglasaAsync_ViseOglasa_FiltriraISortiraOdNajstarije()
     {
         // Arrange
@@ -89,6 +93,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajSvePonudeIzvrsiocaAsync_ViseIzvrsilaca_FiltriraISortiraOdNajnovije()
     {
         // Arrange
@@ -107,6 +112,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DodajAsync_NovaPonuda_SpremaPonuduUBazu()
     {
         // Arrange
@@ -127,6 +133,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task UrediAsync_IzmijenjenaPonuda_SpremaNoveVrijednosti()
     {
         // Arrange
@@ -147,6 +154,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_PostojecaPonuda_BriseSamoZadanuPonudu()
     {
         // Arrange
@@ -162,6 +170,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task ObrisiAsync_NepostojecaPonuda_OstavljaPostojecePonude()
     {
         // Arrange
@@ -177,6 +186,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajProsjekCijenePoKategorijama_PrazneKategorije_VracaNull()
     {
         // Arrange
@@ -191,6 +201,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajProsjekCijenePoKategorijama_KategorijaBezCijena_VracaNull()
     {
         // Arrange
@@ -206,6 +217,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public async Task DajProsjekCijenePoKategorijama_RazlicitePonude_RacunaProsjekSamoOdgovarajucihCijena()
     {
         // Arrange
@@ -223,6 +235,7 @@ public class PonudaUslugeRepositoryTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow("k1", "m1", true)]
     [DataRow("k1", "m2", false)]
     [DataRow("k2", "m1", false)]

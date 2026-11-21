@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 namespace PopravkaBa.Tests.Pretraga.Specifikacije
 {
     [TestClass]
+    [TestCategory("Domain")]
     public class NotSpecificationTests
     {
         private Mock<ISpecification<OglasUsluge>> _unutrasnja = null!;
@@ -23,6 +24,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         [DataRow(Status.Aktivan, false)]
         [DataRow(Status.Neaktivan, true)]
         public void ToExpression_NegacijaAktivnog_VracaOcekivano(Status status, bool ocekivano)
@@ -39,6 +41,7 @@ namespace PopravkaBa.Tests.Pretraga.Specifikacije
         }
 
         [TestMethod]
+        [Owner("Sajra Malkić")]
         public void ToExpression_MockiranaSpecifikacija_PozivaUnutrasnjuSpecifikaciju()
         {
             // Arrange

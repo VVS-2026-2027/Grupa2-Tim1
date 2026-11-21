@@ -15,6 +15,7 @@ using static PopravkaBa.Tests.Profil.ProfilControllerTestHelper;
 namespace PopravkaBa.Tests.Profil;
 
 [TestClass]
+[TestCategory("Controller")]
 public class ProfilControllerTests
 {
     private const string UrlSlike = "https://cdn.popravka.ba/slike/nova.png";
@@ -78,6 +79,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<string>("TestData/xml/ProfilController_nevalidniUsername.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(NevalidniUsernamei))]
     public async Task Index_PrazanUsernameIzXml_VracaNotFoundBezTrazenjaKorisnika(string? username)
     {
@@ -90,6 +93,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_NepostojeciKorisnik_VracaNotFound()
     {
         // Arrange
@@ -103,6 +107,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_Administrator_VracaNotFoundJerAdminNemaJavniProfil()
     {
         // Arrange
@@ -117,6 +122,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_KorisnikBezUloge_VracaViewSaUlogomKorisnik()
     {
         // Arrange
@@ -134,6 +140,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_Klijent_VracaOsnovnePodatkeProfila()
     {
         // Arrange
@@ -158,6 +165,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_Klijent_VracaSamoOglaseVlasnikaOdNajnovijeg()
     {
         // Arrange
@@ -183,6 +191,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_KlijentSaPrihvacenomPonudom_OznacavaIzvrsiocaIPonude()
     {
         // Arrange
@@ -216,6 +225,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_KlijentBezPonudaIKategorija_VracaPraznuListuKategorijaIBezIzvrsioca()
     {
         // Arrange
@@ -241,6 +251,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<bool, bool>("TestData/xml/ProfilController_ocjenjivanjeIzvrsioca.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(OcjenjivanjeIzvrsioca))]
     public async Task Index_KlijentVlasnikSaZavrsenimPoslomIzXml_ProvjeravaDaLiJeIzvrsilacVecOcijenjen(
         bool mozeOstavitiRecenziju, bool vecOcijenjen)
@@ -270,6 +282,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_KlijentNijeVlasnikProfila_NeProvjeravaRecenzije()
     {
         // Arrange
@@ -294,6 +307,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_MajstorSaProfilom_PopunjavaPodatkeIzvrsioca()
     {
         // Arrange
@@ -318,6 +332,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_MajstorSaRecenzijama_SortiraOdNajnovijeIPostavljaBrojRecenzija()
     {
         // Arrange
@@ -339,6 +354,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_Majstor_VracaSamoAktivneOglaseMajstora()
     {
         // Arrange
@@ -366,6 +382,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_MajstorBezProfilaIzvrsioca_VracaPraznePodatkeAliOglase()
     {
         // Arrange
@@ -389,6 +406,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_MajstorBezKolekcija_VracaPrazneListe()
     {
         // Arrange
@@ -409,6 +427,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_Firma_PopunjavaPodatkeFirme()
     {
         // Arrange
@@ -432,6 +451,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_FirmaBezAdminVerifikacije_NijeVerificirana()
     {
         // Arrange
@@ -452,6 +472,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<string, string, bool>("TestData/xml/ProfilController_mogucnostRecenzije.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(MogucnostRecenzije))]
     public async Task Index_MajstorGledanOdPrijavljenogIzXml_MozeOstavitiRecenzijuSamoTudjiKlijent(
         string prijavljeniId, string uloga, bool ocekivano)
@@ -471,6 +493,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Index_MajstorGledanOdNeprijavljenog_NeProvjeravaRecenzije()
     {
         // Arrange
@@ -489,6 +512,7 @@ public class ProfilControllerTests
     // ---------- Edit (GET) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_VlastitiProfilKlijenta_VracaViewSaPodacimaKorisnika()
     {
         // Arrange
@@ -513,6 +537,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_Klijent_NeUcitavaProfilIzvrsioca()
     {
         // Arrange
@@ -526,6 +551,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_NepostojeciKorisnik_VracaNotFound()
     {
         // Arrange
@@ -540,6 +566,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_AdministratorSaUsernameom_UcitavaTudjiProfil()
     {
         // Arrange
@@ -557,6 +584,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_ObicanKorisnikSaTudjimUsernameom_UcitavaVlastitiProfil()
     {
         // Arrange
@@ -573,6 +601,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_Majstor_VracaOdabraneKategorijeMjestaIPortfolio()
     {
         // Arrange
@@ -594,6 +623,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_MajstorBezProfilaIzvrsioca_VracaPraznaPolja()
     {
         // Arrange
@@ -612,6 +642,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Get_Firma_VracaPodatkeFirmeIRadnoVrijeme()
     {
         // Arrange
@@ -635,6 +666,7 @@ public class ProfilControllerTests
     // ---------- Edit (POST) ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_NepostojeciKorisnik_VracaNotFound()
     {
         // Arrange
@@ -650,6 +682,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_KlijentValidanUnos_SnimaIPreusmjeravaNaProfil()
     {
         // Arrange
@@ -673,6 +706,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_VlastitiProfil_OsvjezavaPrijavuKorisnika()
     {
         // Arrange
@@ -687,6 +721,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_AdministratorUredjujeTudjiProfil_NeOsvjezavaPrijavu()
     {
         // Arrange
@@ -708,6 +743,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<string, string, bool>("TestData/xml/ProfilController_promjenaEmaila.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(PromjeneEmaila))]
     public async Task Edit_Post_PromjenaEmailaIzXml_EmailPostajeNepotvrdjenSamoAkoJeStvarnoPromijenjen(
         string stariEmail, string noviEmail, bool ocekivano)
@@ -725,6 +762,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_PromijenjenEmail_NalogPostajeNaCekanju()
     {
         // Arrange
@@ -741,6 +779,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_NevalidanModel_VracaViewSaIstimModelomBezSnimanja()
     {
         // Arrange
@@ -761,6 +800,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_ZauzetoKorisnickoIme_VracaViewSaGreskomIBezSnimanja()
     {
         // Arrange
@@ -780,6 +820,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_SlobodnoNovoKorisnickoIme_PozivaSetUserName()
     {
         // Arrange
@@ -796,6 +837,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_PromjenaKorisnickogImenaNeuspjesna_VracaViewSaGreskomIdentityja()
     {
         // Arrange
@@ -814,6 +856,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_NovaProfilnaSlika_SpremaSlikuUStorageIPostavljaUrl()
     {
         // Arrange
@@ -829,6 +872,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_BezNoveSlike_NeKoristiStorage()
     {
         // Arrange
@@ -843,6 +887,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_UpdateNeuspjesan_VracaViewSaGreskamaBezOsvjezavanjaPrijave()
     {
         // Arrange
@@ -862,6 +907,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_IzuzetakPriSnimanju_VracaViewSaPorukomILogujeGresku()
     {
         // Arrange
@@ -887,6 +933,7 @@ public class ProfilControllerTests
     // ---------- Edit (POST): majstor ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_MajstorBezMjestaIKategorija_VracaViewSaDvijeGreskeBezSnimanja()
     {
         // Arrange
@@ -908,6 +955,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_MajstorBezOdabira_KoristiPostojeceMjestaIKategorijeIzProfila()
     {
         // Arrange
@@ -928,6 +976,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_MajstorSaOdabirom_AzuriraMjestaKategorijeIOpis()
     {
         // Arrange
@@ -950,6 +999,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_MajstorBezProfilaIzvrsioca_NeUredjujeIzvrsioca()
     {
         // Arrange
@@ -969,6 +1019,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<int, int>("TestData/xml/ProfilController_noveSlike.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(BrojeviNovihSlika))]
     public async Task Edit_Post_NoveSlikeIzXml_SpremaNajviseDesetSlikaUPortfolio(int brojSlika, int ocekivano)
     {
@@ -986,6 +1038,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_PrazneDatotekeIzForme_SePreskacu()
     {
         // Arrange
@@ -1004,6 +1057,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_StorageNeVratiUrl_SlikaSeNeDodajeUPortfolio()
     {
         // Arrange
@@ -1021,6 +1075,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_SlikeZaBrisanje_UklanjaSamoOdabranePortfolioSlike()
     {
         // Arrange
@@ -1048,6 +1103,7 @@ public class ProfilControllerTests
     // ---------- Edit (POST): firma ----------
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_FirmaValidanUnos_AzuriraNazivVelicinuIRadnoVrijeme()
     {
         // Arrange
@@ -1074,6 +1130,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_Firma_IgnorisImeIPrezime()
     {
         // Arrange
@@ -1096,6 +1153,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_FirmaBezRadnogVremena_BriseRadnoVrijemeAZadrzavaVelicinu()
     {
         // Arrange
@@ -1118,6 +1176,7 @@ public class ProfilControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public async Task Edit_Post_FirmaBezNazivaFirme_VracaViewSaGreskomBezSnimanja()
     {
         // Arrange
@@ -1140,6 +1199,8 @@ public class ProfilControllerTests
         DataDrivenInputParser.CitajXml<int?, int?, string>("TestData/xml/ProfilController_radnoVrijeme.xml");
 
     [TestMethod]
+    [TestCategory("DataDriven")]
+    [Owner("Emina Vatrić")]
     [DynamicData(nameof(NeispravnaRadnaVremena))]
     public async Task Edit_Post_FirmaNeispravnoRadnoVrijemeIzXml_VracaViewSaPorukom(int? otvorenoOd, int? otvorenoDo, string poruka)
     {

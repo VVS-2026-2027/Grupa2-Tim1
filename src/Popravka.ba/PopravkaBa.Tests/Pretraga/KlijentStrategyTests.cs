@@ -7,6 +7,7 @@ using static PopravkaBa.Tests.Pretraga.StrategijaTestHelper;
 namespace PopravkaBa.Tests.Pretraga;
 
 [TestClass]
+[TestCategory("Domain")]
 public class KlijentStrategyTests
 {
     private const string IzvrsiociTab = "Izvrsioci usluga";
@@ -16,6 +17,7 @@ public class KlijentStrategyTests
     private readonly KlijentStrategy _strategija = new();
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void PostavkeStrategije_Klijent_VracajuUloguIDozvoljeneTabove()
     {
         // Act
@@ -30,6 +32,7 @@ public class KlijentStrategyTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void Specifikacije_TabZaPosao_VracajuNull()
     {
         // Arrange
@@ -47,6 +50,7 @@ public class KlijentStrategyTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(null, null, "m1,m2,m3")]
     [DataRow(30, null, "m2,m3")]
     [DataRow(null, 50, "m1,m2")]
@@ -84,6 +88,7 @@ public class KlijentStrategyTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void NapraviIzvrsilacUslugeSpec_ViseFiltera_PrimjenjujeSveUsloveICijenuRastuce()
     {
         // Arrange
@@ -121,6 +126,7 @@ public class KlijentStrategyTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     [DataRow(null, null, "1,2,3")]
     [DataRow(30, null, "2,3")]
     [DataRow(null, 40, "1,2")]
@@ -160,6 +166,7 @@ public class KlijentStrategyTests
     }
 
     [TestMethod]
+    [Owner("Amina Bukvić")]
     public void NapraviUslugeSpec_ViseFiltera_PrimjenjujeSveUsloveIMaksimalniBudzetRastuce()
     {
         // Arrange

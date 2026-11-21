@@ -11,6 +11,7 @@ namespace PopravkaBa.Tests.Nalog;
 //   (loguje je i nastavlja raditi);
 // - _jobSqlite radi nad SQLite bazom u memoriji, gdje brisanje stvarno radi, pa se tu testira uspješno čišćenje.
 [TestClass]
+[TestCategory("Infrastructure")]
 public class VerifikacijskiTokenCleanupJobTests
 {
     private Mock<ILogger<VerifikacijskiTokenCleanupJob>> _logger = null!;
@@ -65,6 +66,8 @@ public class VerifikacijskiTokenCleanupJobTests
     }
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task ExecuteAsync_GreskaPriBrisanjuTokena_LogujeGresku()
     {
         // Arrange (InMemory baza baca izuzetak na ExecuteDeleteAsync)
@@ -84,6 +87,8 @@ public class VerifikacijskiTokenCleanupJobTests
     }
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task ExecuteAsync_GreskaPriBrisanjuTokena_JobNastavljaRadIPoslijeGreske()
     {
         // Act
@@ -97,6 +102,8 @@ public class VerifikacijskiTokenCleanupJobTests
     }
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task StopAsync_JobUToku_ZavrsavaSeBezIzuzetka()
     {
         // Arrange
@@ -113,6 +120,8 @@ public class VerifikacijskiTokenCleanupJobTests
     // ---------- Uspješno čišćenje (SQLite) ----------
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task ExecuteAsync_IstekliIVazeciTokeni_BriseSamoIstekle()
     {
         // Arrange: jedan token je istekao prije 5 minuta, drugi ističe za 10 minuta
@@ -134,6 +143,8 @@ public class VerifikacijskiTokenCleanupJobTests
     }
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task ExecuteAsync_ImaIsteklihTokena_LogujeBrojObrisanih()
     {
         // Arrange: dva istekla tokena
@@ -159,6 +170,8 @@ public class VerifikacijskiTokenCleanupJobTests
     }
 
     [TestMethod]
+    [Timeout(15000)]
+    [Owner("Emina Vatrić")]
     public async Task ExecuteAsync_NemaIsteklihTokena_NistaNeLoguje()
     {
         // Arrange: samo važeći token
