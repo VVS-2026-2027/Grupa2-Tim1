@@ -1054,4 +1054,20 @@ public class AccountControllerTests
         var jacina = json.Value!.GetType().GetProperty("jacina")?.GetValue(json.Value);
         Assert.AreEqual("Jaka", jacina);
     }
+
+    [TestMethod]
+    [Owner("Amina Bukvić")]
+    public void ProcijeniJacinuLozinke_LozinkaSadrziDioEmaila_VracaSlabu()
+    {
+        // Arrange: lozinka bi bez emaila bila Jaka, pa Slaba znači da je email proslijeđen procjeni
+        var lozinka = "Amina123!x";
+
+        // Act
+        var rezultat = _kontroler.ProcijeniJacinuLozinke(lozinka, "amina@gmail.com");
+
+        // Assert
+        var json = Assert.IsInstanceOfType<JsonResult>(rezultat);
+        var jacina = json.Value!.GetType().GetProperty("jacina")?.GetValue(json.Value);
+        Assert.AreEqual("Slaba", jacina);
+    }
 }
