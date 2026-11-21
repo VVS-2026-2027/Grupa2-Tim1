@@ -46,9 +46,9 @@ namespace PopravkaBa.Domain.Shared
             CesteLozinke.Any(cesta => lozinka.Contains(cesta, StringComparison.OrdinalIgnoreCase));
 
         private static bool SadrziDatum(string lozinka) =>
-            Regex.Matches(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{4}|\d{4}[./-]\d{1,2}[./-]\d{1,2}")
+            Regex.Matches(lozinka, @"\d{1,2}[./-]\d{1,2}[./-]\d{2}(?:\d{2})?|\d{4}[./-]\d{1,2}[./-]\d{1,2}")
                 .Any(kandidat => DateTime.TryParseExact(kandidat.Value,
-                    new[] { "d.M.yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy.M.d", "yyyy-M-d", "yyyy/M/d" },
+                    new[] { "d.M.yyyy", "d-M-yyyy", "d/M/yyyy", "yyyy.M.d", "yyyy-M-d", "yyyy/M/d", "d.M.yy", "d-M-yy", "d/M/yy" },
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
             || Regex.Matches(lozinka, @"(?=(\d{8}))")
                 .Any(kandidat => DateTime.TryParseExact(kandidat.Groups[1].Value,
