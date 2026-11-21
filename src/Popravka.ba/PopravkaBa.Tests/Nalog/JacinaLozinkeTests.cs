@@ -71,7 +71,7 @@ namespace PopravkaBa.Tests.Nalog
 
         [TestMethod]
         [Owner("Emina Vatrić")]
-        public void Procijeni_KratakDioEmaila_Ignorira()
+        public void Procijeni_KratakDioEmaila_VracaJaka()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", "a@gmail.com");
 
@@ -80,7 +80,7 @@ namespace PopravkaBa.Tests.Nalog
 
         [TestMethod]
         [Owner("Emina Vatrić")]
-        public void Procijeni_EmailNull_Ignorira()
+        public void Procijeni_EmailNull_VracaJaka()
         {
             var rezultat = JacinaLozinke.Procijeni("Abcdefg1!", null);
 
