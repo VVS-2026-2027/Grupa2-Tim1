@@ -967,6 +967,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void ProcijeniJacinuLozinke_PraznaLozinka_VracaBadRequest()
     {
         var rezultat = _kontroler.ProcijeniJacinuLozinke("   ", "korisnik@popravka.ba");
@@ -975,6 +976,7 @@ public class AccountControllerTests
     }
 
     [TestMethod]
+    [Owner("Emina Vatrić")]
     public void ProcijeniJacinuLozinke_NullLozinka_VracaBadRequest()
     {
         var rezultat = _kontroler.ProcijeniJacinuLozinke(null, null);
@@ -983,11 +985,13 @@ public class AccountControllerTests
     }
 
     [TestMethod]
-    public void ProcijeniJacinuLozinke_JakaLozinka_VracaJson()
+    [Owner("Emina Vatrić")]
+    public void ProcijeniJacinuLozinke_JakaLozinka_VracaJsonSaJacinom()
     {
         var rezultat = _kontroler.ProcijeniJacinuLozinke("Abcdefg1!", "korisnik@popravka.ba");
 
         var json = Assert.IsInstanceOfType<JsonResult>(rezultat);
-        Assert.AreEqual("{ jacina = Jaka }", json.Value!.ToString());
+        var jacina = json.Value!.GetType().GetProperty("jacina")?.GetValue(json.Value);
+        Assert.AreEqual("Jaka", jacina);
     }
 }
