@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- imeFajla, velicinaUBajtima, ocekivanaGreska (dokument: PDF, JPG ili PNG, najviše 10MB) -->
+<slucajevi>
+  <slucaj>
+    <ime>rjesenje.pdf</ime>
+    <velicina>2048</velicina>
+    <greska>false</greska>
+  </slucaj>
+  <slucaj>
+    <ime>RJESENJE.PDF</ime>
+    <velicina>2048</velicina>
+    <greska>false</greska>
+  </slucaj>
+  <slucaj>
+    <ime>skenirano.jpeg</ime>
+    <velicina>2048</velicina>
+    <greska>false</greska>
+  </slucaj>
+  <slucaj>
+    <ime>rjesenje.docx</ime>
+    <velicina>2048</velicina>
+    <greska>true</greska>
+  </slucaj>
+  <slucaj>
+    <ime>rjesenje</ime>
+    <velicina>2048</velicina>
+    <greska>true</greska>
+  </slucaj>
+  <slucaj>
+    <ime>rjesenje.pdf</ime>
+    <velicina>10485760</velicina>
+    <greska>false</greska>
+  </slucaj>
+  <slucaj>
+    <ime>rjesenje.pdf</ime>
+    <velicina>10485761</velicina>
+    <greska>true</greska>
+  </slucaj>
+  <slucaj>
+    <ime>rjesenje.pdf</ime>
+    <velicina>0</velicina>
+    <greska>true</greska>
+  </slucaj>
+</slucajevi>
