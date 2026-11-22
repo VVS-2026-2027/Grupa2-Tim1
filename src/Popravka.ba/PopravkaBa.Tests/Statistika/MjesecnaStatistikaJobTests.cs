@@ -240,7 +240,6 @@ public class MjesecnaStatistikaJobTests
         Assert.AreEqual(0, _redovi.Count);
     }
 
-    // Prolazi tek kad se u MjesecnaStatistikaJob napiše mjesto?.MjestoID i mjesto?.Mjesto.Naziv (kategorija već koristi ?.)
     [TestMethod]
     [Timeout(15000)]
     [Owner("Aid Mustafić")]

@@ -89,7 +89,6 @@ public class AdminControllerTests
         Assert.AreEqual("Vodoinstalacije", stavka.Kategorija);
     }
 
-    // Prolazi tek kad se u AdminController.Index napiše z.Firma?.UserName (ostala polja već koriste ?.)
     [TestMethod]
     [Owner("Aid Mustafić")]
     public async Task Index_ZahtjevBezUcitaneFirme_NeBacaIzuzetak()
@@ -122,7 +121,6 @@ public class AdminControllerTests
         Assert.AreEqual("Uvredljiv sadržaj", stavka.Razlog);
     }
 
-    // Prolazi tek kad se u AdminController.Index napiše r.Izvrsilac?.DisplayName (sljedeća linija već koristi ?.)
     [TestMethod]
     [Owner("Aid Mustafić")]
     public async Task Index_RecenzijaBezIzvrsioca_PrikazujeNepoznato()

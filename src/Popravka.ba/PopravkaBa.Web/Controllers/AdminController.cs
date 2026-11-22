@@ -44,14 +44,14 @@ namespace PopravkaBa.Web.Controllers
                         .Select(ik => ik.Kategorija?.Naziv)
                         .FirstOrDefault(n => n != null),
                     DatumPodnosenja = z.DatumPodnosenja,
-                    Username = z.Firma.UserName
+                    Username = z.Firma?.UserName
                 }).ToList(),
 
                 PrijavljeneRecenzije = prijavljene.Select(r => new AdminPrijavljenaRecenzijaItem
                 {
                     RecenzijaId = r.RecenzijaID,
                     Komentar = r.Komentar,
-                    IzvrsilacIme = r.Izvrsilac.DisplayName ?? "Nepoznato",
+                    IzvrsilacIme = r.Izvrsilac?.DisplayName ?? "Nepoznato",
                     IzvrsilacUsername = r.Izvrsilac?.UserName,
                     Razlog = r.RazlogPrijave,
                     DatumPrijave = r.DatumPrijave
